@@ -3,217 +3,169 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Alan Philip Hotel — Alan Philip Babu, Product Builder</title>
-  <meta name="description" content="Alan Philip Babu: 10+ years in hospitality and OTA distribution, now building SaaS products. Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ and Build IQ.">
-  <meta name="theme-color" content="#0b0a08">
-  <meta property="og:title" content="The Alan Philip Hotel — Alan Philip Babu">
-  <meta property="og:description" content="10+ years in hospitality and OTA distribution. Now building SaaS products for real businesses.">
+  <title>Alan Philip Babu — Product Builder · Hospitality &amp; SaaS</title>
+  <meta name="description" content="Alan Philip Babu spent ten years in hospitality and OTA distribution. Now he builds SaaS products: Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ and Build IQ.">
+  <meta name="theme-color" content="#f3ede2">
+  <meta property="og:title" content="Alan Philip Babu — Product Builder">
+  <meta property="og:description" content="Ten years in hospitality and OTA distribution. Now building the software those businesses run on.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="skip" href="#suites">Skip to products</a>
+  <a class="skip" href="#work">Skip to products</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <!-- CHECK-IN PRELOADER -->
-  <div class="checkin" id="checkin" aria-hidden="true">
-    <div class="checkin-door left"></div>
-    <div class="checkin-door right"></div>
-    <div class="checkin-card">
-      <span class="crest crest-lg">AP</span>
-      <p class="checkin-name">The Alan Philip Hotel</p>
-      <p class="checkin-status mono">Checking you in<span class="ellipsis"></span></p>
-      <span class="checkin-bar"><i></i></span>
-    </div>
-  </div>
-
-  <!-- TOP SIGNAGE -->
   <header class="nav" id="nav">
-    <a href="#lobby" class="brand" aria-label="The Alan Philip Hotel — lobby">
-      <span class="crest">AP</span>
-      <span class="brand-text">
-        <span class="brand-name">The Alan Philip Hotel</span>
-        <span class="brand-sub mono">Alan Philip Babu · Product Builder</span>
-      </span>
+    <a href="#top" class="brand" aria-label="Alan Philip Babu — home">
+      <span class="mark">AP</span>
+      <span class="brand-name">Alan Philip Babu</span>
     </a>
-    <a href="#rooftop" class="btn btn-small btn-gold">Call reception</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#work">Products</a>
+      <a href="#websites">Websites</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#path">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-small btn-line" data-nav-cta>Let's talk</a>
   </header>
 
-  <!-- LIFT PANEL -->
-  <nav class="lift" id="lift" aria-label="Floors">
-    <button class="lift-display" id="lift-display" aria-expanded="false" aria-controls="lift-buttons">
-      <span class="lift-arrow" id="lift-arrow">▲</span>
-      <span class="lift-floor" id="lift-floor">L</span>
-      <span class="lift-label" id="lift-label">Lobby</span>
-    </button>
-    <ol class="lift-buttons" id="lift-buttons"></ol>
-  </nav>
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="pill"><span class="dot"></span>Product Builder · Hospitality &amp; SaaS · Open to roles</p>
+        <p class="tagline mono">— Hospitality · Product · Software</p>
+        <h1>Alan<br>Philip <em>Babu.</em></h1>
+        <p class="lede">
+          I turn <em>real operational problems</em> into software, from hotel channel management
+          to chit-fund accounting. Ten years in hospitality and OTA distribution, now designing
+          and shipping products end to end.
+        </p>
+        <div class="hero-cta">
+          <a href="#work" class="btn btn-accent">Explore my work <span aria-hidden="true">→</span></a>
+          <a href="#" class="btn btn-line" data-cv hidden>View CV <span aria-hidden="true">↗</span></a>
+          <a href="#" class="btn btn-line" data-linkedin target="_blank" rel="noopener" hidden>LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
 
-  <main>
-    <!-- L · LOBBY -->
-    <section class="lobby" id="lobby" data-floor="L" data-floor-name="Lobby">
-      <div class="lobby-marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
-      <div class="lobby-light" id="lobby-light" aria-hidden="true"></div>
-
-      <div class="lobby-inner">
-        <div class="lobby-copy">
-          <p class="eyebrow"><span class="led"></span>Reception · open to roles &amp; collaborations</p>
-          <h1>Welcome to the <em>Alan Philip</em> Hotel.</h1>
-          <p class="lede">
-            Ten years running hotels and managing OTA partners. Now I design and ship the software
-            businesses run on. Take the lift to see the <strong>suites</strong> (my products), the
-            <strong>gallery</strong> (client websites) and the <strong>concierge</strong> (my toolbox).
-          </p>
-          <div class="lobby-cta">
-            <a href="#suites" class="btn btn-gold">Take the lift <span aria-hidden="true">↓</span></a>
-            <a href="#rooftop" class="btn btn-ghost">Call reception</a>
-            <a href="#" class="btn btn-ghost" data-cv hidden>Download CV</a>
+      <figure class="hero-figure">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="arch" id="arch">
+          <div class="arch-inner" id="arch-inner"></div>
+          <div class="arch-caption">
+            <span class="arch-name" id="arch-name">Room IQ</span>
+            <span class="arch-domain mono" id="arch-domain">Hospitality · Channel management</span>
           </div>
         </div>
+        <span class="float-chip chip-a"><small class="mono">Cleartrip · Flipkart Travel</small>380+ partners</span>
+        <span class="float-chip chip-b"><small class="mono">Shipped</small>6 SaaS products</span>
+        <figcaption class="mono"><span>Fig. 01</span><span>Six products, one builder</span></figcaption>
+      </figure>
+      <a href="#about" class="scroll-cue mono" aria-label="Scroll to about">Scroll<span></span></a>
+    </section>
 
-        <div class="keycard-stage">
-          <button class="keycard" id="keycard" aria-label="Guest key card. Select to flip.">
-            <span class="keycard-inner">
-              <span class="keycard-face front">
-                <span class="glare" aria-hidden="true"></span>
-                <span class="kc-top">
-                  <span class="crest">AP</span>
-                  <span class="mono kc-tag">GUEST KEY · ALL ACCESS</span>
-                </span>
-                <span class="kc-chip" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="kc-name">Alan Philip Babu</span>
-                <span class="kc-role">Product Builder · Hospitality &amp; SaaS</span>
-                <span class="kc-bottom mono">
-                  <span>ROOMS 101–106</span>
-                  <span>CHECK-IN 2016</span>
-                </span>
-              </span>
-              <span class="keycard-face back">
-                <span class="kc-stripe" aria-hidden="true"></span>
-                <span class="kc-stats">
-                  <span><b>10+ yrs</b><small>Hospitality &amp; OTA</small></span>
-                  <span><b>380+</b><small>Hotel partners managed</small></span>
-                  <span><b>6</b><small>SaaS products built</small></span>
-                </span>
-                <span class="kc-back-foot mono">Kerala, India · open to relocation</span>
-              </span>
-            </span>
-          </button>
-          <p class="keycard-hint mono">tap the key card to flip it</p>
+    <!-- NUMBERS TICKER -->
+    <div class="ticker" aria-label="Key numbers">
+      <div class="ticker-track" id="ticker"></div>
+    </div>
+
+    <!-- 01 ABOUT -->
+    <section class="section" id="about">
+      <p class="label mono"><span>01</span>About</p>
+      <div class="about">
+        <div>
+          <h2>Built from the <em>front desk</em> up.</h2>
+          <p class="about-lead">I hosted guests at my family's homestay, ran a 34-room hotel for eight years, and managed <em>380+ hotel partners</em> at Cleartrip.</p>
+          <p>That's where I learned how rates, inventory and reservations really break, and how much small businesses lose to tools that don't fit them. Now I build those tools myself: I talk to the people who'll use them, define the workflow, and ship web and mobile products with modern frameworks and AI-assisted development.</p>
+          <p>Today I'm Product &amp; Business Development Manager at Akshaya Group, where I built Room IQ, Chit IQ and Fin IQ.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- 1 · THE SUITES -->
-    <section class="floor" id="suites" data-floor="1" data-floor-name="The Suites">
-      <header class="floor-head">
-        <p class="floor-tag mono"><span>Floor 1</span>The Suites</p>
-        <h2>Six rooms, six products.</h2>
-        <p class="floor-sub">Each product started from a problem I saw first-hand in an industry. Knock on a door to open its brief.</p>
-      </header>
-      <div class="corridor" id="corridor"></div>
-    </section>
-
-    <!-- 2 · THE GALLERY -->
-    <section class="floor" id="gallery" data-floor="2" data-floor-name="The Gallery">
-      <header class="floor-head">
-        <p class="floor-tag mono"><span>Floor 2</span>The Gallery</p>
-        <h2>Websites in production.</h2>
-        <p class="floor-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
-      </header>
-      <div class="gallery" id="gallery-wall"></div>
-    </section>
-
-    <!-- 3 · CONCIERGE -->
-    <section class="floor" id="concierge" data-floor="3" data-floor-name="Concierge">
-      <header class="floor-head">
-        <p class="floor-tag mono"><span>Floor 3</span>Concierge</p>
-        <h2>The key rack.</h2>
-        <p class="floor-sub">Every tool I use, hung on its hook. Pick a key from the build stack and the concierge tells you which rooms it opens.</p>
-      </header>
-      <div class="concierge">
-        <div class="rack" id="rack"></div>
-        <aside class="desk" aria-live="polite">
-          <p class="mono desk-label">Concierge</p>
-          <p class="desk-q" id="desk-q">Which rooms use <b>Supabase</b>?</p>
-          <ul class="desk-rooms" id="desk-rooms"></ul>
-        </aside>
-      </div>
-    </section>
-
-    <!-- 4 · GUEST REGISTER -->
-    <section class="floor" id="register" data-floor="4" data-floor-name="Guest Register">
-      <header class="floor-head">
-        <p class="floor-tag mono"><span>Floor 4</span>Guest Register</p>
-        <h2>Where I've stayed.</h2>
-        <p class="floor-sub">My career so far, from hosting guests to building the software.</p>
-      </header>
-      <ol class="ledger" id="ledger"></ol>
-    </section>
-
-    <!-- 5 · BUSINESS CENTRE -->
-    <section class="floor" id="business" data-floor="5" data-floor-name="Business Centre">
-      <header class="floor-head">
-        <p class="floor-tag mono"><span>Floor 5</span>Business Centre</p>
-        <h2>Ways we can work together.</h2>
-      </header>
-      <div class="meeting-rooms">
-        <article class="meeting">
-          <span class="meeting-plate mono">Meeting room A</span>
-          <h3>Product roles</h3>
-          <p>Product manager or product owner roles in travel, hospitality or vertical SaaS, where knowing the industry and being able to build both matter.</p>
-        </article>
-        <article class="meeting">
-          <span class="meeting-plate mono">Meeting room B</span>
-          <h3>Build collaborations</h3>
-          <p>Working with a firm to take an industry problem from discovery to a shipped product, either on web and mobile or as an internal tool.</p>
-        </article>
-        <article class="meeting">
-          <span class="meeting-plate mono">Meeting room C</span>
-          <h3>Hospitality tech advisory</h3>
-          <p>OTA distribution, channel management, pricing and partner workflows, from someone who has worked on both the hotel side and the OTA side.</p>
-        </article>
-      </div>
-      <div class="itinerary">
-        <p class="mono itinerary-label">Itinerary · how I work</p>
-        <ol class="itinerary-steps">
-          <li><b>Discover</b><span>Sit with the users and map the workflow</span></li>
-          <li><b>Define</b><span>Scope, requirements, priorities</span></li>
-          <li><b>Build</b><span>Fast prototypes, weekly demos</span></li>
-          <li><b>Ship</b><span>Launch, feedback, iterate</span></li>
+        <ol class="principles">
+          <li>
+            <span class="roman">I.</span>
+            <div><h3>Start at the front desk</h3><p>Sit with the people who'll use it. The workflow comes before the screens.</p></div>
+          </li>
+          <li>
+            <span class="roman">II.</span>
+            <div><h3>One source of truth</h3><p>Rates, stock and ledgers must never disagree. I design the data first, then the features.</p></div>
+          </li>
+          <li>
+            <span class="roman">III.</span>
+            <div><h3>Ship, then listen</h3><p>Small releases in real businesses, shaped by feedback from owners and staff.</p></div>
+          </li>
         </ol>
       </div>
     </section>
 
-    <!-- R · ROOFTOP -->
-    <section class="rooftop" id="rooftop" data-floor="R" data-floor-name="Rooftop">
-      <canvas id="sky" aria-hidden="true"></canvas>
-      <div class="reservation">
-        <p class="floor-tag mono"><span>Rooftop</span>Reservations</p>
-        <h2>Let's book a meeting.</h2>
-        <p class="floor-sub">Live demos and product walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
-        <dl class="res-slip mono">
-          <div><dt>Guest</dt><dd>You</dd></div>
-          <div><dt>Host</dt><dd>Alan Philip Babu</dd></div>
-          <div><dt>Purpose</dt><dd>Role · Collaboration · Advisory</dd></div>
-        </dl>
-        <div class="res-actions">
-          <a class="btn btn-gold" data-email href="#">Email me</a>
-          <a class="btn btn-ghost" data-linkedin href="#" target="_blank" rel="noopener" hidden>LinkedIn</a>
-          <a class="btn btn-ghost" data-github href="#" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn btn-ghost" data-cv href="#" hidden>Download CV</a>
-        </div>
-        <p class="res-email mono" data-email-text></p>
-      </div>
-      <footer class="footer">
-        <span>© <span id="year"></span> Alan Philip Babu</span>
-        <span class="mono">Kerala, India</span>
-      </footer>
+    <!-- 02 WORK -->
+    <section class="section" id="work">
+      <p class="label mono"><span>02</span>Selected work</p>
+      <h2 class="section-title">Products, not <em>prototypes.</em></h2>
+      <div class="cases" id="cases"></div>
     </section>
+
+    <!-- 03 WEBSITES -->
+    <section class="section" id="websites">
+      <p class="label mono"><span>03</span>Websites</p>
+      <h2 class="section-title">Live on the <em>web.</em></h2>
+      <p class="section-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
+      <div class="sites" id="sites"></div>
+    </section>
+
+    <!-- 04 TOOLKIT -->
+    <section class="section" id="toolkit">
+      <p class="label mono"><span>04</span>Toolkit</p>
+      <h2 class="section-title">Tools I reach for, <em>and why.</em></h2>
+      <p class="section-sub">Hover over or focus a highlighted build tool to see where I've used it.</p>
+      <div class="bento" id="bento"></div>
+      <p class="used-in" id="used-in" aria-live="polite">&nbsp;</p>
+    </section>
+
+    <!-- 05 PATH -->
+    <section class="section" id="path">
+      <p class="label mono"><span>05</span>Experience &amp; education</p>
+      <h2 class="section-title">The path <em>so far.</em></h2>
+      <ol class="path" id="path-list"></ol>
+    </section>
+
+    <!-- 06 CONTACT -->
+    <section class="section contact" id="contact">
+      <p class="label mono"><span>06</span>Contact</p>
+      <h2 class="contact-title">Let's build something<br><em>worth booking.</em></h2>
+      <div class="contact-grid">
+        <div>
+          <p class="section-sub">Open to product roles, build collaborations and hospitality-tech advisory. Live demos and walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
+          <ul class="ways mono">
+            <li>Product roles</li>
+            <li>Build collaborations</li>
+            <li>Hospitality tech advisory</li>
+          </ul>
+        </div>
+        <div class="contact-card">
+          <span class="mono">Email</span>
+          <a class="contact-email" data-email href="#"><span data-email-text></span></a>
+          <div class="contact-links">
+            <a class="btn btn-accent" data-email href="#">Email me <span aria-hidden="true">→</span></a>
+            <a class="btn btn-line" data-linkedin href="#" target="_blank" rel="noopener" hidden>LinkedIn ↗</a>
+            <a class="btn btn-line" data-github href="#" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="btn btn-line" data-cv href="#" hidden>CV ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="giant" aria-hidden="true"><span>Let's talk · Let's talk · </span><span>Let's talk · Let's talk · </span></div>
   </main>
 
-  <!-- ROOM BRIEF -->
+  <footer class="footer">
+    <span>© <span id="year"></span> Alan Philip Babu</span>
+    <span class="mono">Kerala, India</span>
+  </footer>
+
+  <!-- CASE STUDY DRAWER -->
   <div class="brief" id="brief" role="dialog" aria-modal="true" aria-labelledby="brief-title" hidden>
     <div class="brief-backdrop" data-close></div>
     <article class="brief-panel" tabindex="-1">

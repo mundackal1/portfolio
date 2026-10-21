@@ -9,7 +9,8 @@ const CONFIG = {
   emailDomain: 'gmail.com',
   github: 'https://github.com/mundackal1',
   linkedin: 'https://www.linkedin.com/in/alan-mundackal/',
-  cv: ''        // e.g. 'assets/Alan-Philip-Babu-CV.pdf' to show "Download CV"
+  cv: '',       // e.g. 'assets/Alan-Philip-Babu-CV.pdf' to show "Download CV"
+  photo: ''     // e.g. 'assets/alan.jpg' to show your photo in the hero arch
 };
 
 /* ---------- Products ----------
@@ -18,8 +19,7 @@ const PRODUCTS = [
   {
     id: 'room-iq',
     name: 'Room IQ',
-    short: 'RM',
-    color: '#7aa7ff',
+    headline: 'Overbookings across every OTA',
     domain: 'Hospitality · Channel management',
     tagline: 'Hotel distribution and channel management for independent properties.',
     problem: 'Independent hotels sell rooms on several OTAs and their own channels at once. Keeping rates and availability in sync by hand leads to overbookings, lost revenue and long nights at the front desk.',
@@ -38,8 +38,7 @@ const PRODUCTS = [
   {
     id: 'rates-iq',
     name: 'Rates IQ',
-    short: 'RT',
-    color: '#6ef2c4',
+    headline: 'Prices drifting out of parity',
     domain: 'Hospitality · Revenue intelligence',
     tagline: 'Rate intelligence that helps hotels win more direct bookings.',
     problem: 'Hotels pay a large commission on every OTA booking and often find out too late that their prices have drifted out of line across channels or against competitors.',
@@ -58,8 +57,7 @@ const PRODUCTS = [
   {
     id: 'salon-iq',
     name: 'Salon IQ',
-    short: 'SL',
-    color: '#f58fc8',
+    headline: 'Salon bills on paper and WhatsApp',
     domain: 'Retail & services · Salon operations',
     tagline: 'The everyday operating system for salons and spas.',
     problem: 'Salons run appointments, billing, stock and staff pay across paper registers, WhatsApp and spreadsheets, so nothing adds up at the end of the day.',
@@ -78,8 +76,7 @@ const PRODUCTS = [
   {
     id: 'chit-iq',
     name: 'Chit IQ',
-    short: 'CH',
-    color: '#ffc56b',
+    headline: 'Chit auctions reconciled by hand',
     domain: 'Finance · Chit funds',
     tagline: 'End-to-end management for chit fund companies.',
     problem: 'Chit companies handle groups, auctions, collections and accounts in separate tools and reconcile them by hand, which is slow and error-prone.',
@@ -98,8 +95,7 @@ const PRODUCTS = [
   {
     id: 'fin-iq',
     name: 'Fin IQ',
-    short: 'FN',
-    color: '#b69cff',
+    headline: 'Loans tracked in spreadsheets',
     domain: 'Finance · Lending operations',
     tagline: 'Lending and finance operations in one system.',
     problem: 'Finance companies track loans, disbursements, repayments and accounts across registers and spreadsheets, with no single source of truth.',
@@ -118,8 +114,7 @@ const PRODUCTS = [
   {
     id: 'build-iq',
     name: 'Build IQ',
-    short: 'BD',
-    color: '#ff9f6b',
+    headline: 'Materials lost between sites',
     domain: 'Construction · Site & materials',
     tagline: 'Material and site tracking for construction contractors.',
     problem: 'Contractors running several sites lose track of what was ordered, delivered and used, and find out about overruns after the money is spent.',
@@ -143,7 +138,6 @@ const SITES = [
     name: 'El Paradiso',
     url: 'https://elparadiso.in',
     type: 'Homestay · Thekkady',
-    color: '#5ad08a',
     desc: 'Website for our family homestay near Periyar Tiger Reserve, covering rooms, gallery, location and direct booking enquiries.',
     tags: ['Next.js', 'React', 'Tailwind CSS']
   },
@@ -151,7 +145,6 @@ const SITES = [
     name: 'Akshaya Chits',
     url: 'https://akshayachits.com',
     type: 'Chit fund company',
-    color: '#ffc56b',
     desc: 'Company website presenting chit schemes, the company and its branches, with customer enquiries.',
     tags: ['Design', 'Build', 'Launch']
   },
@@ -159,7 +152,6 @@ const SITES = [
     name: 'Akshaya Fincorp',
     url: 'https://akshayafincorp.com',
     type: 'Finance company',
-    color: '#7aa7ff',
     desc: 'Company website presenting loan products and the company, with customer enquiries.',
     tags: ['Design', 'Build', 'Launch']
   }
@@ -316,26 +308,25 @@ function viz(kind) {
   return open + body + close;
 }
 
-function siteViz(color) {
-  return `<svg viewBox="0 0 300 150" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs><linearGradient id="g${color.slice(1)}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${color}" stop-opacity=".35"/><stop offset="1" stop-color="${color}" stop-opacity=".05"/>
-    </linearGradient></defs>
-    <rect width="300" height="150" fill="url(#g${color.slice(1)})"/>
-    <rect x="18" y="14" width="40" height="6" rx="3" fill="${color}" opacity=".8"/>
-    <rect x="190" y="14" width="22" height="6" rx="3" fill="#fff" opacity=".2"/>
-    <rect x="218" y="14" width="22" height="6" rx="3" fill="#fff" opacity=".2"/>
-    <rect x="246" y="14" width="36" height="8" rx="4" fill="${color}" opacity=".7"/>
-    <rect x="18" y="46" width="150" height="12" rx="4" fill="#fff" opacity=".75"/>
-    <rect x="18" y="64" width="110" height="12" rx="4" fill="#fff" opacity=".45"/>
-    <rect x="18" y="88" width="56" height="16" rx="8" fill="${color}"/>
-    <rect x="190" y="44" width="92" height="62" rx="8" fill="#fff" opacity=".08"/>
-    <rect x="18" y="120" width="82" height="40" rx="6" fill="#fff" opacity=".06"/>
-    <rect x="109" y="120" width="82" height="40" rx="6" fill="#fff" opacity=".06"/>
-    <rect x="200" y="120" width="82" height="40" rx="6" fill="#fff" opacity=".06"/>
+
+function siteViz() {
+  // Wireframe thumbnail drawn in the current text colour.
+  return `<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" aria-hidden="true">
+    <defs><linearGradient id="sv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".18"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+    <rect width="320" height="180" fill="url(#sv)" stroke="none"/>
+    <rect x="20" y="14" width="40" height="6" rx="3" fill="currentColor" stroke="none"/>
+    <rect x="200" y="14" width="22" height="6" rx="3" fill="#1d1a16" fill-opacity=".2" stroke="none"/>
+    <rect x="228" y="14" width="22" height="6" rx="3" fill="#1d1a16" fill-opacity=".2" stroke="none"/>
+    <rect x="262" y="12" width="40" height="10" rx="5" fill="currentColor" fill-opacity=".8" stroke="none"/>
+    <rect x="20" y="50" width="150" height="12" rx="3" fill="#1d1a16" fill-opacity=".8" stroke="none"/>
+    <rect x="20" y="68" width="110" height="12" rx="3" fill="#1d1a16" fill-opacity=".45" stroke="none"/>
+    <rect x="20" y="94" width="58" height="16" rx="8" fill="currentColor" stroke="none"/>
+    <rect x="196" y="46" width="104" height="66" rx="8" fill="#1d1a16" fill-opacity=".05" stroke-opacity=".3"/>
+    <g fill="#1d1a16" fill-opacity=".04" stroke-opacity=".15">
+      <rect x="20" y="128" width="86" height="44" rx="6"/><rect x="117" y="128" width="86" height="44" rx="6"/><rect x="214" y="128" width="86" height="44" rx="6"/>
+    </g>
   </svg>`;
 }
-
 
 /* =========================================================
    Render
@@ -344,98 +335,100 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const roomNo = p => 101 + PRODUCTS.indexOf(p);
+const listJoin = arr => arr.length < 2 ? arr.join('') : `${arr.slice(0, -1).join(', ')} and ${arr[arr.length - 1]}`;
+const focusOf = p => p.domain.split('·').pop().trim();
 
-function renderMarquee() {
-  const words = ['Hospitality', 'Product', 'Distribution', 'SaaS', 'Revenue', 'Operations'];
-  $('#marquee').innerHTML = [...words, ...words].map(w => `<span>${w} ·</span>`).join('');
+const NUMBERS = [
+  ['10+', 'years in hospitality & OTA'],
+  ['380+', 'hotel partners managed at Cleartrip'],
+  ['34', 'room hotel run for eight years'],
+  ['6', 'SaaS products built'],
+  ['3', 'client websites live'],
+  ['Web · iOS · Android', 'platforms shipped']
+];
+
+function renderTicker() {
+  const items = NUMBERS.map(([b, s]) => `<div class="tick"><b>${b}</b><span>${s}</span></div>`).join('');
+  $('#ticker').innerHTML = items + items;
 }
 
-function renderCorridor() {
-  $('#corridor').innerHTML = PRODUCTS.map(p => `
-    <div class="room reveal" style="--c:${p.color}">
-      <div class="door-frame" style="--c:${p.color}">
-        <div class="door-inside">${viz(p.viz)}</div>
-        <div class="door">
-          <span class="plate">${roomNo(p)}</span>
-          <span class="reader"></span>
-          <span class="handle"></span>
-          <span class="hanger">${esc(p.name)}</span>
-        </div>
-        <button class="door-btn" data-open="${p.id}" aria-label="Open room ${roomNo(p)}: ${p.name}"></button>
+function renderCases() {
+  $('#cases').innerHTML = PRODUCTS.map((p, i) => `
+    <article class="case reveal">
+      <div class="case-art">
+        ${viz(p.viz)}
+        <span class="case-chip"><b>solves →</b> ${esc(p.headline)}</span>
       </div>
-      <span class="threshold"></span>
-      <div class="room-plaque">
+      <div class="case-text">
+        <span class="case-kicker mono">${String(i + 1).padStart(2, '0')} · ${esc(p.domain)}</span>
         <h3>${p.name}</h3>
-        <span class="room-type mono">${esc(p.domain)}</span>
-        <p>${esc(p.tagline)}</p>
+        <p class="case-problem">${esc(p.problem)}</p>
+        <div class="facts">
+          <div><b>${esc(p.platforms)}</b><span>Platforms</span></div>
+          <div><b>${esc(focusOf(p))}</b><span>Focus</span></div>
+          <div><b>${p.stack[0]}</b><span>Core stack</span></div>
+        </div>
+        <div class="chips">${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div>
+        <div class="case-actions">
+          <button class="btn btn-small btn-accent" data-open="${p.id}">Case study <span aria-hidden="true">→</span></button>
+          <a class="btn btn-small btn-line" href="#contact">Request a demo</a>
+        </div>
       </div>
-    </div>`).join('');
-
-  // Keyboard focus swings the door open the same way hover does.
-  $$('.door-btn').forEach(b => {
-    const room = b.closest('.room');
-    b.addEventListener('focus', () => room.classList.add('focus'));
-    b.addEventListener('blur', () => room.classList.remove('focus'));
-  });
+    </article>`).join('');
 }
 
-function renderGallery() {
-  $('#gallery-wall').innerHTML = SITES.map(s => {
+function renderSites() {
+  $('#sites').innerHTML = SITES.map(s => {
     const host = s.url.replace(/^https?:\/\//, '');
     return `
-    <figure class="artwork reveal">
-      <div class="frame"><div class="canvas">
-        <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="browser-url">${host}</span></div>
-        <div class="browser-view">${siteViz(s.color)}</div>
-      </div></div>
-      <figcaption class="museum-plaque">
-        <span class="site-type mono">${esc(s.type)}</span>
+    <article class="site reveal">
+      <div class="browser-bar"><span class="dots3"><i></i><i></i><i></i></span><span class="browser-url">${host}</span></div>
+      <div class="browser-view">${siteViz()}</div>
+      <div class="site-body">
+        <span class="mono">${esc(s.type)}</span>
         <h3>${esc(s.name)}</h3>
         <p>${esc(s.desc)}</p>
-        <span class="chips">${s.tags.map(t => `<span class="chip">${t}</span>`).join('')}</span>
         <a class="site-link" href="${s.url}" target="_blank" rel="noopener">Visit ${host} ↗</a>
-      </figcaption>
-    </figure>`;
+      </div>
+    </article>`;
   }).join('');
 }
 
-function renderRack() {
-  $('#rack').innerHTML = TOOL_GROUPS.map(g => `
-    <div class="rack-row reveal">
-      <h3>${g.title}</h3>
-      <p>${g.note}</p>
-      <div class="hooks">${g.tools.map(t => g.linked
-        ? `<button class="key" data-linked data-tool="${esc(t)}">${t}</button>`
-        : `<span class="key">${t}</span>`).join('')}</div>
+function renderToolkit() {
+  const wide = [0, 3]; // build stack and product & business span wider cells
+  $('#bento').innerHTML = TOOL_GROUPS.map((g, i) => `
+    <div class="cell${wide.includes(i) ? ' wide' : ''} reveal">
+      <p class="cell-head"><span class="mono">${String(i + 1).padStart(2, '0')}</span>${g.title}</p>
+      <p class="cell-tools">${g.tools.map(t => g.linked
+        ? `<button class="t" data-tool="${esc(t)}">${t}</button>`
+        : `<span class="t">${t}</span>`).join('')}</p>
+      <p class="cell-note">${g.note}</p>
     </div>`).join('');
 
+  const out = $('#used-in');
   const show = tool => {
-    $$('.key.on').forEach(k => k.classList.remove('on'));
-    $(`.key[data-tool="${CSS.escape(tool)}"]`)?.classList.add('on');
-    const used = PRODUCTS.filter(p => p.stack.includes(tool));
-    $('#desk-q').innerHTML = `Which rooms use <b>${esc(tool)}</b>?`;
-    $('#desk-rooms').innerHTML = used.length
-      ? used.map(p => `<li><span class="rn">${roomNo(p)}</span>${p.name}</li>`).join('')
-      : '<li class="empty">None of the suites, yet.</li>';
+    $$('.t.on').forEach(t => t.classList.remove('on'));
+    $(`.t[data-tool="${CSS.escape(tool)}"]`)?.classList.add('on');
+    const used = PRODUCTS.filter(p => p.stack.includes(tool)).map(p => p.name);
+    out.innerHTML = `<b>${esc(tool)}</b> is used in ${used.length ? listJoin(used) : 'none of the products yet'}.`;
   };
-  $$('.key[data-linked]').forEach(k => {
-    k.addEventListener('mouseenter', () => show(k.dataset.tool));
-    k.addEventListener('focus', () => show(k.dataset.tool));
-    k.addEventListener('click', () => show(k.dataset.tool));
+  $$('.t[data-tool]').forEach(t => {
+    t.addEventListener('mouseenter', () => show(t.dataset.tool));
+    t.addEventListener('focus', () => show(t.dataset.tool));
+    t.addEventListener('click', () => show(t.dataset.tool));
   });
-  show('Supabase');
 }
 
-function renderLedger() {
-  $('#ledger').innerHTML = `
-    <li class="ledger-head mono" aria-hidden="true"><span>Dates</span><span>Stay</span><span>Notes</span></li>
-    ${TIMELINE.map((t, i) => `
-    <li class="entry reveal${i === 0 ? ' current' : ''}">
+function renderPath() {
+  $('#path-list').innerHTML = TIMELINE.map(t => `
+    <li class="reveal">
       <span class="when mono">${t.when}</span>
-      <div><h3>${esc(t.role)}</h3><p class="where">${esc(t.where)}</p></div>
-      ${t.points.length ? `<ul>${t.points.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<span></span>'}
-    </li>`).join('')}`;
+      <div>
+        <h3>${esc(t.role)}</h3>
+        <p class="where">${esc(t.where)}</p>
+        ${t.points.length ? `<ul>${t.points.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      </div>
+    </li>`).join('');
 }
 
 function renderContact() {
@@ -444,58 +437,40 @@ function renderContact() {
   $$('[data-email-text]').forEach(el => { el.textContent = email; });
   $$('[data-github]').forEach(a => { a.href = CONFIG.github; });
   $$('[data-linkedin]').forEach(a => { if (CONFIG.linkedin) { a.href = CONFIG.linkedin; a.hidden = false; } });
-  $$('[data-cv]').forEach(a => { if (CONFIG.cv) { a.href = CONFIG.cv; a.setAttribute('download', ''); a.hidden = false; } });
+  $$('[data-cv]').forEach(a => { if (CONFIG.cv) { a.href = CONFIG.cv; a.hidden = false; } });
   $('#year').textContent = new Date().getFullYear();
 }
 
 /* =========================================================
-   Lift — floor indicator that follows the scroll
+   Hero arch — your photo, or a slow rotation through the products
    ========================================================= */
-function initLift() {
-  const lift = $('#lift');
-  const floors = $$('[data-floor]');
-  const order = floors.map(f => f.dataset.floor);
-  $('#lift-buttons').innerHTML = floors.slice().reverse().map(f => `
-    <li><button class="lift-btn" data-goto="${f.id}" aria-label="${f.dataset.floorName}">
-      ${f.dataset.floor}<span class="tip">${f.dataset.floorName}</span>
-    </button></li>`).join('');
-
-  const display = $('#lift-display');
-  const floorEl = $('#lift-floor');
-  let current = 'L';
-
-  const setFloor = f => {
-    if (f.dataset.floor === current) return;
-    const goingDown = order.indexOf(f.dataset.floor) > order.indexOf(current);
-    current = f.dataset.floor;
-    floorEl.textContent = current;
-    $('#lift-label').textContent = f.dataset.floorName;
-    $('#lift-arrow').classList.toggle('down', goingDown);
-    floorEl.classList.remove('ding'); void floorEl.offsetWidth; floorEl.classList.add('ding');
-    $$('.lift-btn').forEach(b => b.classList.toggle('on', b.dataset.goto === f.id));
+function initArch() {
+  const arch = $('#arch');
+  const inner = $('#arch-inner');
+  if (CONFIG.photo) {
+    inner.style.inset = '0';
+    inner.innerHTML = `<img src="${CONFIG.photo}" alt="Alan Philip Babu">`;
+    $('.arch-caption', arch).remove();
+    return;
+  }
+  let i = 0;
+  const paint = () => {
+    const p = PRODUCTS[i];
+    inner.innerHTML = viz(p.viz);
+    $('#arch-name').textContent = p.name;
+    $('#arch-domain').textContent = p.domain;
   };
-  $$('.lift-btn')[floors.length - 1].classList.add('on');
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => { if (en.isIntersecting) setFloor(en.target); });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  floors.forEach(f => io.observe(f));
-
-  lift.addEventListener('click', e => {
-    const b = e.target.closest('.lift-btn');
-    if (b) { $('#' + b.dataset.goto).scrollIntoView(); lift.classList.remove('open'); display.setAttribute('aria-expanded', 'false'); }
-  });
-  display.addEventListener('click', () => {
-    const open = lift.classList.toggle('open');
-    display.setAttribute('aria-expanded', String(open));
-  });
-  document.addEventListener('click', e => {
-    if (!lift.contains(e.target)) { lift.classList.remove('open'); display.setAttribute('aria-expanded', 'false'); }
-  });
+  paint();
+  if (reduceMotion) return;
+  setInterval(() => {
+    if (document.hidden) return;
+    arch.classList.add('swap');
+    setTimeout(() => { i = (i + 1) % PRODUCTS.length; paint(); arch.classList.remove('swap'); }, 500);
+  }, 4000);
 }
 
 /* =========================================================
-   Room brief (drawer) — deep-linkable via #/work/<id>
+   Case study drawer — deep-linkable via #/work/<id>
    ========================================================= */
 const brief = $('#brief');
 const briefPanel = $('.brief-panel', brief);
@@ -507,11 +482,10 @@ function briefHTML(p) {
   const prev = PRODUCTS[(i - 1 + PRODUCTS.length) % PRODUCTS.length];
   const next = PRODUCTS[(i + 1) % PRODUCTS.length];
   return `
-    <div class="brief-room"><span class="plate">${roomNo(p)}</span><span class="brief-domain mono">${esc(p.domain)}</span></div>
+    <span class="case-kicker mono">${String(i + 1).padStart(2, '0')} · ${esc(p.domain)}</span>
     <h2 id="brief-title">${p.name}</h2>
     <p class="brief-tag">${esc(p.tagline)}</p>
-    <div class="brief-visual">${viz(p.viz)}</div>
-
+    <div class="brief-art">${viz(p.viz)}</div>
     <section class="brief-section"><h3>The problem</h3><p>${esc(p.problem)}</p></section>
     <section class="brief-section"><h3>What it does</h3>
       <ul class="brief-list">${p.does.map(d => `<li>${esc(d)}</li>`).join('')}</ul>
@@ -519,38 +493,31 @@ function briefHTML(p) {
     <section class="brief-section"><h3>How it fits together</h3>
       <div class="flow">${p.flow.map((f, k) => `${k ? '<span class="flow-arrow">→</span>' : ''}<span class="flow-node">${esc(f)}</span>`).join('')}</div>
     </section>
-    <section class="brief-section">
-      <dl class="brief-meta">
-        <div><dt>My role</dt><dd>${esc(p.role)}</dd></div>
-        <div><dt>Platforms</dt><dd>${esc(p.platforms)}</dd></div>
-      </dl>
+    <section class="brief-section"><h3>My role</h3><p>${esc(p.role)}</p></section>
+    <section class="brief-section"><h3>Platforms &amp; stack</h3>
+      <div class="chips"><span class="chip">${esc(p.platforms)}</span>${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div>
     </section>
-    <section class="brief-section"><h3>Built with</h3>
-      <div class="chips">${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}</div>
-    </section>
-
     <div class="brief-note">
-      <p>I'm happy to give a live demo and walk through the product on a call.</p>
-      <a class="btn btn-gold btn-small" href="#rooftop" data-close>Request a demo</a>
+      <p>Want to see it <em>working?</em> I'm happy to give a live demo on a call.</p>
+      <a class="btn btn-small btn-accent" href="#contact" data-close>Request a demo</a>
     </div>
-    <div class="brief-nav">
-      <button data-open="${prev.id}">← ${roomNo(prev)} ${prev.name}</button>
-      <button data-open="${next.id}">${roomNo(next)} ${next.name} →</button>
-    </div>`;
+    <nav class="brief-nav" aria-label="More products">
+      <button data-open="${prev.id}">← ${prev.name}</button>
+      <button data-open="${next.id}">${next.name} →</button>
+    </nav>`;
 }
 
 function openBrief(id, push = true) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
   if (brief.hidden) lastFocus = document.activeElement;
-  briefPanel.style.setProperty('--c', p.color);
   $('#brief-body').innerHTML = briefHTML(p);
   brief.hidden = false;
   document.body.classList.add('locked');
   briefPanel.scrollTop = 0;
   briefPanel.focus();
   if (push && location.hash !== `#/work/${id}`) {
-    // First open adds a history entry so Back closes the brief; switching rooms replaces it.
+    // First open adds a history entry so Back closes the drawer; switching products replaces it.
     if (pushedEntry) history.replaceState(null, '', `#/work/${id}`);
     else { history.pushState(null, '', `#/work/${id}`); pushedEntry = true; }
   }
@@ -565,7 +532,6 @@ function closeBrief(push = true) {
     else history.replaceState(null, '', location.pathname + location.search);
   }
   pushedEntry = false;
-  $$('.room.opening').forEach(r => r.classList.remove('opening'));
   if (lastFocus) lastFocus.focus({ preventScroll: true });
 }
 
@@ -576,18 +542,7 @@ function syncRoute() {
 
 document.addEventListener('click', e => {
   const opener = e.target.closest('[data-open]');
-  if (opener) {
-    e.preventDefault();
-    const room = opener.closest('.room');
-    // Swing the door fully open before the brief slides in.
-    if (room && !reduceMotion) {
-      room.classList.add('opening');
-      setTimeout(() => openBrief(opener.dataset.open), 420);
-    } else {
-      openBrief(opener.dataset.open);
-    }
-    return;
-  }
+  if (opener) { e.preventDefault(); openBrief(opener.dataset.open); return; }
   const closer = e.target.closest('[data-close]');
   if (closer && !brief.hidden) {
     const href = closer.getAttribute('href');
@@ -613,107 +568,67 @@ window.addEventListener('popstate', syncRoute);
 window.addEventListener('hashchange', syncRoute);
 
 /* =========================================================
-   Lobby effects
+   Motion
    ========================================================= */
-function initCheckin() {
-  const el = $('#checkin');
-  let seen = false;
-  try { seen = sessionStorage.getItem('checked-in') === '1'; } catch (_) { /* storage blocked */ }
-  if (reduceMotion || seen || location.hash.startsWith('#/work/')) { el.classList.add('done'); return; }
-  try { sessionStorage.setItem('checked-in', '1'); } catch (_) { /* storage blocked */ }
-  const open = () => {
-    if (el.classList.contains('open')) return;
-    el.classList.add('open');
-    setTimeout(() => el.classList.add('done'), 1050);
+function initScroll() {
+  const nav = $('#nav');
+  const bar = $('#progress');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
   };
-  setTimeout(open, 1300);
-  el.addEventListener('click', open);
-}
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-function initKeycard() {
-  const card = $('#keycard');
-  const stage = $('.lobby');
-  const light = $('#lobby-light');
-  card.addEventListener('click', () => card.classList.toggle('flipped'));
-  if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
-
-  stage.addEventListener('pointermove', e => {
-    const s = stage.getBoundingClientRect();
-    light.style.transform = `translate3d(${e.clientX - s.left - 320}px, ${e.clientY - s.top - 320}px, 0)`;
-    const r = card.getBoundingClientRect();
-    const dx = (e.clientX - (r.left + r.width / 2)) / (s.width / 2);
-    const dy = (e.clientY - (r.top + r.height / 2)) / (s.height / 2);
-    card.style.transform = `rotateY(${(dx * 14).toFixed(2)}deg) rotateX(${(-dy * 12).toFixed(2)}deg)`;
-    card.style.setProperty('--gx', `${((e.clientX - r.left) / r.width) * 100}%`);
-    card.style.setProperty('--gy', `${((e.clientY - r.top) / r.height) * 100}%`);
-    $$('.glare', card).forEach(g => {
-      g.style.setProperty('--gx', `${30 + ((e.clientX - r.left) / r.width) * 40}%`);
-      g.style.setProperty('--gy', `${30 + ((e.clientY - r.top) / r.height) * 40}%`);
+  const links = $$('.nav-links a');
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${en.target.id}`));
     });
-  });
-  stage.addEventListener('pointerleave', () => { card.style.transform = ''; });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  links.forEach(a => { const s = $(a.getAttribute('href')); if (s) io.observe(s); });
 }
 
-function initSky() {
-  const canvas = $('#sky');
-  const ctx = canvas.getContext('2d');
-  let w, h, stars = [], raf = null;
-  const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth; h = canvas.clientHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    stars = Array.from({ length: Math.round((w * h) / 5000) }, () => ({
-      x: Math.random() * w, y: Math.random() * h * 0.75,
-      r: Math.random() * 1.2 + 0.2, p: Math.random() * Math.PI * 2, s: 0.5 + Math.random() * 1.5
-    }));
+function initParallax() {
+  // The case illustrations drift slightly against the scroll.
+  if (reduceMotion) return;
+  const arts = $$('.case-art');
+  let ticking = false;
+  const update = () => {
+    const h = window.innerHeight;
+    arts.forEach(a => {
+      const r = a.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > h) return;
+      const off = ((r.top + r.height / 2) - h / 2) / h;
+      a.style.transform = `translateY(${(off * -24).toFixed(1)}px)`;
+    });
+    ticking = false;
   };
-  const frame = t => {
-    ctx.clearRect(0, 0, w, h);
-    for (const st of stars) {
-      const a = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(st.p + (t / 1000) * st.s));
-      ctx.fillStyle = `rgba(255, 244, 220, ${a * (1 - st.y / h)})`;
-      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
-    }
-    raf = requestAnimationFrame(frame);
-  };
-  resize();
-  window.addEventListener('resize', resize);
-  if (reduceMotion) { frame(0); cancelAnimationFrame(raf); return; }
-  new IntersectionObserver(([en]) => {
-    if (en.isIntersecting && !raf) raf = requestAnimationFrame(frame);
-    else if (!en.isIntersecting && raf) { cancelAnimationFrame(raf); raf = null; }
-  }).observe(canvas);
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
 }
 
 function initReveal() {
-  const els = $$('.reveal, .floor-head, .meeting, .itinerary, .reservation');
+  const els = $$('.reveal, .label, .section-title, .about > *, .principles li, .contact-title, .contact-grid > *');
   if (reduceMotion || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
   els.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   els.forEach(el => io.observe(el));
 }
 
-function initNav() {
-  const nav = $('#nav');
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-}
-
 /* ---------- Boot ---------- */
-renderMarquee();
-renderCorridor();
-renderGallery();
-renderRack();
-renderLedger();
+renderTicker();
+renderCases();
+renderSites();
+renderToolkit();
+renderPath();
 renderContact();
-initCheckin();
-initLift();
-initKeycard();
-initSky();
+initArch();
+initScroll();
+initParallax();
 initReveal();
-initNav();
 syncRoute();
