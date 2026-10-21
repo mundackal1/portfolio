@@ -1,14 +1,17 @@
 /**
- * Alan Philip Portfolio — Dynamic Interactive Engine
- * Pure Vanilla JavaScript: High-Performance, Accessible, Zero Dependencies
+ * Alan Philip Portfolio — 3D Premium Animated Engine
+ * Powered by Three.js WebGL, Web Audio API Synthesizer & Modern Vanilla JS
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initAccentPicker();
-  initCanvasBackground();
+  initCustomCursor();
+  initWebAudio();
+  initThreeJSScene();
   initTypewriter();
   initCounters();
   init3DTilt();
+  initCardGlare();
   initTerminal();
   initProjectFilters();
   initProjectModals();
@@ -39,125 +42,334 @@ function initAccentPicker() {
       
       dots.forEach(d => d.classList.remove('active'));
       dot.classList.add('active');
-      showToast('Accent Updated', `Theme palette switched to ${theme.toUpperCase()}`, '🎨');
+      showToast('Palette Switched', `Active accent glow: ${theme.toUpperCase()}`, '🎨');
+      playTone(440, 0.08, 'sine');
+
+      if (window.update3DMaterialColor) {
+        window.update3DMaterialColor(theme);
+      }
     });
   });
 }
 
 /* ==========================================================================
-   2. INTERACTIVE CONSTELLATION CANVAS BACKGROUND
+   2. CUSTOM INTERACTIVE CURSOR & FOLLOWER
    ========================================================================== */
-function initCanvasBackground() {
-  const canvas = document.getElementById('bg-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+function initCustomCursor() {
+  const dot = document.getElementById('cursor-dot');
+  const glow = document.getElementById('cursor-glow');
+  if (!dot || !glow) return;
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-
-  const particleCount = Math.min(Math.floor((width * height) / 16000), 75);
-  const particles = [];
-  const mouse = { x: null, y: null, radius: 140 };
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let glowX = mouseX;
+  let glowY = mouseY;
 
   window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
   });
 
-  window.addEventListener('mouseout', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.45;
-      this.vy = (Math.random() - 0.5) * 0.45;
-      this.radius = Math.random() * 1.8 + 0.6;
-    }
-
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      if (this.x < 0 || this.x > width) this.vx = -this.vx;
-      if (this.y < 0 || this.y > height) this.vy = -this.vy;
-
-      // Mouse interactive repulse
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          this.x -= (dx / dist) * force * 2.5;
-          this.y -= (dy / dist) * force * 2.5;
-        }
-      }
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(79, 172, 254, 0.4)';
-      ctx.fill();
-    }
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.15;
+    glowY += (mouseY - glowY) * 0.15;
+    glow.style.transform = `translate(${glowX}px, ${glowY}px)`;
+    requestAnimationFrame(animateGlow);
   }
+  animateGlow();
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  function render() {
-    ctx.clearRect(0, 0, width, height);
-
-    // Draw connecting lines
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxDist = 120;
-
-        if (dist < maxDist) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          const alpha = (1 - dist / maxDist) * 0.18;
-          ctx.strokeStyle = `rgba(0, 242, 254, ${alpha})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-
-    particles.forEach(p => {
-      p.update();
-      p.draw();
+  const hoverTargets = document.querySelectorAll('a, button, .project-card, .terminal-quick-chip, .tech-chip, .geom-btn');
+  hoverTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      document.body.classList.add('cursor-hover');
+      playTone(587.33, 0.04, 'triangle', 0.03); // D5 soft blip
     });
-
-    requestAnimationFrame(render);
-  }
-
-  render();
+    el.addEventListener('mouseleave', () => {
+      document.body.classList.remove('cursor-hover');
+    });
+  });
 }
 
 /* ==========================================================================
-   3. HERO TYPEWRITER
+   3. WEB AUDIO API SYNTHESIZER (ZERO ASSETS REQUIRED)
+   ========================================================================== */
+let audioCtx = null;
+let soundEnabled = false;
+
+function initWebAudio() {
+  const btn = document.getElementById('sound-toggle');
+  const label = document.getElementById('sound-label');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    soundEnabled = !soundEnabled;
+    if (soundEnabled) {
+      btn.classList.add('sound-on');
+      label.textContent = 'AUDIO: ON';
+      showToast('Synthesizer Active', 'Interactive audio soundscapes enabled', '🔊');
+      playChord([523.25, 659.25, 783.99]); // C Major chord
+    } else {
+      btn.classList.remove('sound-on');
+      label.textContent = 'AUDIO: OFF';
+      showToast('Audio Muted', 'Sound effects disabled', '🔇');
+    }
+  });
+}
+
+function playTone(freq, duration = 0.08, type = 'sine', vol = 0.05) {
+  if (!soundEnabled || !audioCtx) return;
+  try {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch (e) {}
+}
+
+function playChord(freqs, duration = 0.3, type = 'sine') {
+  if (!soundEnabled || !audioCtx) return;
+  freqs.forEach(f => playTone(f, duration, type, 0.04));
+}
+
+function playWhoosh() {
+  if (!soundEnabled || !audioCtx) return;
+  try {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.15);
+
+    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.15);
+  } catch (e) {}
+}
+
+/* ==========================================================================
+   4. THREE.JS 3D WEBGL HERO SCENE
+   ========================================================================== */
+function initThreeJSScene() {
+  const canvas = document.getElementById('webgl-bg-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 7;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true,
+    powerPreference: 'high-performance'
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Ambient & Directional Lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
+
+  const pointLight1 = new THREE.PointLight(0x00f2fe, 3, 20);
+  pointLight1.position.set(4, 3, 4);
+  scene.add(pointLight1);
+
+  const pointLight2 = new THREE.PointLight(0xa855f7, 3, 20);
+  pointLight2.position.set(-4, -3, 3);
+  scene.add(pointLight2);
+
+  // 3D Geometries Map
+  const geometries = {
+    torus: new THREE.TorusKnotGeometry(1.6, 0.45, 120, 24),
+    icosahedron: new THREE.IcosahedronGeometry(2.1, 2),
+    sphere: new THREE.SphereGeometry(2.0, 36, 36)
+  };
+
+  const themeColors = {
+    cyan: { primary: 0x00f2fe, secondary: 0x4facfe },
+    purple: { primary: 0xa855f7, secondary: 0xec4899 },
+    emerald: { primary: 0x10b981, secondary: 0x34d399 },
+    amber: { primary: 0xf59e0b, secondary: 0xfbbf24 }
+  };
+
+  let activeTheme = document.body.getAttribute('data-accent') || 'cyan';
+  let curColors = themeColors[activeTheme] || themeColors.cyan;
+
+  // Wireframe Core Material
+  const meshMaterial = new THREE.MeshStandardMaterial({
+    color: curColors.primary,
+    emissive: curColors.secondary,
+    emissiveIntensity: 0.35,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.85
+  });
+
+  let currentMesh = new THREE.Mesh(geometries.torus, meshMaterial);
+  // Position to the right-center behind the hero card
+  currentMesh.position.set(2.4, 0.2, -1);
+  scene.add(currentMesh);
+
+  // Floating Particle Field
+  const particleCount = 750;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+
+  for (let i = 0; i < particleCount * 3; i += 3) {
+    positions[i] = (Math.random() - 0.5) * 22;
+    positions[i + 1] = (Math.random() - 0.5) * 22;
+    positions[i + 2] = (Math.random() - 0.5) * 20;
+  }
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+  const particleMat = new THREE.PointsMaterial({
+    color: curColors.primary,
+    size: 0.045,
+    transparent: true,
+    opacity: 0.6
+  });
+
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // Mouse Coordinates for Interactive 3D Parallax
+  let targetRotX = 0;
+  let targetRotY = 0;
+  let targetCameraX = 0;
+  let targetCameraY = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 2 - 1;
+    const y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+    targetRotY = x * 0.8;
+    targetRotX = -y * 0.8;
+    targetCameraX = x * 0.4;
+    targetCameraY = y * 0.4;
+  });
+
+  // Switch Geometry Trigger
+  const geomBtns = document.querySelectorAll('.geom-btn');
+  geomBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gType = btn.getAttribute('data-geom');
+      if (geometries[gType]) {
+        currentMesh.geometry = geometries[gType];
+        geomBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        playWhoosh();
+        showToast('3D Geometry Changed', `Active Wireframe: ${gType.toUpperCase()}`, '💎');
+      }
+    });
+  });
+
+  // Color Update on Palette Switch
+  window.update3DMaterialColor = (theme) => {
+    const c = themeColors[theme] || themeColors.cyan;
+    meshMaterial.color.setHex(c.primary);
+    meshMaterial.emissive.setHex(c.secondary);
+    particleMat.color.setHex(c.primary);
+    pointLight1.color.setHex(c.primary);
+    pointLight2.color.setHex(c.secondary);
+  };
+
+  // Resize Handler
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Responsive position of 3D object
+    if (window.innerWidth < 992) {
+      currentMesh.position.set(0, 0, -2);
+    } else {
+      currentMesh.position.set(2.4, 0.2, -1);
+    }
+  });
+
+  if (window.innerWidth < 992) {
+    currentMesh.position.set(0, 0, -2);
+  }
+
+  // Animation Loop
+  let clock = new THREE.Clock();
+
+  function animate() {
+    const delta = clock.getDelta();
+    const elapsed = clock.getElapsedTime();
+
+    // Constant smooth rotation + mouse lerp
+    currentMesh.rotation.y += (targetRotY - currentMesh.rotation.y) * 0.05 + 0.2 * delta;
+    currentMesh.rotation.x += (targetRotX - currentMesh.rotation.x) * 0.05 + 0.15 * delta;
+    currentMesh.rotation.z += 0.08 * delta;
+
+    // Gentle float
+    currentMesh.position.y += Math.sin(elapsed * 1.5) * 0.002;
+
+    // Particle field slow drift
+    particles.rotation.y = elapsed * 0.03;
+    particles.rotation.x = elapsed * 0.015;
+
+    // Camera parallax lerp
+    camera.position.x += (targetCameraX - camera.position.x) * 0.05;
+    camera.position.y += (targetCameraY - camera.position.y) * 0.05;
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+/* ==========================================================================
+   5. SPECULAR CARD GLARE TRACKING
+   ========================================================================== */
+function initCardGlare() {
+  const cards = document.querySelectorAll('.hero-card, .project-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+}
+
+/* ==========================================================================
+   6. HERO TYPEWRITER
    ========================================================================== */
 function initTypewriter() {
   const el = document.getElementById('typewriter-text');
   if (!el) return;
 
   const words = [
-    'intelligent web',
+    'intelligent 3D web',
     'distributed microservices',
     'autonomous AI workflows',
     'low-latency engines',
@@ -204,7 +416,7 @@ function initTypewriter() {
 }
 
 /* ==========================================================================
-   4. ANIMATED COUNTERS
+   7. ANIMATED COUNTERS
    ========================================================================== */
 function initCounters() {
   const counters = document.querySelectorAll('.counter');
@@ -223,7 +435,6 @@ function initCounters() {
           function updateCounter(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out quad
             const easeProgress = 1 - (1 - progress) * (1 - progress);
             const current = easeProgress * target;
 
@@ -247,7 +458,7 @@ function initCounters() {
 }
 
 /* ==========================================================================
-   5. 3D CARD TILT EFFECT
+   8. 3D CARD TILT EFFECT
    ========================================================================== */
 function init3DTilt() {
   const card = document.getElementById('tilt-card');
@@ -270,7 +481,7 @@ function init3DTilt() {
 }
 
 /* ==========================================================================
-   6. DEVELOPER TERMINAL WIDGET
+   9. DEVELOPER TERMINAL WIDGET
    ========================================================================== */
 function initTerminal() {
   const input = document.getElementById('terminal-cmd-input');
@@ -294,12 +505,12 @@ function initTerminal() {
     `,
     about: () => `
 <div class="term-line cyan">About Alan Philip:</div>
-<div class="term-line">Senior Staff Full-Stack Software Engineer specializing in high-throughput distributed backends (Go, Kafka, Node) and reactive frontend platforms (Next.js, TypeScript). 7+ years of engineering experience with a deep focus on autonomous agent workflows and cloud scalability.</div>
+<div class="term-line">Senior Staff Full-Stack Software Engineer specializing in high-throughput distributed backends (Go, Kafka, Node) and reactive 3D frontend platforms (Three.js, Next.js, TypeScript). 7+ years of engineering experience with a deep focus on autonomous agent workflows and cloud scalability.</div>
     `,
     skills: () => `
 <div class="term-line cyan">Technical Proficiencies:</div>
 <div class="term-line"><span class="yellow">Languages:</span> Go (Golang), TypeScript/JavaScript, Python, Rust, SQL</div>
-<div class="term-line"><span class="yellow">Frontend:</span> React, Next.js, WebAssembly, Canvas/WebGL, Tailwind, CSS</div>
+<div class="term-line"><span class="yellow">Frontend & 3D:</span> Three.js, WebGL, React, Next.js, WebAssembly, Canvas, CSS</div>
 <div class="term-line"><span class="yellow">Backend & Data:</span> Kafka, Redis, PostgreSQL, TimescaleDB, gRPC, WebSockets</div>
 <div class="term-line"><span class="yellow">Cloud & Infra:</span> Kubernetes, Docker, Terraform, Helm, GCP, AWS, CI/CD</div>
     `,
@@ -308,7 +519,7 @@ function initTerminal() {
 <div class="term-line">1. <span class="green">Nexus AI</span> - Autonomous agent orchestration platform [4.7TB Data, &lt;65ms execution]</div>
 <div class="term-line">2. <span class="green">Quantum Edge Flow</span> - High-frequency financial settlement engine [14.2k TPS, 14ms latency]</div>
 <div class="term-line">3. <span class="green">DevForge Workspace</span> - Cloud collaborative IDE & real-time CRDT Git lenses</div>
-<div class="term-line dim">Type 'open &lt;project-id&gt;' or inspect the cards in the Featured Work section.</div>
+<div class="term-line dim">Type 'open &lt;project-id&gt;' or click inspect in Featured Work.</div>
     `,
     experience: () => `
 <div class="term-line cyan">Career Highlights:</div>
@@ -327,6 +538,7 @@ function initTerminal() {
     `,
     'sudo hire': () => {
       showToast('Offer Initiated! 🚀', 'Routing directly to prioritized contact queue...', '✨');
+      playTone(880, 0.2, 'sine', 0.1);
       return `
 <div class="term-line green">🔥 Access Granted! [CONFIDENTIAL PRIORITY]</div>
 <div class="term-line">Initializing interview scheduling channel... Scroll down to the Contact Section or email directly at alan.philip@example.com!</div>
@@ -343,7 +555,8 @@ function initTerminal() {
     const cmd = rawCmd.trim().toLowerCase();
     if (!cmd) return;
 
-    // Append input line
+    playTone(400, 0.05, 'square', 0.02);
+
     const userLine = document.createElement('div');
     userLine.className = 'term-line';
     userLine.innerHTML = `<span class="green">alan@portfolio:~$</span> ${escapeHTML(rawCmd)}`;
@@ -395,7 +608,7 @@ function escapeHTML(str) {
 }
 
 /* ==========================================================================
-   7. PROJECT CATEGORY FILTERS
+   10. PROJECT CATEGORY FILTERS
    ========================================================================== */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -405,6 +618,7 @@ function initProjectFilters() {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      playWhoosh();
 
       const filter = btn.getAttribute('data-filter');
 
@@ -426,7 +640,7 @@ function initProjectFilters() {
 }
 
 /* ==========================================================================
-   8. PROJECT DETAIL MODALS
+   11. PROJECT DETAIL MODALS
    ========================================================================== */
 const projectData = {
   'nexus-ai': {
@@ -434,7 +648,7 @@ const projectData = {
     category: 'Autonomous Agents & Cloud Infrastructure',
     image: 'assets/images/project-ai-platform.jpg',
     description: `Nexus AI is a next-generation agent orchestration platform engineered to supervise, monitor, and direct autonomous multi-step reasoning models across distributed cloud clusters. Built to process over 4.7 TB of telemetry data with a continuous 99.8% SLA uptime, it features live streaming node graph topology, dynamic agent status tracking, and sub-65ms execution latency.`,
-    tags: ['TypeScript', 'Next.js 14', 'FastAPI', 'Redis Streams', 'WebSockets', 'Docker', 'Google Cloud']
+    tags: ['TypeScript', 'Three.js', 'Next.js 14', 'FastAPI', 'Redis Streams', 'WebSockets', 'Docker', 'Google Cloud']
   },
   'quantum-edge': {
     title: 'Quantum Edge Flow: High-Frequency Settlement Engine',
@@ -472,6 +686,7 @@ window.openProjectModal = function(projectId) {
   const data = projectData[projectId];
   if (!data) return;
 
+  playWhoosh();
   const modal = document.getElementById('project-modal');
   document.getElementById('modal-title').textContent = data.title;
   document.getElementById('modal-tag').textContent = data.category;
@@ -501,7 +716,7 @@ window.closeProjectModal = function() {
 };
 
 /* ==========================================================================
-   9. SKILL BARS ON SCROLL
+   12. SKILL BARS ON SCROLL
    ========================================================================== */
 function initSkillBars() {
   const fills = document.querySelectorAll('.skill-fill');
@@ -524,7 +739,7 @@ function initSkillBars() {
 }
 
 /* ==========================================================================
-   10. CONTACT FORM & INSTANT TOAST
+   13. CONTACT FORM & INSTANT TOAST
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById('contact-form');
@@ -535,7 +750,6 @@ function initContactForm() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('contact-name').value;
-    const email = document.getElementById('contact-email').value;
 
     btn.disabled = true;
     btn.innerHTML = 'Transmitting Message... ⏳';
@@ -544,6 +758,10 @@ function initContactForm() {
       btn.disabled = false;
       btn.innerHTML = 'Send Direct Message 🚀';
       form.reset();
+
+      playTone(523.25, 0.25, 'sine');
+      setTimeout(() => playTone(659.25, 0.25, 'sine'), 100);
+      setTimeout(() => playTone(783.99, 0.4, 'sine'), 200);
 
       showToast(
         'Message Delivered!',
@@ -581,7 +799,7 @@ function showToast(title, message, icon = '✨') {
 }
 
 /* ==========================================================================
-   11. NAVBAR SCROLL EFFECT
+   14. NAVBAR SCROLL EFFECT
    ========================================================================== */
 function initNavbarScroll() {
   const nav = document.getElementById('main-nav');
@@ -595,7 +813,6 @@ function initNavbarScroll() {
       nav.classList.remove('scrolled');
     }
 
-    // Active link highlighting
     let currentId = '';
     sections.forEach(sec => {
       const top = sec.offsetTop - 120;

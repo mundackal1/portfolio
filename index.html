@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alan Philip — Full-Stack Software Engineer & Distributed Systems</title>
-  <meta name="description" content="Portfolio of Alan Philip, Senior Full-Stack Software Engineer specializing in scalable cloud architectures, high-performance distributed systems, and modern AI-driven web applications.">
-  <meta name="keywords" content="Software Engineer, Full Stack, Distributed Systems, Go, TypeScript, React, Next.js, Cloud Architecture, AI Agents">
+  <title>Alan Philip — 3D Full-Stack Software Engineer & Distributed Systems</title>
+  <meta name="description" content="Portfolio of Alan Philip, Senior Full-Stack Software Engineer specializing in scalable cloud architectures, high-performance distributed systems, and modern 3D AI-driven web applications.">
+  <meta name="keywords" content="Software Engineer, 3D Portfolio, Three.js, WebGL, Full Stack, Distributed Systems, Go, TypeScript, React, Next.js, Cloud Architecture, AI Agents">
   <meta name="author" content="Alan Philip">
 
   <!-- OpenGraph Metadata -->
-  <meta property="og:title" content="Alan Philip — Full-Stack Software Engineer">
-  <meta property="og:description" content="Building scalable cloud architectures, resilient distributed systems, and cutting-edge web experiences.">
+  <meta property="og:title" content="Alan Philip — 3D Full-Stack Software Engineer">
+  <meta property="og:description" content="Building scalable cloud architectures, resilient distributed systems, and cutting-edge 3D web experiences.">
   <meta property="og:image" content="assets/images/avatar.jpg">
   <meta property="og:type" content="website">
 
@@ -19,8 +19,13 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 </head>
 <body data-accent="cyan">
-  <!-- Interactive Background Canvas & Ambient Glows -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- Custom Neon Interactive Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- WebGL 3D Canvas Background & Cyber Grid -->
+  <canvas id="webgl-bg-canvas"></canvas>
+  <div class="cyber-grid-overlay"></div>
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
   <div class="ambient-orb orb-3"></div>
@@ -45,7 +50,18 @@
       </nav>
 
       <div class="nav-actions">
-        <!-- Palette Switcher -->
+        <!-- Interactive Synthesizer Audio Toggle -->
+        <button class="sound-toggle-btn" id="sound-toggle" aria-label="Toggle Sound Effects" title="Toggle Synthesizer Audio">
+          <div class="sound-bars">
+            <span class="s-bar"></span>
+            <span class="s-bar"></span>
+            <span class="s-bar"></span>
+            <span class="s-bar"></span>
+          </div>
+          <span id="sound-label">AUDIO: OFF</span>
+        </button>
+
+        <!-- Accent Palette Switcher -->
         <div class="theme-picker" title="Switch Accent Glow">
           <button class="accent-dot active" data-theme="cyan" id="accent-cyan" aria-label="Cyan Accent"></button>
           <button class="accent-dot" data-theme="purple" id="accent-purple" aria-label="Purple Accent"></button>
@@ -59,7 +75,7 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION WITH 3D WEBGL CORE -->
     <section class="hero-section" id="hero">
       <div class="container hero-grid">
         <div class="hero-text-content">
@@ -73,7 +89,7 @@
           </h1>
 
           <p class="hero-subtitle">
-            Hi, I'm <strong>Alan Philip</strong>. A Full-Stack Software Engineer with 7+ years of experience designing high-throughput distributed backends, ultra-responsive frontend web platforms, and production AI agent workflows.
+            Hi, I'm <strong>Alan Philip</strong>. A Full-Stack Software Engineer with 7+ years of experience designing high-throughput distributed backends, ultra-responsive 3D web platforms, and production AI agent workflows.
           </p>
 
           <div class="hero-cta-group">
@@ -111,9 +127,18 @@
           </div>
         </div>
 
-        <!-- 3D Tilt Avatar Card -->
+        <!-- 3D Visual Centerpiece & Card Stage -->
         <div class="hero-visual-wrapper">
+          <!-- 3D Interactive Geometry Switcher -->
+          <div class="geometry-stage-controls">
+            <span>3D GEOMETRY:</span>
+            <button class="geom-btn active" data-geom="torus">Torus Knot</button>
+            <button class="geom-btn" data-geom="icosahedron">Icosahedron</button>
+            <button class="geom-btn" data-geom="sphere">Cyber Sphere</button>
+          </div>
+
           <div class="hero-card" id="tilt-card">
+            <div class="card-glare"></div>
             <div class="avatar-image-container">
               <img src="assets/images/avatar.jpg" alt="Alan Philip Portrait" class="avatar-img" id="hero-avatar">
               <div class="avatar-badge-float">
@@ -127,9 +152,9 @@
 
             <div class="tech-chips-floating">
               <span class="tech-chip">TypeScript</span>
+              <span class="tech-chip">Three.js / WebGL</span>
               <span class="tech-chip">React / Next.js</span>
               <span class="tech-chip">Go / Golang</span>
-              <span class="tech-chip">Python</span>
               <span class="tech-chip">Kafka</span>
               <span class="tech-chip">Docker</span>
               <span class="tech-chip">Kubernetes</span>
@@ -179,7 +204,7 @@
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS SHOWCASE -->
+    <!-- FEATURED PROJECTS SHOWCASE (3D PARALLAX CARDS) -->
     <section class="projects-section" id="projects">
       <div class="container">
         <div class="section-header">
@@ -201,6 +226,7 @@
           
           <!-- PROJECT 1: Nexus AI -->
           <article class="project-card" data-category="ai-cloud" data-id="nexus-ai">
+            <div class="card-glare"></div>
             <div class="project-img-wrap" onclick="openProjectModal('nexus-ai')">
               <img src="assets/images/project-ai-platform.jpg" alt="Nexus AI Platform" class="project-img">
               <div class="project-overlay">
@@ -246,6 +272,7 @@
 
           <!-- PROJECT 2: Quantum Edge -->
           <article class="project-card" data-category="distributed" data-id="quantum-edge">
+            <div class="card-glare"></div>
             <div class="project-img-wrap" onclick="openProjectModal('quantum-edge')">
               <img src="assets/images/project-cloud-engine.jpg" alt="Quantum Edge Flow" class="project-img">
               <div class="project-overlay">
@@ -291,6 +318,7 @@
 
           <!-- PROJECT 3: DevForge -->
           <article class="project-card" data-category="devtools" data-id="devforge">
+            <div class="card-glare"></div>
             <div class="project-img-wrap" onclick="openProjectModal('devforge')">
               <img src="assets/images/project-devflow.jpg" alt="DevForge Tooling" class="project-img">
               <div class="project-overlay">
@@ -408,6 +436,13 @@
               </div>
               <div class="skill-bar-item">
                 <div class="skill-meta">
+                  <span>Three.js / WebGL & Canvas</span>
+                  <span>92%</span>
+                </div>
+                <div class="skill-track"><div class="skill-fill" data-progress="92%"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-meta">
                   <span>Modern CSS / Glassmorphic UI</span>
                   <span>95%</span>
                 </div>
@@ -419,13 +454,6 @@
                   <span>90%</span>
                 </div>
                 <div class="skill-track"><div class="skill-fill" data-progress="90%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Canvas, WebGL & Micro-animations</span>
-                  <span>85%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="85%"></div></div>
               </div>
             </div>
           </div>
@@ -624,7 +652,7 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <div class="footer-copy">
-        © <span id="current-year">2026</span> Alan Philip. Built with Vanilla Web Standards, Glassmorphism & High-Performance Design.
+        © <span id="current-year">2026</span> Alan Philip. Built with Three.js 3D WebGL, Glassmorphism & High-Performance Design.
       </div>
       <div class="footer-socials">
         <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="GitHub">GitHub</a>
@@ -659,6 +687,9 @@
 
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <!-- App Logic -->
   <script src="js/main.js"></script>
