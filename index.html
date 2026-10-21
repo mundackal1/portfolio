@@ -1,719 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alan Philip — Senior Full-Stack Engineer & SaaS Product Architect</title>
-  <meta name="description" content="Portfolio of Alan Philip (@mundackal1), Senior Full-Stack Software Engineer & Founder Architect behind the IQ Ecosystem: Salon IQ, Room IQ PMS, Hotelzify v2, ChitIQ, VoxIQ, and Nest iQ.">
-  <meta name="keywords" content="Alan Philip, mundackal1, Salon IQ, Room IQ, Hotelzify v2, ChitIQ, VoxIQ, Nest iQ, Full Stack Engineer, Next.js 16, Supabase, Python FastAPI, Playwright, React, PostgreSQL">
-  <meta name="author" content="Alan Philip">
-
-  <!-- OpenGraph Metadata -->
-  <meta property="og:title" content="Alan Philip — Senior Full-Stack Engineer & SaaS Architect">
-  <meta property="og:description" content="16 production repositories spanning hospitality revenue intelligence, enterprise SaaS operating systems, fintech ledgers, and AI voice engines.">
-  <meta property="og:image" content="assets/images/avatar.jpg">
-  <meta property="og:type" content="website">
-
-  <!-- Stylesheet -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alan Philip Babu — Product Builder</title>
+  <meta name="description" content="Alan Philip Babu: hospitality and OTA professional who builds SaaS products for hotels, salons, construction and finance. Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ and Build IQ.">
+  <meta name="theme-color" content="#07090c">
+  <meta property="og:title" content="Alan Philip Babu — Product Builder">
+  <meta property="og:description" content="10+ years in hospitality and OTA distribution. Now building SaaS products for real businesses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 </head>
-<body data-accent="cyan">
-  <!-- Custom Neon Interactive Cursor -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-glow" id="cursor-glow"></div>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
 
-  <!-- WebGL 3D Canvas Background & Cyber Grid -->
-  <canvas id="webgl-bg-canvas"></canvas>
-  <div class="cyber-grid-overlay"></div>
-  <div class="ambient-orb orb-1"></div>
-  <div class="ambient-orb orb-2"></div>
-  <div class="ambient-orb orb-3"></div>
-
-  <!-- Main Navigation -->
-  <header class="site-nav" id="main-nav">
-    <div class="container nav-container">
-      <a href="#hero" class="nav-logo" id="logo-link">
-        <div class="logo-badge">AP</div>
-        <div class="logo-text">Alan<span>.dev</span></div>
-      </a>
-
-      <nav>
-        <ul class="nav-links" id="nav-menu">
-          <li><a href="#hero" class="nav-link active" id="nav-link-home">Overview</a></li>
-          <li><a href="#projects" class="nav-link" id="nav-link-projects">Flagship SaaS</a></li>
-          <li><a href="#all-repos" class="nav-link" id="nav-link-repos">All 16 Repositories</a></li>
-          <li><a href="#skills" class="nav-link" id="nav-link-skills">Architecture</a></li>
-          <li><a href="#experience" class="nav-link" id="nav-link-experience">Career</a></li>
-          <li><a href="#terminal" class="nav-link" id="nav-link-terminal">Terminal</a></li>
-          <li><a href="#contact" class="nav-link" id="nav-link-contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <!-- Interactive Synthesizer Audio Toggle -->
-        <button class="sound-toggle-btn" id="sound-toggle" aria-label="Toggle Sound Effects" title="Toggle Synthesizer Audio">
-          <div class="sound-bars">
-            <span class="s-bar"></span>
-            <span class="s-bar"></span>
-            <span class="s-bar"></span>
-            <span class="s-bar"></span>
-          </div>
-          <span id="sound-label">AUDIO: OFF</span>
-        </button>
-
-        <!-- Accent Palette Switcher -->
-        <div class="theme-picker" title="Switch Accent Glow">
-          <button class="accent-dot active" data-theme="cyan" id="accent-cyan" aria-label="Cyan Accent"></button>
-          <button class="accent-dot" data-theme="purple" id="accent-purple" aria-label="Purple Accent"></button>
-          <button class="accent-dot" data-theme="emerald" id="accent-emerald" aria-label="Emerald Accent"></button>
-          <button class="accent-dot" data-theme="amber" id="accent-amber" aria-label="Amber Accent"></button>
-        </div>
-
-        <a href="https://github.com/mundackal1" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="nav-github-link">
-          GitHub (@mundackal1) ↗
-        </a>
-        <a href="#contact" class="btn btn-primary btn-sm" id="nav-cta-talk">Let's Connect</a>
-      </div>
-    </div>
+  <header class="nav" id="nav">
+    <a href="#top" class="brand" aria-label="Alan Philip Babu — home">
+      <span class="brand-mark">AP</span>
+      <span class="brand-name">Alan Philip Babu</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#work">Products</a>
+      <a href="#websites">Websites</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#experience">Experience</a>
+      <a href="#collab">Work with me</a>
+    </nav>
+    <a href="#contact" class="btn btn-small btn-accent">Contact</a>
   </header>
 
-  <main>
-    <!-- HERO SECTION WITH 3D WEBGL CORE -->
-    <section class="hero-section" id="hero">
-      <div class="container hero-grid">
-        <div class="hero-text-content">
-          <div class="hero-status-pill">
-            <span class="status-dot"></span>
-            Architecting 16 Production Systems Across Hospitality, SaaS & Fintech
-          </div>
-
-          <h1 class="hero-title">
-            Engineering <span class="text-gradient">the IQ Suite</span> & <span class="hero-typewriter" id="typewriter-text">enterprise platforms</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            Hi, I'm <strong>Alan Philip</strong> (<a href="https://github.com/mundackal1" target="_blank" rel="noopener noreferrer" style="color: var(--glow-secondary); text-decoration: none;">@mundackal1</a>). Senior Full-Stack Software Engineer & SaaS Product Architect. Creator and lead engineer of <strong>Salon IQ</strong>, <strong>Room IQ PMS</strong>, <strong>Hotelzify v2</strong>, <strong>ChitIQ</strong>, <strong>VoxIQ AI</strong>, and <strong>Nest iQ</strong>.
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse"></span>Open to roles &amp; collaborations</p>
+          <h1>I turn real business problems<br><span class="grad">into working software.</span></h1>
+          <p class="lede">
+            Ten years running hotels and managing OTA partners. Now I design and ship SaaS
+            products for <strong>hospitality</strong>, <strong>finance</strong>, <strong>salons</strong> and
+            <strong>construction</strong>, built around how these businesses actually operate.
           </p>
-
-          <div class="hero-cta-group">
-            <a href="#projects" class="btn btn-primary" id="hero-btn-work">
-              Inspect Flagship Systems <span>→</span>
-            </a>
-            <a href="#all-repos" class="btn btn-secondary" id="hero-btn-all-repos">
-              View All 16 Repositories <span>📁</span>
-            </a>
-            <a href="#terminal" class="btn btn-secondary" id="hero-btn-terminal">
-              Terminal Console <span>⌘</span>
-            </a>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-accent">See my products</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+            <a href="#" class="btn btn-ghost" data-cv hidden>Download CV</a>
           </div>
-
-          <!-- Hero Metrics -->
-          <div class="hero-stats-row">
-            <div class="stat-item">
-              <div class="stat-num">
-                <span class="counter" data-target="16">0</span><span class="plus"> Repos</span>
-              </div>
-              <div class="stat-label">Full-Stack Repositories</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">
-                <span class="counter" data-target="5">0</span><span class="plus"> Domains</span>
-              </div>
-              <div class="stat-label">Hospitality, SaaS, Fintech, AI</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-num">
-                <span class="counter" data-target="99.98">0</span><span class="plus">%</span>
-              </div>
-              <div class="stat-label">Verified Production SLA</div>
-            </div>
-          </div>
+          <dl class="hero-stats">
+            <div><dt>10+ yrs</dt><dd>Hospitality &amp; OTA</dd></div>
+            <div><dt>380+</dt><dd>Hotel partners managed</dd></div>
+            <div><dt>6</dt><dd>SaaS products built</dd></div>
+          </dl>
         </div>
 
-        <!-- 3D Visual Centerpiece & Card Stage -->
-        <div class="hero-visual-wrapper">
-          <!-- 3D Interactive Geometry Switcher -->
-          <div class="geometry-stage-controls">
-            <span>3D GEOMETRY:</span>
-            <button class="geom-btn active" data-geom="torus">Torus Knot</button>
-            <button class="geom-btn" data-geom="icosahedron">Icosahedron</button>
-            <button class="geom-btn" data-geom="sphere">Cyber Sphere</button>
+        <aside class="suite" aria-label="Product suite">
+          <div class="suite-head">
+            <span class="mono">// the IQ suite</span>
+            <span class="dots"><i></i><i></i><i></i></span>
           </div>
-
-          <div class="hero-card" id="tilt-card">
-            <div class="card-glare"></div>
-            <div class="avatar-image-container">
-              <img src="assets/images/avatar.jpg" alt="Alan Philip Portrait" class="avatar-img" id="hero-avatar">
-              <div class="avatar-badge-float">
-                <div class="badge-info">
-                  <h4>Alan Philip</h4>
-                  <p>@mundackal1 • 16 Active Production Repos</p>
-                </div>
-                <div class="status-dot"></div>
-              </div>
-            </div>
-
-            <div class="tech-chips-floating">
-              <span class="tech-chip">Next.js 16</span>
-              <span class="tech-chip">React 19</span>
-              <span class="tech-chip">Python FastAPI</span>
-              <span class="tech-chip">Playwright</span>
-              <span class="tech-chip">Supabase RLS</span>
-              <span class="tech-chip">PostgreSQL</span>
-              <span class="tech-chip">Kotlin / Native</span>
-              <span class="tech-chip">Docker</span>
-            </div>
-          </div>
-        </div>
+          <ul class="suite-list" id="suite-list"></ul>
+          <div class="suite-foot mono">select a product to open its brief →</div>
+        </aside>
       </div>
     </section>
 
-    <!-- INTERACTIVE DEVELOPER TERMINAL -->
-    <section class="terminal-section" id="terminal">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Interactive Environment</div>
-          <h2 class="section-title">Developer Terminal</h2>
-          <p class="section-desc">Test-drive interactive commands to inspect system logs, query all 16 repositories, or inspect technical stacks.</p>
-        </div>
+    <!-- PRODUCTS -->
+    <section class="section" id="work">
+      <div class="section-head">
+        <p class="kicker mono">01 / Products</p>
+        <h2>SaaS products I've built</h2>
+        <p class="section-sub">Each product started from a problem I saw first-hand in an industry. Open one for a short brief covering the problem, what it does, my role and the stack.</p>
+      </div>
+      <div class="work-grid" id="work-grid"></div>
+    </section>
 
-        <div class="terminal-box" id="terminal-widget">
-          <div class="terminal-header">
-            <div class="terminal-dots">
-              <span class="terminal-dot dot-red"></span>
-              <span class="terminal-dot dot-yellow"></span>
-              <span class="terminal-dot dot-green"></span>
-            </div>
-            <div class="terminal-title">alan@mundackal1-box: ~ (zsh)</div>
-            <div class="terminal-actions">
-              <button class="terminal-quick-chip" data-cmd="repos" id="chip-cmd-repos">repos</button>
-              <button class="terminal-quick-chip" data-cmd="iq-suite" id="chip-cmd-iq">iq-suite</button>
-              <button class="terminal-quick-chip" data-cmd="skills" id="chip-cmd-skills">skills</button>
-              <button class="terminal-quick-chip" data-cmd="whoami" id="chip-cmd-whoami">whoami</button>
-              <button class="terminal-quick-chip" data-cmd="clear" id="chip-cmd-clear">clear</button>
-            </div>
-          </div>
+    <!-- WEBSITES -->
+    <section class="section" id="websites">
+      <div class="section-head">
+        <p class="kicker mono">02 / Client websites</p>
+        <h2>Websites in production</h2>
+        <p class="section-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
+      </div>
+      <div class="site-grid" id="site-grid"></div>
+    </section>
 
-          <div class="terminal-body" id="term-body">
-            <div class="terminal-output" id="term-output">
-              <div class="term-line cyan">✨ Alan Philip (@mundackal1) Production Terminal v3.2.0</div>
-              <div class="term-line dim">Type <span class="green">repos</span> to list all 16 repositories or <span class="green">iq-suite</span> to inspect the IQ SaaS ecosystem.</div>
-            </div>
-
-            <div class="terminal-input-row">
-              <span class="terminal-prompt">alan@mundackal1:~$</span>
-              <input type="text" class="terminal-input" id="terminal-cmd-input" placeholder="Type a command (e.g. repos, iq-suite, skills, whoami)..." autocomplete="off" spellcheck="false">
-            </div>
-          </div>
-        </div>
+    <!-- TOOLBOX -->
+    <section class="section" id="toolbox">
+      <div class="section-head">
+        <p class="kicker mono">03 / Toolbox</p>
+        <h2>Tools I use every day</h2>
+        <p class="section-sub">Product, hospitality and build tools. Hover or tap a build tool to see which products use it.</p>
+      </div>
+      <div class="toolbox">
+        <div class="tool-groups" id="tool-groups"></div>
+        <aside class="tool-usage" aria-live="polite">
+          <p class="mono tool-usage-label">used in</p>
+          <ul id="tool-usage-list"></ul>
+          <p class="tool-usage-hint" id="tool-usage-hint">Select a tool</p>
+        </aside>
       </div>
     </section>
 
-    <!-- FLAGSHIP PRODUCTION SHOWCASE -->
-    <section class="projects-section" id="projects">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Flagship Systems</div>
-          <h2 class="section-title">Core Production Platforms</h2>
-          <p class="section-desc">Architectural deep dives into the major commercial platforms designed, built, and maintained across production clusters.</p>
-        </div>
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="section-head">
+        <p class="kicker mono">04 / Experience</p>
+        <h2>Track record</h2>
+      </div>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
 
-        <!-- Filter Tabs -->
-        <div class="project-filters" id="project-filters-bar">
-          <button class="filter-btn active" data-filter="all" id="filter-all">All Flagships</button>
-          <button class="filter-btn" data-filter="hospitality" id="filter-hosp">Hospitality & Travel</button>
-          <button class="filter-btn" data-filter="saas" id="filter-saas">Enterprise SaaS</button>
-          <button class="filter-btn" data-filter="fintech" id="filter-fintech">Fintech & Ledgers</button>
-        </div>
-
-        <!-- Project Cards Grid -->
-        <div class="projects-grid" id="projects-grid">
-          
-          <!-- PROJECT 1: Salon IQ -->
-          <article class="project-card" data-category="saas" data-id="salon-iq">
-            <div class="card-glare"></div>
-            <div class="project-img-wrap" onclick="openProjectModal('salon-iq')">
-              <img src="assets/images/salon-iq.jpg" alt="Salon IQ Enterprise Operating System" class="project-img">
-              <div class="project-overlay">
-                <span class="btn btn-sm btn-secondary">Inspect Architecture ↗</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <span class="project-category">Multi-Tenant Enterprise SaaS</span>
-              <h3 class="project-title">
-                Salon IQ — Operating System
-                <span class="text-glow">Next.js 16</span>
-              </h3>
-              <p class="project-desc">
-                Cloud-native multi-tenant operating system for luxury salons and spas. Features multi-chair appointment scheduling, sub-second POS billing with 18% GST invoicing, FIFO inventory, staff commissions, and ESC/POS thermal printer hardware integration.
-              </p>
-              <div class="project-stats-pills">
-                <div class="stat-pill">
-                  <span class="val">&lt; 300ms</span>
-                  <span class="lbl">POS Bill Generation</span>
-                </div>
-                <div class="stat-pill">
-                  <span class="val">100% RLS</span>
-                  <span class="lbl">Tenant Isolation</span>
-                </div>
-                <div class="stat-pill">
-                  <span class="val">Multi-Device</span>
-                  <span class="lbl">Web, iOS, Android</span>
-                </div>
-              </div>
-              <div class="project-tags">
-                <span class="p-tag">Next.js 16</span>
-                <span class="p-tag">React 19</span>
-                <span class="p-tag">Supabase Postgres</span>
-                <span class="p-tag">Tailwind CSS v4</span>
-                <span class="p-tag">Capacitor Mobile</span>
-                <span class="p-tag">ESC/POS</span>
-              </div>
-              <div class="project-actions">
-                <button class="btn btn-primary btn-sm" onclick="openProjectModal('salon-iq')">Deep Dive Details</button>
-                <a href="https://github.com/mundackal1/salon-iq" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">GitHub Repo ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- PROJECT 2: Hotelzify v2 -->
-          <article class="project-card" data-category="hospitality" data-id="hotelzify">
-            <div class="card-glare"></div>
-            <div class="project-img-wrap" onclick="openProjectModal('hotelzify')">
-              <img src="assets/images/hotelzify.jpg" alt="Hotelzify v2 Rate Intelligence Platform" class="project-img">
-              <div class="project-overlay">
-                <span class="btn btn-sm btn-secondary">Inspect Architecture ↗</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <span class="project-category">Revenue Management & Headless Scraping</span>
-              <h3 class="project-title">
-                Hotelzify v2 — Rate Intelligence
-                <span class="text-glow">Direct Defense</span>
-              </h3>
-              <p class="project-desc">
-                Multi-property competitive revenue management platform engineered to reclaim revenue from 18–25% OTA commissions (MakeMyTrip, Booking.com, Agoda). Features real-time Playwright scraping with proxy rotation, rate parity alerts, and 4-Pillar compression analysis.
-              </p>
-              <div class="project-stats-pills">
-                <div class="stat-pill">
-                  <span class="val">20% Cuts</span>
-                  <span class="lbl">OTA Commission Defended</span>
-                </div>
-                <div class="stat-pill">
-                  <span class="val">Multi-City</span>
-                  <span class="lbl">Goa, Munnar, Manali</span>
-                </div>
-                <div class="stat-pill">
-                  <span class="val">Aurora RDS</span>
-                  <span class="lbl">Rate Matrix Telemetry</span>
-                </div>
-              </div>
-              <div class="project-tags">
-                <span class="p-tag">Python FastAPI</span>
-                <span class="p-tag">Playwright</span>
-                <span class="p-tag">PostgreSQL</span>
-                <span class="p-tag">Docker Compose</span>
-                <span class="p-tag">Nginx</span>
-                <span class="p-tag">Next.js</span>
-              </div>
-              <div class="project-actions">
-                <button class="btn btn-primary btn-sm" onclick="openProjectModal('hotelzify')">Deep Dive Details</button>
-                <a href="https://github.com/mundackal1/Hotelzifyv2" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">GitHub Repo ↗</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- PROJECT 3: ChitIQ -->
-          <article class="project-card" data-category="fintech" data-id="chitiq">
-            <div class="card-glare"></div>
-            <div class="project-img-wrap" onclick="openProjectModal('chitiq')">
-              <img src="assets/images/chitiq.jpg" alt="ChitIQ Fintech Management Platform" class="project-img">
-              <div class="project-overlay">
-                <span class="btn btn-sm btn-secondary">Inspect Architecture ↗</span>
-              </div>
-            </div>
-            <div class="project-content">
-              <span class="project-category">Fintech & Double-Entry Accounting</span>
-              <h3 class="project-title">
-                ChitIQ — Financial Core
-                <span class="text-glow">Double-Entry</span>
-              </h3>
-              <p class="project-desc">
-                Comprehensive chit fund lifecycle management platform for Kerala financial companies. Integrates live subscriber auction bidding, collections tracking, loan advance amortization, and an airtight double-entry general ledger with director governance portals.
-              </p>
-              <div class="project-stats-pills">
-                <div class="stat-pill">
-                  <span class="val">₹ Cr Scale</span>
-                  <span class="lbl">Managed Capital Pools</span>
-                </div>
-                <div class="stat-pill">
-                  <span class="val">Double-Entry</span>
-                  <span class="lbl">Audited General Ledger</span>
-                </div>
-                <div class="stat-pill">
-                  <span class="val">iOS & Android</span>
-                  <span class="lbl">Subscriber PWA/Native</span>
-                </div>
-              </div>
-              <div class="project-tags">
-                <span class="p-tag">Vite & React 18</span>
-                <span class="p-tag">TypeScript</span>
-                <span class="p-tag">shadcn/ui</span>
-                <span class="p-tag">TanStack Query</span>
-                <span class="p-tag">Supabase Postgres</span>
-                <span class="p-tag">Capacitor</span>
-              </div>
-              <div class="project-actions">
-                <button class="btn btn-primary btn-sm" onclick="openProjectModal('chitiq')">Deep Dive Details</button>
-                <a href="https://github.com/atcafc/chitiq" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">GitHub Repo ↗</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
+    <!-- COLLAB -->
+    <section class="section" id="collab">
+      <div class="section-head">
+        <p class="kicker mono">05 / Work with me</p>
+        <h2>How we can work together</h2>
+      </div>
+      <div class="collab-grid">
+        <article class="collab-card">
+          <span class="collab-icon mono">01</span>
+          <h3>Product roles</h3>
+          <p>Product manager or product owner roles in travel, hospitality or vertical SaaS, where knowing the industry and being able to build both matter.</p>
+        </article>
+        <article class="collab-card">
+          <span class="collab-icon mono">02</span>
+          <h3>Build collaborations</h3>
+          <p>Working with a firm to take an industry problem from discovery to a shipped product, either on web and mobile or as an internal tool.</p>
+        </article>
+        <article class="collab-card">
+          <span class="collab-icon mono">03</span>
+          <h3>Hospitality tech advisory</h3>
+          <p>OTA distribution, channel management, pricing and partner workflows, from someone who has worked on both the hotel side and the OTA side.</p>
+        </article>
+      </div>
+      <div class="process">
+        <p class="mono process-label">how I work</p>
+        <ol class="process-steps">
+          <li><b>Discover</b><span>Sit with the users and map the workflow</span></li>
+          <li><b>Define</b><span>Scope, requirements, priorities</span></li>
+          <li><b>Build</b><span>Fast prototypes, weekly demos</span></li>
+          <li><b>Ship</b><span>Launch, feedback, iterate</span></li>
+        </ol>
       </div>
     </section>
 
-    <!-- COMPLETE 16 REPOSITORIES DIRECTORY TABLE -->
-    <section class="projects-section" id="all-repos" style="padding-top: 20px;">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Full Ecosystem</div>
-          <h2 class="section-title">All 16 Production Repositories</h2>
-          <p class="section-desc">Search, filter, and inspect the complete suite of repositories authored under @mundackal1 and affiliated organizations.</p>
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="contact-card">
+        <p class="kicker mono">06 / Contact</p>
+        <h2>Let's build something.</h2>
+        <p class="section-sub">Live demos and product walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
+        <div class="contact-links">
+          <a class="btn btn-accent" data-email href="#">Email me</a>
+          <a class="btn btn-ghost" data-linkedin href="#" target="_blank" rel="noopener" hidden>LinkedIn</a>
+          <a class="btn btn-ghost" data-github href="#" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-ghost" data-cv href="#" hidden>Download CV</a>
         </div>
-
-        <!-- Repository Search & Filter Bar -->
-        <div style="max-width: 700px; margin: 0 auto 32px auto; display: flex; gap: 12px; flex-wrap: wrap;">
-          <input type="text" id="repo-search-input" class="form-input" placeholder="🔍 Search repositories by name, language, or domain..." style="flex: 1; min-width: 260px;">
-          <select id="repo-category-select" class="form-select" style="width: auto; min-width: 180px;">
-            <option value="all">All Domains (16)</option>
-            <option value="Hospitality">Hospitality & Booking (4)</option>
-            <option value="SaaS & Operations">Enterprise SaaS (4)</option>
-            <option value="Fintech & Wealth">Fintech & Accounting (3)</option>
-            <option value="AI & Native">AI & Voice Studio (2)</option>
-            <option value="Holdings & Portals">Holdings & Platforms (3)</option>
-          </select>
-        </div>
-
-        <!-- Repositories Grid Matrix -->
-        <div class="projects-grid" id="full-repos-grid">
-          <!-- Dynamically populated by js/main.js with all 16 repos -->
-        </div>
-      </div>
-    </section>
-
-    <!-- TECHNICAL ARCHITECTURE & MATRIX -->
-    <section class="skills-section" id="skills">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Core Competencies</div>
-          <h2 class="section-title">Technical Proficiency & Architecture</h2>
-          <p class="section-desc">Battle-tested in production across multi-tenant microservices, complex financial accounting rules, and high-resilience web scraping pipelines.</p>
-        </div>
-
-        <div class="skills-grid">
-          <!-- Backend & Systems -->
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <div class="cat-icon-wrap">⚙️</div>
-              <div class="cat-info">
-                <h3>Backend & Data Systems</h3>
-                <p>Distributed APIs, RLS & Ledger logic</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Supabase / PostgreSQL & RLS Policies</span>
-                  <span>96%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="96%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Python FastAPI & Playwright Automation</span>
-                  <span>93%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="93%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Node.js / TypeScript Microservices</span>
-                  <span>95%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="95%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Double-Entry General Ledger Accounting</span>
-                  <span>90%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="90%"></div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Frontend Architecture -->
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <div class="cat-icon-wrap">🎨</div>
-              <div class="cat-info">
-                <h3>Frontend Architecture</h3>
-                <p>Next.js 16, React 19 & 3D Interactive UI</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Next.js 16 (App Router) & React 19</span>
-                  <span>98%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="98%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Tailwind CSS v4 & Glassmorphism Design</span>
-                  <span>96%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="96%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Three.js / WebGL & Canvas Graphics</span>
-                  <span>91%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="91%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Capacitor Mobile (iOS & Android)</span>
-                  <span>92%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="92%"></div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Infrastructure & Cloud -->
-          <div class="skill-category-card">
-            <div class="skill-cat-header">
-              <div class="cat-icon-wrap">☁️</div>
-              <div class="cat-info">
-                <h3>DevOps, Hardware & Cloud</h3>
-                <p>Containerization, proxies & peripherals</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Docker & Docker Compose</span>
-                  <span>94%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="94%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Residential Proxy Pools & Anti-Bot Defense</span>
-                  <span>91%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="91%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>Hardware ESC/POS & Barcode Integration</span>
-                  <span>93%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="93%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-meta">
-                  <span>AWS Aurora RDS & Nginx Reverse Proxy</span>
-                  <span>89%</span>
-                </div>
-                <div class="skill-track"><div class="skill-fill" data-progress="89%"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CAREER MILESTONES -->
-    <section class="experience-section" id="experience">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Career Journey</div>
-          <h2 class="section-title">Track Record of Product Delivery</h2>
-          <p class="section-desc">Leading architecture, full-stack implementation, and production hardening for industry-specific SaaS platforms.</p>
-        </div>
-
-        <div class="timeline">
-          <!-- Item 1 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <span class="timeline-period">2024 — Present</span>
-              <h3 class="timeline-role">Lead Full-Stack Architect & Founder Engineer</h3>
-              <p class="timeline-company">IQ SaaS Suite & Nexhaz Platforms</p>
-              <p class="timeline-desc">
-                Architecting 16 commercial repositories including Salon IQ (multi-tenant beauty wellness operating system), Room IQ PMS, Hotelzify v2 (OTA rate parity defense & revenue intelligence), and VoxIQ.
-              </p>
-              <ul class="timeline-bullets">
-                <li>Built Salon IQ from ground up with Next.js 16, Supabase RLS, and native thermal printing driver integration.</li>
-                <li>Designed Hotelzify's distributed Playwright scrapers with residential proxy pooling and Aurora RDS analytics.</li>
-                <li>Engineered Room IQ PMS featuring automated night audit, housekeeping task dispatch, and bookings timeline.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Item 2 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <span class="timeline-period">2022 — 2024</span>
-              <h3 class="timeline-role">Senior Full-Stack & Fintech Engineer</h3>
-              <p class="timeline-company">ChitIQ Platform & Financial Systems</p>
-              <p class="timeline-desc">
-                Engineered the core auction mechanics and accounting infrastructure for ChitIQ and FinIQ, powering chit funds with verifiable financial auditing.
-              </p>
-              <ul class="timeline-bullets">
-                <li>Implemented strict double-entry bookkeeping ledger engine to eliminate balance reconciliation errors.</li>
-                <li>Built hybrid mobile applications using Capacitor for cross-platform iOS and Android subscriber deployment.</li>
-                <li>Streamlined subscriber KYC, dividend distributions, and real-time auction bidding countdowns.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section class="contact-section" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-tag">Direct Line</div>
-          <h2 class="section-title">Let's Build Something Exceptional</h2>
-          <p class="section-desc">Interested in discussing SaaS architecture, consulting on rate scrapers, or exploring engineering opportunities? Reach out directly.</p>
-        </div>
-
-        <div class="contact-grid">
-          <!-- Left Info Card -->
-          <div class="contact-card">
-            <h3>Get in Touch</h3>
-            <p class="section-desc" style="margin-top: 8px;">
-              Direct contact channels for technical inquiries and engineering leadership engagements.
-            </p>
-
-            <div class="contact-info-list">
-              <div class="contact-info-item">
-                <div class="contact-icon-badge">🐙</div>
-                <div class="contact-meta">
-                  <span>GitHub Profile</span>
-                  <a href="https://github.com/mundackal1" target="_blank" rel="noopener noreferrer">github.com/mundackal1</a>
-                </div>
-              </div>
-              <div class="contact-info-item">
-                <div class="contact-icon-badge">✉️</div>
-                <div class="contact-meta">
-                  <span>Direct Email</span>
-                  <a href="mailto:alanphilip@example.com">alanphilip@example.com</a>
-                </div>
-              </div>
-              <div class="contact-info-item">
-                <div class="contact-icon-badge">⚡</div>
-                <div class="contact-meta">
-                  <span>Current Focus</span>
-                  <p>16 Production Repos: Next.js 16, Supabase, Distributed Scrapers & AI Workflows</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Form Card -->
-          <div class="contact-card">
-            <form id="contact-form">
-              <div class="form-group">
-                <label for="contact-name" class="form-label">Your Name *</label>
-                <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Henderson" required>
-              </div>
-
-              <div class="form-group">
-                <label for="contact-email" class="form-label">Email Address *</label>
-                <input type="email" id="contact-email" class="form-input" placeholder="name@company.com" required>
-              </div>
-
-              <div class="form-group">
-                <label for="contact-interest" class="form-label">Collaboration Topic</label>
-                <select id="contact-interest" class="form-select">
-                  <option value="engineering-role">Senior / Staff Engineering Role</option>
-                  <option value="saas-consulting">SaaS Architecture Consulting</option>
-                  <option value="scraping-infra">Web Scraping & Rate Intelligence</option>
-                  <option value="networking">Tech Networking & Discussion</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="contact-message" class="form-label">Message *</label>
-                <textarea id="contact-message" class="form-textarea" placeholder="Describe your team, project, or requirements..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary" id="btn-submit-message" style="width: 100%;">
-                Send Direct Message 🚀
-              </button>
-            </form>
-          </div>
-        </div>
+        <p class="contact-email mono" data-email-text></p>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <div class="footer-copy">
-        © <span id="current-year">2026</span> Alan Philip (<a href="https://github.com/mundackal1" target="_blank" rel="noopener noreferrer" style="color: var(--glow-secondary); text-decoration: none;">@mundackal1</a>). Built with Three.js 3D WebGL, Glassmorphism & High-Performance Design.
-      </div>
-      <div class="footer-socials">
-        <a href="https://github.com/mundackal1" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="GitHub">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="LinkedIn">LinkedIn</a>
-        <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Twitter / X">X</a>
-      </div>
-    </div>
+  <footer class="footer">
+    <span>© <span id="year"></span> Alan Philip Babu</span>
+    <span class="mono">Kerala, India</span>
   </footer>
 
-  <!-- PROJECT DETAIL MODAL DIALOG -->
-  <div class="modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" id="modal-close" aria-label="Close modal">✕</button>
-      <div class="modal-img-wrap">
-        <img src="" alt="Project Preview" id="modal-project-img">
-      </div>
-      <div class="modal-content-inner">
-        <div class="section-tag" id="modal-tag">Architecture Case</div>
-        <h2 class="modal-title" id="modal-title" style="margin-bottom: 12px;">Project Title</h2>
-        <p class="modal-desc" id="modal-desc" style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7;"></p>
-        
-        <h4 style="margin-bottom: 10px; font-size: 1rem;">Core Architecture & Tech Stack</h4>
-        <div class="project-tags" id="modal-tags" style="margin-bottom: 24px;"></div>
-
-        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-          <a href="#" id="modal-repo-btn" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View GitHub Repository ↗</a>
-          <a href="#contact" class="btn btn-secondary" onclick="closeProjectModal()">Discuss Architecture</a>
-          <button class="btn btn-secondary" onclick="closeProjectModal()">Close Window</button>
-        </div>
-      </div>
-    </div>
+  <!-- PRODUCT BRIEF -->
+  <div class="brief" id="brief" role="dialog" aria-modal="true" aria-labelledby="brief-title" hidden>
+    <div class="brief-backdrop" data-close></div>
+    <article class="brief-panel" tabindex="-1">
+      <button class="brief-close" data-close aria-label="Close">✕</button>
+      <div id="brief-body"></div>
+    </article>
   </div>
 
-  <!-- TOAST CONTAINER -->
-  <div class="toast-container" id="toast-container"></div>
-
-  <!-- Three.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-  <!-- App Logic -->
   <script src="js/main.js"></script>
 </body>
 </html>
