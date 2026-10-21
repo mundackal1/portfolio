@@ -1,48 +1,40 @@
-# Alan Philip — Full-Stack Software Engineer Portfolio
+# Alan Philip (@mundackal1) — Production Portfolio
 
-A modern, high-performance developer portfolio website built with clean semantic HTML5, vanilla CSS3 glassmorphism, and vanilla JavaScript.
+A 3D interactive, glassmorphic portfolio website showcasing **Alan Philip's** real-world production platforms, SaaS operating systems, and distributed rate intelligence architectures.
 
-## 🚀 Key Features
+## 🚀 Featured Real Production Repositories
 
-- **Aesthetic**: Modern Dark Glassmorphic with vibrant glowing accents (`cyan`, `purple`, `emerald`, `amber`), fluid micro-interactions, and frosted glass cards.
-- **Hero & Identity**: Interactive 3D tilt card, live counter metrics (7+ years, 99.99% SLA, 50M+ requests), and dynamic typewriter headings.
-- **Interactive Developer Terminal**: Embedded command line (`help`, `skills`, `projects`, `whoami`, `sudo hire-alan`, `clear`) simulating a real developer environment.
-- **Project Showcase & Deep Dive**: Categorized project filter tabs and full modal inspection for architectural breakdowns:
-  - **Nexus AI Platform**: Autonomous agent orchestration engine.
-  - **Quantum Edge Flow**: Low-latency distributed settlement engine (14.2k TPS).
-  - **DevForge Workspace**: Collaborative web runtime & Git lenses.
-- **Live Theme Palette Switcher**: Real-time accent glow selector persisted to `localStorage`.
-- **Skills Matrix**: Dynamic animated progress bars triggered via `IntersectionObserver`.
-- **Interactive Contact Form**: Client-side validation with rich animated toast alerts.
-- **Zero Dependencies**: Lightning-fast load times, no build steps, and zero external runtime dependencies.
+### 1. **Salon IQ — The Enterprise Salon Operating System**
+- **Repository**: [`https://github.com/mundackal1/salon-iq`](https://github.com/mundackal1/salon-iq)
+- **Tech Stack**: Next.js 16 (App Router), React 19, Supabase PostgreSQL with Row-Level Security (RLS), Tailwind CSS v4, Capacitor iOS/Android, ESC/POS hardware.
+- **Capabilities**: Multi-chair appointment scheduling, sub-second POS billing with 18% GST invoicing, FIFO inventory & stock alerts, staff commission split calculations, and automated WhatsApp transactional messaging.
 
-## 📁 Project Structure
+### 2. **Hotelzify v2 — Direct Revenue Management & Rate Intelligence**
+- **Repository**: [`https://github.com/mundackal1/Hotelzifyv2`](https://github.com/mundackal1/Hotelzifyv2)
+- **Tech Stack**: Python FastAPI, Playwright Headless Scraping Engine, PostgreSQL / AWS Aurora RDS, Docker Compose, Nginx, Next.js.
+- **Capabilities**: Real-time OTA Rate Parity Defense (MakeMyTrip, Booking.com, Agoda), Monthly Commission Loss Calculator (recovering 18–25% OTA commissions), 4-Pillar Competitive Compression & Demand Analytics, and Scheduled Morning Executive Briefs.
 
-```
-portfolio/
-├── index.html              # Main HTML5 structure with SEO & OpenGraph tags
-├── css/
-│   └── styles.css          # Design system tokens, glassmorphism, responsive grid
-├── js/
-│   └── main.js             # Terminal logic, particle canvas, modals, form handlers
-└── assets/
-    └── images/             # High-res generated profile avatar & project previews
-        ├── avatar.jpg
-        ├── project-ai-platform.jpg
-        ├── project-cloud-engine.jpg
-        └── project-devflow.jpg
-```
+### 3. **ChitIQ — Chit Lifecycle & Double-Entry Accounting Core**
+- **Repository**: [`https://github.com/atcafc/chitiq`](https://github.com/atcafc/chitiq)
+- **Tech Stack**: Vite, React 18, TypeScript, shadcn/ui, TanStack Query, Capacitor Mobile, Supabase Postgres RLS.
+- **Capabilities**: Real-time chit fund auction bidding engine, subscriber KYC & collection tracking, complete double-entry general ledger balance sheet, dividend distributions, and director governance portal.
+
+---
+
+## 🎨 Interactive 3D & Technical Features
+
+- **Three.js WebGL Engine**: Responsive wireframe 3D geometries (`Torus Knot`, `Icosahedron`, `Cyber Sphere`) with 750 orbiting stars and cursor parallax.
+- **Web Audio API Synthesizer**: Native zero-asset audio engine with synthesizer tones and animated equalizer toggle.
+- **Interactive Developer Console**: Command-line terminal supporting `repos`, `skills`, `whoami`, `contact`, and `sudo hire`.
+- **Specular Card Glare & 3D Tilt**: Perspective card tilting on hover with dynamic cursor-relative light sweeps.
+- **Theme Accent Switcher**: Live switching between Cyan, Purple, Emerald, and Amber neon glows persisted to `localStorage`.
+
+---
 
 ## 💻 Local Preview
 
-Run any lightweight local static HTTP server:
-
+The development server runs locally on port 8085:
 ```bash
-# Using Python
-python3 -m http.server 8080
-
-# Or using npx serve
-npx -y serve .
+python3 -m http.server 8085
 ```
-
-Then navigate to `http://localhost:8080`.
+Open [http://localhost:8085](http://localhost:8085) in any modern browser.

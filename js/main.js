@@ -1,5 +1,6 @@
 /**
- * Alan Philip Portfolio — 3D Premium Animated Engine
+ * Alan Philip (@mundackal1) Portfolio — 3D Premium Animated Engine
+ * Featuring real production repositories: Salon IQ, Hotelzify v2, ChitIQ
  * Powered by Three.js WebGL, Web Audio API Synthesizer & Modern Vanilla JS
  */
 
@@ -230,7 +231,6 @@ function initThreeJSScene() {
   });
 
   let currentMesh = new THREE.Mesh(geometries.torus, meshMaterial);
-  // Position to the right-center behind the hero card
   currentMesh.position.set(2.4, 0.2, -1);
   scene.add(currentMesh);
 
@@ -304,7 +304,6 @@ function initThreeJSScene() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Responsive position of 3D object
     if (window.innerWidth < 992) {
       currentMesh.position.set(0, 0, -2);
     } else {
@@ -323,19 +322,15 @@ function initThreeJSScene() {
     const delta = clock.getDelta();
     const elapsed = clock.getElapsedTime();
 
-    // Constant smooth rotation + mouse lerp
     currentMesh.rotation.y += (targetRotY - currentMesh.rotation.y) * 0.05 + 0.2 * delta;
     currentMesh.rotation.x += (targetRotX - currentMesh.rotation.x) * 0.05 + 0.15 * delta;
     currentMesh.rotation.z += 0.08 * delta;
 
-    // Gentle float
     currentMesh.position.y += Math.sin(elapsed * 1.5) * 0.002;
 
-    // Particle field slow drift
     particles.rotation.y = elapsed * 0.03;
     particles.rotation.x = elapsed * 0.015;
 
-    // Camera parallax lerp
     camera.position.x += (targetCameraX - camera.position.x) * 0.05;
     camera.position.y += (targetCameraY - camera.position.y) * 0.05;
 
@@ -369,11 +364,11 @@ function initTypewriter() {
   if (!el) return;
 
   const words = [
-    'intelligent 3D web',
-    'distributed microservices',
-    'autonomous AI workflows',
-    'low-latency engines',
-    'cloud-native systems'
+    'enterprise SaaS systems',
+    'automated rate scrapers',
+    'financial ledger platforms',
+    'multi-tenant architectures',
+    'Next.js 16 applications'
   ];
 
   let wordIndex = 0;
@@ -494,54 +489,46 @@ function initTerminal() {
   const commands = {
     help: () => `
 <div class="term-line cyan">Available Commands:</div>
-<div class="term-line">  <span class="green">about</span>        - Summary of Alan's background & focus</div>
-<div class="term-line">  <span class="green">skills</span>       - List core technical stack & architectures</div>
-<div class="term-line">  <span class="green">projects</span>     - Display featured production repositories</div>
-<div class="term-line">  <span class="green">experience</span>   - Summary of career leadership roles</div>
-<div class="term-line">  <span class="green">contact</span>      - Direct contact links & details</div>
-<div class="term-line">  <span class="green">whoami</span>       - Current session identity</div>
-<div class="term-line">  <span class="green">sudo hire</span>     - Trigger fast-track interview pipeline ⚡</div>
-<div class="term-line">  <span class="green">clear</span>        - Clear the terminal console</div>
+<div class="term-line">  <span class="green">repos</span>       - Query Alan's production repositories on GitHub</div>
+<div class="term-line">  <span class="green">skills</span>      - Inspect core technical stack & architectural tools</div>
+<div class="term-line">  <span class="green">whoami</span>      - Developer profile & GitHub handles</div>
+<div class="term-line">  <span class="green">contact</span>     - Direct contact coordinates & links</div>
+<div class="term-line">  <span class="green">sudo hire</span>    - Fast-track engineering interview channel ⚡</div>
+<div class="term-line">  <span class="green">clear</span>       - Clear the terminal console</div>
     `,
-    about: () => `
-<div class="term-line cyan">About Alan Philip:</div>
-<div class="term-line">Senior Staff Full-Stack Software Engineer specializing in high-throughput distributed backends (Go, Kafka, Node) and reactive 3D frontend platforms (Three.js, Next.js, TypeScript). 7+ years of engineering experience with a deep focus on autonomous agent workflows and cloud scalability.</div>
+    repos: () => `
+<div class="term-line cyan">Production Repositories (@mundackal1):</div>
+<div class="term-line">1. <span class="green">salon-iq</span> [github.com/mundackal1/salon-iq]</div>
+<div class="term-line">   • Multi-tenant salon OS: Next.js 16, React 19, Supabase RLS, ESC/POS hardware, POS & WhatsApp CRM.</div>
+<div class="term-line">2. <span class="green">Hotelzifyv2</span> [github.com/mundackal1/Hotelzifyv2]</div>
+<div class="term-line">   • Revenue intelligence & OTA rate parity defense: Python FastAPI, Playwright scrapers, Aurora RDS.</div>
+<div class="term-line">3. <span class="green">chitiq</span> [github.com/atcafc/chitiq]</div>
+<div class="term-line">   • Chit fund lifecycle & double-entry accounting engine: Vite, React 18, Supabase RLS, Capacitor.</div>
     `,
     skills: () => `
-<div class="term-line cyan">Technical Proficiencies:</div>
-<div class="term-line"><span class="yellow">Languages:</span> Go (Golang), TypeScript/JavaScript, Python, Rust, SQL</div>
-<div class="term-line"><span class="yellow">Frontend & 3D:</span> Three.js, WebGL, React, Next.js, WebAssembly, Canvas, CSS</div>
-<div class="term-line"><span class="yellow">Backend & Data:</span> Kafka, Redis, PostgreSQL, TimescaleDB, gRPC, WebSockets</div>
-<div class="term-line"><span class="yellow">Cloud & Infra:</span> Kubernetes, Docker, Terraform, Helm, GCP, AWS, CI/CD</div>
-    `,
-    projects: () => `
-<div class="term-line cyan">Featured Production Repositories:</div>
-<div class="term-line">1. <span class="green">Nexus AI</span> - Autonomous agent orchestration platform [4.7TB Data, &lt;65ms execution]</div>
-<div class="term-line">2. <span class="green">Quantum Edge Flow</span> - High-frequency financial settlement engine [14.2k TPS, 14ms latency]</div>
-<div class="term-line">3. <span class="green">DevForge Workspace</span> - Cloud collaborative IDE & real-time CRDT Git lenses</div>
-<div class="term-line dim">Type 'open &lt;project-id&gt;' or click inspect in Featured Work.</div>
-    `,
-    experience: () => `
-<div class="term-line cyan">Career Highlights:</div>
-<div class="term-line">• <span class="yellow">Staff Full-Stack Engineer</span> @ CloudScale Tech (2023 - Present)</div>
-<div class="term-line">• <span class="yellow">Senior Systems Engineer</span> @ FinTech Dynamics (2020 - 2023)</div>
-<div class="term-line">• <span class="yellow">Full-Stack Engineer</span> @ NextGen Digital Labs (2018 - 2020)</div>
+<div class="term-line cyan">Core Technical Competencies:</div>
+<div class="term-line"><span class="yellow">Languages & Frameworks:</span> TypeScript/JavaScript, Python, Next.js 16, React 19, Vite</div>
+<div class="term-line"><span class="yellow">Data & Security:</span> PostgreSQL, Supabase Row-Level Security (RLS), AWS Aurora RDS</div>
+<div class="term-line"><span class="yellow">Automation & Scraping:</span> Playwright, Residential Proxy Pools, Nginx, Docker</div>
+<div class="term-line"><span class="yellow">Mobile & Peripherals:</span> Capacitor (iOS/Android), ESC/POS Thermal Printers, WebSockets</div>
     `,
     whoami: () => `
-<div class="term-line cyan">visitor@alan-philip-portfolio:~$ authenticated as prospective collaborator / engineer</div>
+<div class="term-line cyan">Alan Philip (@mundackal1)</div>
+<div class="term-line">Senior Full-Stack Software Engineer & SaaS Architect. Focused on multi-tenant applications, rate intelligence scraping platforms, and secure financial engines.</div>
+<div class="term-line">GitHub Profile: <a href="https://github.com/mundackal1" target="_blank" class="cyan">https://github.com/mundackal1</a></div>
     `,
     contact: () => `
 <div class="term-line cyan">Contact Coordinates:</div>
-<div class="term-line">• Email: <a href="mailto:alan.philip@example.com" class="cyan">alan.philip@example.com</a></div>
-<div class="term-line">• GitHub: <a href="https://github.com" target="_blank" class="cyan">github.com/alanphilip</a></div>
-<div class="term-line">• LinkedIn: <a href="https://linkedin.com" target="_blank" class="cyan">linkedin.com/in/alanphilip</a></div>
+<div class="term-line">• GitHub: <a href="https://github.com/mundackal1" target="_blank" class="cyan">github.com/mundackal1</a></div>
+<div class="term-line">• Email: <a href="mailto:alanphilip@example.com" class="cyan">alanphilip@example.com</a></div>
+<div class="term-line">• Direct Message: Use the contact form below on this page.</div>
     `,
     'sudo hire': () => {
-      showToast('Offer Initiated! 🚀', 'Routing directly to prioritized contact queue...', '✨');
+      showToast('Interview Offer Initiated! 🚀', 'Direct routing to priority contact queue...', '✨');
       playTone(880, 0.2, 'sine', 0.1);
       return `
 <div class="term-line green">🔥 Access Granted! [CONFIDENTIAL PRIORITY]</div>
-<div class="term-line">Initializing interview scheduling channel... Scroll down to the Contact Section or email directly at alan.philip@example.com!</div>
+<div class="term-line">Initializing interview scheduling channel... Reach out directly via the Contact section below or at https://github.com/mundackal1!</div>
       `;
     },
     'sudo hire-alan': () => commands['sudo hire'](),
@@ -559,7 +546,7 @@ function initTerminal() {
 
     const userLine = document.createElement('div');
     userLine.className = 'term-line';
-    userLine.innerHTML = `<span class="green">alan@portfolio:~$</span> ${escapeHTML(rawCmd)}`;
+    userLine.innerHTML = `<span class="green">alan@mundackal1:~$</span> ${escapeHTML(rawCmd)}`;
     output.appendChild(userLine);
 
     if (commands[cmd]) {
@@ -569,6 +556,11 @@ function initTerminal() {
         resDiv.innerHTML = result;
         output.appendChild(resDiv);
       }
+    } else if (cmd === 'projects') {
+      const result = commands['repos']();
+      const resDiv = document.createElement('div');
+      resDiv.innerHTML = result;
+      output.appendChild(resDiv);
     } else if (cmd.startsWith('open ')) {
       const projId = cmd.replace('open ', '').trim();
       openProjectModal(projId);
@@ -579,7 +571,7 @@ function initTerminal() {
     } else {
       const errLine = document.createElement('div');
       errLine.className = 'term-line dim';
-      errLine.innerHTML = `zsh: command not found: <span class="yellow">${escapeHTML(cmd)}</span>. Type <span class="cyan">help</span> to list available commands.`;
+      errLine.innerHTML = `zsh: command not found: <span class="yellow">${escapeHTML(cmd)}</span>. Type <span class="cyan">help</span> or <span class="cyan">repos</span>.`;
       output.appendChild(errLine);
     }
 
@@ -640,29 +632,45 @@ function initProjectFilters() {
 }
 
 /* ==========================================================================
-   11. PROJECT DETAIL MODALS
+   11. REAL PRODUCTION PROJECT DETAIL MODALS
    ========================================================================== */
 const projectData = {
-  'nexus-ai': {
-    title: 'Nexus AI: Autonomous Agent Orchestration Platform',
-    category: 'Autonomous Agents & Cloud Infrastructure',
-    image: 'assets/images/project-ai-platform.jpg',
-    description: `Nexus AI is a next-generation agent orchestration platform engineered to supervise, monitor, and direct autonomous multi-step reasoning models across distributed cloud clusters. Built to process over 4.7 TB of telemetry data with a continuous 99.8% SLA uptime, it features live streaming node graph topology, dynamic agent status tracking, and sub-65ms execution latency.`,
-    tags: ['TypeScript', 'Three.js', 'Next.js 14', 'FastAPI', 'Redis Streams', 'WebSockets', 'Docker', 'Google Cloud']
+  'salon-iq': {
+    title: 'Salon IQ — The Enterprise Salon Operating System',
+    category: 'Multi-Tenant Enterprise SaaS (IQ Nexhaz Global)',
+    image: 'assets/images/salon-iq.jpg',
+    repoUrl: 'https://github.com/mundackal1/salon-iq',
+    description: `Salon IQ is an enterprise multi-tenant operating system purpose-built for luxury salons, wellness chains, and spas. Engineered with Next.js 16, React 19, and Supabase PostgreSQL with strict Row-Level Security (RLS) tenant isolation. Features include:
+• Multi-chair appointment schedule timeline with dynamic booking slots
+• High-speed Point of Sale (POS) billing with 18% GST invoicing and sub-300ms generation
+• Hardware peripheral interoperability with ESC/POS thermal receipt printers and barcode scanners
+• FIFO inventory management with low-stock alerts and staff commission split calculations
+• Automated transactional messaging via WhatsApp API and executive analytics`,
+    tags: ['Next.js 16', 'React 19', 'Supabase PostgreSQL RLS', 'Tailwind CSS v4', 'Capacitor iOS & Android', 'ESC/POS Printing', 'WhatsApp API']
   },
-  'quantum-edge': {
-    title: 'Quantum Edge Flow: High-Frequency Settlement Engine',
-    category: 'Distributed Systems & Fintech Core',
-    image: 'assets/images/project-cloud-engine.jpg',
-    description: `Quantum Edge Flow provides sub-14 millisecond transaction clearance and settlement telemetry for high-volume market operators. Designed using Go worker pools and partitioned Kafka queues, the engine reliably absorbs 14,200 peak transactions per second with live fraud scoring pipelines and automatic failover replication.`,
-    tags: ['Go (Golang)', 'Apache Kafka', 'TimescaleDB', 'Kubernetes', 'Microservices', 'React', 'Prometheus']
+  'hotelzify': {
+    title: 'Hotelzify v2 — Direct Revenue Management & Rate Intelligence',
+    category: 'Revenue Management & Distributed Scraping',
+    image: 'assets/images/hotelzify.jpg',
+    repoUrl: 'https://github.com/mundackal1/Hotelzifyv2',
+    description: `Hotelzify v2 is a competitive revenue management platform designed for independent and boutique hotels in premier leisure destinations (Goa, Munnar, Manali) to reclaim revenue from 18–25% OTA commissions (MakeMyTrip, Booking.com, Agoda). Architecture highlights:
+• Headless scraping engine built with Python FastAPI and Playwright, utilizing residential proxy pools and anti-bot mitigation
+• 4-Pillar intelligence engine: OTA Rates & Parity Defense, SEO Search Score, Room Availability Compression, and Seasonality Forecasting
+• Monthly Commission Loss Calculator showing exact ₹ lost to OTAs vs. 100% net direct bookings
+• Aurora RDS rate matrix telemetry with scheduled morning executive briefs and CSV/Excel exports`,
+    tags: ['Python FastAPI', 'Playwright Scrapers', 'PostgreSQL / Aurora RDS', 'Docker Compose', 'Nginx', 'Next.js Frontend', 'Residential Proxies']
   },
-  'devforge': {
-    title: 'DevForge: Cloud Collaborative IDE & Git Lenses',
-    category: 'Collaborative DevTools & Web Runtime',
-    image: 'assets/images/project-devflow.jpg',
-    description: `DevForge is a browser-based distributed coding platform providing conflict-free replicated data type (CRDT) document collaboration, visual Git graph diffing, and WebAssembly compiler sandboxes. It handles multi-user real-time typing with under 8ms synchronization jitter.`,
-    tags: ['TypeScript', 'WebAssembly', 'WebRTC', 'Rust', 'Docker', 'CSS Architecture']
+  'chitiq': {
+    title: 'ChitIQ — Financial Chit Lifecycle & Double-Entry Accounting Core',
+    category: 'Fintech & Verified Accounting Core',
+    image: 'assets/images/chitiq.jpg',
+    repoUrl: 'https://github.com/atcafc/chitiq',
+    description: `ChitIQ is a mission-critical platform engineered for Kerala chit fund companies, replacing manual ledgers with a tamper-resistant digital infrastructure. Key architectural capabilities:
+• Real-time chit auction bidding engine with subscriber KYC verification and automated countdowns
+• Complete double-entry general ledger balance sheet ensuring strict mathematical debit/credit reconciliation
+• Loan advance amortization schedules, dividend distribution tracking, and automated collection status
+• Cross-platform subscriber portal built with Vite, React 18, shadcn/ui, and Capacitor for iOS/Android native deployment`,
+    tags: ['Vite & React 18', 'TypeScript', 'shadcn/ui', 'TanStack Query', 'Supabase Postgres RLS', 'Edge Functions', 'Capacitor Mobile']
   }
 };
 
@@ -690,8 +698,13 @@ window.openProjectModal = function(projectId) {
   const modal = document.getElementById('project-modal');
   document.getElementById('modal-title').textContent = data.title;
   document.getElementById('modal-tag').textContent = data.category;
-  document.getElementById('modal-desc').textContent = data.description;
+  document.getElementById('modal-desc').innerText = data.description;
   document.getElementById('modal-project-img').src = data.image;
+
+  const repoBtn = document.getElementById('modal-repo-btn');
+  if (repoBtn) {
+    repoBtn.href = data.repoUrl;
+  }
 
   const tagsContainer = document.getElementById('modal-tags');
   tagsContainer.innerHTML = '';
