@@ -336,114 +336,166 @@ function siteViz(color) {
   </svg>`;
 }
 
+
 /* =========================================================
    Render
    ========================================================= */
 const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const glyph = p => `<span class="suite-glyph" style="--c:${p.color}">${p.short}</span>`;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const roomNo = p => 101 + PRODUCTS.indexOf(p);
 
-function renderSuite() {
-  $('#suite-list').innerHTML = PRODUCTS.map(p => `
-    <li><button class="suite-item" data-open="${p.id}">
-      ${glyph(p)}
-      <span><span class="suite-name">${p.name}</span><span class="suite-domain">${esc(p.domain)}</span></span>
-      <span class="suite-arrow">→</span>
-    </button></li>`).join('');
+function renderMarquee() {
+  const words = ['Hospitality', 'Product', 'Distribution', 'SaaS', 'Revenue', 'Operations'];
+  $('#marquee').innerHTML = [...words, ...words].map(w => `<span>${w} ·</span>`).join('');
 }
 
-function renderWork() {
-  $('#work-grid').innerHTML = PRODUCTS.map(p => `
-    <button class="card reveal" style="--c:${p.color}" data-open="${p.id}" aria-label="Open ${p.name} brief">
-      <div class="card-visual" style="color:${p.color}">${viz(p.viz)}</div>
-      <div class="card-body">
-        <span class="card-domain mono">${esc(p.domain)}</span>
-        <h3>${p.name}</h3>
-        <p>${esc(p.tagline)}</p>
-        <div class="card-foot">
-          <span class="chips">${p.stack.slice(0, 3).map(t => `<span class="chip">${t}</span>`).join('')}</span>
-          <span class="card-open">Brief →</span>
+function renderCorridor() {
+  $('#corridor').innerHTML = PRODUCTS.map(p => `
+    <div class="room reveal" style="--c:${p.color}">
+      <div class="door-frame" style="--c:${p.color}">
+        <div class="door-inside">${viz(p.viz)}</div>
+        <div class="door">
+          <span class="plate">${roomNo(p)}</span>
+          <span class="reader"></span>
+          <span class="handle"></span>
+          <span class="hanger">${esc(p.name)}</span>
         </div>
+        <button class="door-btn" data-open="${p.id}" aria-label="Open room ${roomNo(p)}: ${p.name}"></button>
       </div>
-    </button>`).join('');
+      <span class="threshold"></span>
+      <div class="room-plaque">
+        <h3>${p.name}</h3>
+        <span class="room-type mono">${esc(p.domain)}</span>
+        <p>${esc(p.tagline)}</p>
+      </div>
+    </div>`).join('');
+
+  // Keyboard focus swings the door open the same way hover does.
+  $$('.door-btn').forEach(b => {
+    const room = b.closest('.room');
+    b.addEventListener('focus', () => room.classList.add('focus'));
+    b.addEventListener('blur', () => room.classList.remove('focus'));
+  });
 }
 
-function renderSites() {
-  $('#site-grid').innerHTML = SITES.map(s => {
+function renderGallery() {
+  $('#gallery-wall').innerHTML = SITES.map(s => {
     const host = s.url.replace(/^https?:\/\//, '');
     return `
-    <article class="site reveal">
-      <div class="browser">
+    <figure class="artwork reveal">
+      <div class="frame"><div class="canvas">
         <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="browser-url">${host}</span></div>
         <div class="browser-view">${siteViz(s.color)}</div>
-      </div>
-      <div class="site-body">
+      </div></div>
+      <figcaption class="museum-plaque">
         <span class="site-type mono">${esc(s.type)}</span>
         <h3>${esc(s.name)}</h3>
         <p>${esc(s.desc)}</p>
         <span class="chips">${s.tags.map(t => `<span class="chip">${t}</span>`).join('')}</span>
         <a class="site-link" href="${s.url}" target="_blank" rel="noopener">Visit ${host} ↗</a>
-      </div>
-    </article>`;
+      </figcaption>
+    </figure>`;
   }).join('');
 }
 
-function renderToolbox() {
-  $('#tool-groups').innerHTML = TOOL_GROUPS.map(g => `
-    <div class="tool-group reveal">
+function renderRack() {
+  $('#rack').innerHTML = TOOL_GROUPS.map(g => `
+    <div class="rack-row reveal">
       <h3>${g.title}</h3>
       <p>${g.note}</p>
-      <div class="tools">${g.tools.map(t => g.linked
-        ? `<button class="tool" data-linked data-tool="${esc(t)}">${t}</button>`
-        : `<span class="tool">${t}</span>`).join('')}</div>
+      <div class="hooks">${g.tools.map(t => g.linked
+        ? `<button class="key" data-linked data-tool="${esc(t)}">${t}</button>`
+        : `<span class="key">${t}</span>`).join('')}</div>
     </div>`).join('');
 
-  const list = $('#tool-usage-list');
-  const hint = $('#tool-usage-hint');
   const show = tool => {
-    document.querySelectorAll('.tool.on').forEach(t => t.classList.remove('on'));
-    const btn = document.querySelector(`.tool[data-tool="${CSS.escape(tool)}"]`);
-    if (btn) btn.classList.add('on');
+    $$('.key.on').forEach(k => k.classList.remove('on'));
+    $(`.key[data-tool="${CSS.escape(tool)}"]`)?.classList.add('on');
     const used = PRODUCTS.filter(p => p.stack.includes(tool));
-    list.innerHTML = used.map(p => `<li>${glyph(p)}${p.name}</li>`).join('');
-    hint.textContent = used.length ? '' : 'Select a build tool';
+    $('#desk-q').innerHTML = `Which rooms use <b>${esc(tool)}</b>?`;
+    $('#desk-rooms').innerHTML = used.length
+      ? used.map(p => `<li><span class="rn">${roomNo(p)}</span>${p.name}</li>`).join('')
+      : '<li class="empty">None of the suites, yet.</li>';
   };
-  document.querySelectorAll('.tool[data-linked]').forEach(t => {
-    t.addEventListener('mouseenter', () => show(t.dataset.tool));
-    t.addEventListener('focus', () => show(t.dataset.tool));
-    t.addEventListener('click', () => show(t.dataset.tool));
+  $$('.key[data-linked]').forEach(k => {
+    k.addEventListener('mouseenter', () => show(k.dataset.tool));
+    k.addEventListener('focus', () => show(k.dataset.tool));
+    k.addEventListener('click', () => show(k.dataset.tool));
   });
   show('Supabase');
 }
 
-function renderTimeline() {
-  $('#timeline').innerHTML = TIMELINE.map(t => `
-    <li class="reveal">
+function renderLedger() {
+  $('#ledger').innerHTML = `
+    <li class="ledger-head mono" aria-hidden="true"><span>Dates</span><span>Stay</span><span>Notes</span></li>
+    ${TIMELINE.map((t, i) => `
+    <li class="entry reveal${i === 0 ? ' current' : ''}">
       <span class="when mono">${t.when}</span>
-      <div>
-        <h3>${esc(t.role)}</h3>
-        <p class="where">${esc(t.where)}</p>
-        ${t.points.length ? `<ul>${t.points.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
-      </div>
-    </li>`).join('');
+      <div><h3>${esc(t.role)}</h3><p class="where">${esc(t.where)}</p></div>
+      ${t.points.length ? `<ul>${t.points.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<span></span>'}
+    </li>`).join('')}`;
 }
 
 function renderContact() {
   const email = `${CONFIG.emailUser}@${CONFIG.emailDomain}`;
-  document.querySelectorAll('[data-email]').forEach(a => { a.href = `mailto:${email}`; });
-  document.querySelectorAll('[data-email-text]').forEach(el => { el.textContent = email; });
-  document.querySelectorAll('[data-github]').forEach(a => { a.href = CONFIG.github; });
-  document.querySelectorAll('[data-linkedin]').forEach(a => {
-    if (CONFIG.linkedin) { a.href = CONFIG.linkedin; a.hidden = false; }
-  });
-  document.querySelectorAll('[data-cv]').forEach(a => {
-    if (CONFIG.cv) { a.href = CONFIG.cv; a.setAttribute('download', ''); a.hidden = false; }
-  });
+  $$('[data-email]').forEach(a => { a.href = `mailto:${email}`; });
+  $$('[data-email-text]').forEach(el => { el.textContent = email; });
+  $$('[data-github]').forEach(a => { a.href = CONFIG.github; });
+  $$('[data-linkedin]').forEach(a => { if (CONFIG.linkedin) { a.href = CONFIG.linkedin; a.hidden = false; } });
+  $$('[data-cv]').forEach(a => { if (CONFIG.cv) { a.href = CONFIG.cv; a.setAttribute('download', ''); a.hidden = false; } });
   $('#year').textContent = new Date().getFullYear();
 }
 
 /* =========================================================
-   Product brief (drawer) — deep-linkable via #/work/<id>
+   Lift — floor indicator that follows the scroll
+   ========================================================= */
+function initLift() {
+  const lift = $('#lift');
+  const floors = $$('[data-floor]');
+  const order = floors.map(f => f.dataset.floor);
+  $('#lift-buttons').innerHTML = floors.slice().reverse().map(f => `
+    <li><button class="lift-btn" data-goto="${f.id}" aria-label="${f.dataset.floorName}">
+      ${f.dataset.floor}<span class="tip">${f.dataset.floorName}</span>
+    </button></li>`).join('');
+
+  const display = $('#lift-display');
+  const floorEl = $('#lift-floor');
+  let current = 'L';
+
+  const setFloor = f => {
+    if (f.dataset.floor === current) return;
+    const goingDown = order.indexOf(f.dataset.floor) > order.indexOf(current);
+    current = f.dataset.floor;
+    floorEl.textContent = current;
+    $('#lift-label').textContent = f.dataset.floorName;
+    $('#lift-arrow').classList.toggle('down', goingDown);
+    floorEl.classList.remove('ding'); void floorEl.offsetWidth; floorEl.classList.add('ding');
+    $$('.lift-btn').forEach(b => b.classList.toggle('on', b.dataset.goto === f.id));
+  };
+  $$('.lift-btn')[floors.length - 1].classList.add('on');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) setFloor(en.target); });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  floors.forEach(f => io.observe(f));
+
+  lift.addEventListener('click', e => {
+    const b = e.target.closest('.lift-btn');
+    if (b) { $('#' + b.dataset.goto).scrollIntoView(); lift.classList.remove('open'); display.setAttribute('aria-expanded', 'false'); }
+  });
+  display.addEventListener('click', () => {
+    const open = lift.classList.toggle('open');
+    display.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', e => {
+    if (!lift.contains(e.target)) { lift.classList.remove('open'); display.setAttribute('aria-expanded', 'false'); }
+  });
+}
+
+/* =========================================================
+   Room brief (drawer) — deep-linkable via #/work/<id>
    ========================================================= */
 const brief = $('#brief');
 const briefPanel = $('.brief-panel', brief);
@@ -455,10 +507,10 @@ function briefHTML(p) {
   const prev = PRODUCTS[(i - 1 + PRODUCTS.length) % PRODUCTS.length];
   const next = PRODUCTS[(i + 1) % PRODUCTS.length];
   return `
-    <span class="brief-domain mono">${esc(p.domain)}</span>
+    <div class="brief-room"><span class="plate">${roomNo(p)}</span><span class="brief-domain mono">${esc(p.domain)}</span></div>
     <h2 id="brief-title">${p.name}</h2>
     <p class="brief-tag">${esc(p.tagline)}</p>
-    <div class="brief-visual" style="color:${p.color}">${viz(p.viz)}</div>
+    <div class="brief-visual">${viz(p.viz)}</div>
 
     <section class="brief-section"><h3>The problem</h3><p>${esc(p.problem)}</p></section>
     <section class="brief-section"><h3>What it does</h3>
@@ -479,11 +531,11 @@ function briefHTML(p) {
 
     <div class="brief-note">
       <p>I'm happy to give a live demo and walk through the product on a call.</p>
-      <a class="btn btn-accent btn-small" href="#contact" data-close>Request a demo</a>
+      <a class="btn btn-gold btn-small" href="#rooftop" data-close>Request a demo</a>
     </div>
     <div class="brief-nav">
-      <button data-open="${prev.id}">← ${prev.name}</button>
-      <button data-open="${next.id}">${next.name} →</button>
+      <button data-open="${prev.id}">← ${roomNo(prev)} ${prev.name}</button>
+      <button data-open="${next.id}">${roomNo(next)} ${next.name} →</button>
     </div>`;
 }
 
@@ -498,7 +550,7 @@ function openBrief(id, push = true) {
   briefPanel.scrollTop = 0;
   briefPanel.focus();
   if (push && location.hash !== `#/work/${id}`) {
-    // First open adds a history entry so Back closes the brief; switching products replaces it.
+    // First open adds a history entry so Back closes the brief; switching rooms replaces it.
     if (pushedEntry) history.replaceState(null, '', `#/work/${id}`);
     else { history.pushState(null, '', `#/work/${id}`); pushedEntry = true; }
   }
@@ -513,6 +565,7 @@ function closeBrief(push = true) {
     else history.replaceState(null, '', location.pathname + location.search);
   }
   pushedEntry = false;
+  $$('.room.opening').forEach(r => r.classList.remove('opening'));
   if (lastFocus) lastFocus.focus({ preventScroll: true });
 }
 
@@ -523,7 +576,18 @@ function syncRoute() {
 
 document.addEventListener('click', e => {
   const opener = e.target.closest('[data-open]');
-  if (opener) { e.preventDefault(); openBrief(opener.dataset.open); return; }
+  if (opener) {
+    e.preventDefault();
+    const room = opener.closest('.room');
+    // Swing the door fully open before the brief slides in.
+    if (room && !reduceMotion) {
+      room.classList.add('opening');
+      setTimeout(() => openBrief(opener.dataset.open), 420);
+    } else {
+      openBrief(opener.dataset.open);
+    }
+    return;
+  }
   const closer = e.target.closest('[data-close]');
   if (closer && !brief.hidden) {
     const href = closer.getAttribute('href');
@@ -538,7 +602,7 @@ document.addEventListener('keydown', e => {
   if (brief.hidden) return;
   if (e.key === 'Escape') closeBrief();
   if (e.key === 'Tab') {
-    const f = [...briefPanel.querySelectorAll('a, button')];
+    const f = $$('a, button', briefPanel);
     if (!f.length) return;
     const first = f[0], last = f[f.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -549,12 +613,81 @@ window.addEventListener('popstate', syncRoute);
 window.addEventListener('hashchange', syncRoute);
 
 /* =========================================================
-   Ambient effects
+   Lobby effects
    ========================================================= */
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function initCheckin() {
+  const el = $('#checkin');
+  let seen = false;
+  try { seen = sessionStorage.getItem('checked-in') === '1'; } catch (_) { /* storage blocked */ }
+  if (reduceMotion || seen || location.hash.startsWith('#/work/')) { el.classList.add('done'); return; }
+  try { sessionStorage.setItem('checked-in', '1'); } catch (_) { /* storage blocked */ }
+  const open = () => {
+    if (el.classList.contains('open')) return;
+    el.classList.add('open');
+    setTimeout(() => el.classList.add('done'), 1050);
+  };
+  setTimeout(open, 1300);
+  el.addEventListener('click', open);
+}
+
+function initKeycard() {
+  const card = $('#keycard');
+  const stage = $('.lobby');
+  const light = $('#lobby-light');
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+  if (reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+
+  stage.addEventListener('pointermove', e => {
+    const s = stage.getBoundingClientRect();
+    light.style.transform = `translate3d(${e.clientX - s.left - 320}px, ${e.clientY - s.top - 320}px, 0)`;
+    const r = card.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width / 2)) / (s.width / 2);
+    const dy = (e.clientY - (r.top + r.height / 2)) / (s.height / 2);
+    card.style.transform = `rotateY(${(dx * 14).toFixed(2)}deg) rotateX(${(-dy * 12).toFixed(2)}deg)`;
+    card.style.setProperty('--gx', `${((e.clientX - r.left) / r.width) * 100}%`);
+    card.style.setProperty('--gy', `${((e.clientY - r.top) / r.height) * 100}%`);
+    $$('.glare', card).forEach(g => {
+      g.style.setProperty('--gx', `${30 + ((e.clientX - r.left) / r.width) * 40}%`);
+      g.style.setProperty('--gy', `${30 + ((e.clientY - r.top) / r.height) * 40}%`);
+    });
+  });
+  stage.addEventListener('pointerleave', () => { card.style.transform = ''; });
+}
+
+function initSky() {
+  const canvas = $('#sky');
+  const ctx = canvas.getContext('2d');
+  let w, h, stars = [], raf = null;
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({ length: Math.round((w * h) / 5000) }, () => ({
+      x: Math.random() * w, y: Math.random() * h * 0.75,
+      r: Math.random() * 1.2 + 0.2, p: Math.random() * Math.PI * 2, s: 0.5 + Math.random() * 1.5
+    }));
+  };
+  const frame = t => {
+    ctx.clearRect(0, 0, w, h);
+    for (const st of stars) {
+      const a = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(st.p + (t / 1000) * st.s));
+      ctx.fillStyle = `rgba(255, 244, 220, ${a * (1 - st.y / h)})`;
+      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
+    }
+    raf = requestAnimationFrame(frame);
+  };
+  resize();
+  window.addEventListener('resize', resize);
+  if (reduceMotion) { frame(0); cancelAnimationFrame(raf); return; }
+  new IntersectionObserver(([en]) => {
+    if (en.isIntersecting && !raf) raf = requestAnimationFrame(frame);
+    else if (!en.isIntersecting && raf) { cancelAnimationFrame(raf); raf = null; }
+  }).observe(canvas);
+}
 
 function initReveal() {
-  const els = document.querySelectorAll('.reveal, .section-head, .collab-card, .process, .contact-card');
+  const els = $$('.reveal, .floor-head, .meeting, .itinerary, .reservation');
   if (reduceMotion || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
   els.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver(entries => {
@@ -563,114 +696,24 @@ function initReveal() {
   els.forEach(el => io.observe(el));
 }
 
-function initCardGlow() {
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('pointermove', e => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  });
-}
-
 function initNav() {
   const nav = $('#nav');
-  const links = [...document.querySelectorAll('.nav-links a')];
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
-  if (!('IntersectionObserver' in window)) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${en.target.id}`));
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  links.forEach(a => { const s = $(a.getAttribute('href')); if (s) io.observe(s); });
-}
-
-/* Hero field — drifting nodes that link up and lean toward the cursor */
-function initField() {
-  const canvas = $('#field');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const colors = PRODUCTS.map(p => p.color);
-  let w, h, dpr, nodes = [], raf = null;
-  const mouse = { x: -9999, y: -9999 };
-
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth; h = canvas.clientHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.round(Math.min(90, (w * h) / 16000));
-    nodes = Array.from({ length: count }, (_, i) => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-      r: i < colors.length ? 3 : 1.2 + Math.random() * 1.2,
-      c: i < colors.length ? colors[i] : null
-    }));
-  }
-
-  function frame() {
-    ctx.clearRect(0, 0, w, h);
-    const link = 130;
-    for (const n of nodes) {
-      const dx = mouse.x - n.x, dy = mouse.y - n.y, d = Math.hypot(dx, dy);
-      if (d < 180 && d > 1) { n.vx += (dx / d) * 0.012; n.vy += (dy / d) * 0.012; }
-      n.vx *= 0.985; n.vy *= 0.985;
-      n.vx += (Math.random() - 0.5) * 0.01; n.vy += (Math.random() - 0.5) * 0.01;
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
-      if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
-    }
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < link) {
-          ctx.strokeStyle = `rgba(160, 200, 220, ${0.14 * (1 - d / link)})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        }
-      }
-    }
-    for (const n of nodes) {
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      if (n.c) { ctx.fillStyle = n.c; ctx.shadowColor = n.c; ctx.shadowBlur = 14; }
-      else { ctx.fillStyle = 'rgba(200, 215, 230, 0.45)'; ctx.shadowBlur = 0; }
-      ctx.fill();
-    }
-    ctx.shadowBlur = 0;
-    raf = requestAnimationFrame(frame);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  const hero = canvas.parentElement;
-  hero.addEventListener('pointermove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-  });
-  hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
-
-  if (reduceMotion) { frame(); cancelAnimationFrame(raf); return; }
-  // Only animate while the hero is on screen.
-  new IntersectionObserver(([en]) => {
-    if (en.isIntersecting && !raf) raf = requestAnimationFrame(frame);
-    else if (!en.isIntersecting && raf) { cancelAnimationFrame(raf); raf = null; }
-  }).observe(hero);
 }
 
 /* ---------- Boot ---------- */
-renderSuite();
-renderWork();
-renderSites();
-renderToolbox();
-renderTimeline();
+renderMarquee();
+renderCorridor();
+renderGallery();
+renderRack();
+renderLedger();
 renderContact();
+initCheckin();
+initLift();
+initKeycard();
+initSky();
 initReveal();
-initCardGlow();
 initNav();
-initField();
 syncRoute();

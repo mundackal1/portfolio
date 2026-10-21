@@ -3,142 +3,181 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alan Philip Babu — Product Builder</title>
-  <meta name="description" content="Alan Philip Babu: hospitality and OTA professional who builds SaaS products for hotels, salons, construction and finance. Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ and Build IQ.">
-  <meta name="theme-color" content="#07090c">
-  <meta property="og:title" content="Alan Philip Babu — Product Builder">
+  <title>The Alan Philip Hotel — Alan Philip Babu, Product Builder</title>
+  <meta name="description" content="Alan Philip Babu: 10+ years in hospitality and OTA distribution, now building SaaS products. Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ and Build IQ.">
+  <meta name="theme-color" content="#0b0a08">
+  <meta property="og:title" content="The Alan Philip Hotel — Alan Philip Babu">
   <meta property="og:description" content="10+ years in hospitality and OTA distribution. Now building SaaS products for real businesses.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="skip" href="#work">Skip to work</a>
+  <a class="skip" href="#suites">Skip to products</a>
 
+  <!-- CHECK-IN PRELOADER -->
+  <div class="checkin" id="checkin" aria-hidden="true">
+    <div class="checkin-door left"></div>
+    <div class="checkin-door right"></div>
+    <div class="checkin-card">
+      <span class="crest crest-lg">AP</span>
+      <p class="checkin-name">The Alan Philip Hotel</p>
+      <p class="checkin-status mono">Checking you in<span class="ellipsis"></span></p>
+      <span class="checkin-bar"><i></i></span>
+    </div>
+  </div>
+
+  <!-- TOP SIGNAGE -->
   <header class="nav" id="nav">
-    <a href="#top" class="brand" aria-label="Alan Philip Babu — home">
-      <span class="brand-mark">AP</span>
-      <span class="brand-name">Alan Philip Babu</span>
+    <a href="#lobby" class="brand" aria-label="The Alan Philip Hotel — lobby">
+      <span class="crest">AP</span>
+      <span class="brand-text">
+        <span class="brand-name">The Alan Philip Hotel</span>
+        <span class="brand-sub mono">Alan Philip Babu · Product Builder</span>
+      </span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#work">Products</a>
-      <a href="#websites">Websites</a>
-      <a href="#toolbox">Toolbox</a>
-      <a href="#experience">Experience</a>
-      <a href="#collab">Work with me</a>
-    </nav>
-    <a href="#contact" class="btn btn-small btn-accent">Contact</a>
+    <a href="#rooftop" class="btn btn-small btn-gold">Call reception</a>
   </header>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero">
-      <canvas id="field" aria-hidden="true"></canvas>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="pulse"></span>Open to roles &amp; collaborations</p>
-          <h1>I turn real business problems<br><span class="grad">into working software.</span></h1>
+  <!-- LIFT PANEL -->
+  <nav class="lift" id="lift" aria-label="Floors">
+    <button class="lift-display" id="lift-display" aria-expanded="false" aria-controls="lift-buttons">
+      <span class="lift-arrow" id="lift-arrow">▲</span>
+      <span class="lift-floor" id="lift-floor">L</span>
+      <span class="lift-label" id="lift-label">Lobby</span>
+    </button>
+    <ol class="lift-buttons" id="lift-buttons"></ol>
+  </nav>
+
+  <main>
+    <!-- L · LOBBY -->
+    <section class="lobby" id="lobby" data-floor="L" data-floor-name="Lobby">
+      <div class="lobby-marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+      <div class="lobby-light" id="lobby-light" aria-hidden="true"></div>
+
+      <div class="lobby-inner">
+        <div class="lobby-copy">
+          <p class="eyebrow"><span class="led"></span>Reception · open to roles &amp; collaborations</p>
+          <h1>Welcome to the <em>Alan Philip</em> Hotel.</h1>
           <p class="lede">
-            Ten years running hotels and managing OTA partners. Now I design and ship SaaS
-            products for <strong>hospitality</strong>, <strong>finance</strong>, <strong>salons</strong> and
-            <strong>construction</strong>, built around how these businesses actually operate.
+            Ten years running hotels and managing OTA partners. Now I design and ship the software
+            businesses run on. Take the lift to see the <strong>suites</strong> (my products), the
+            <strong>gallery</strong> (client websites) and the <strong>concierge</strong> (my toolbox).
           </p>
-          <div class="hero-cta">
-            <a href="#work" class="btn btn-accent">See my products</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          <div class="lobby-cta">
+            <a href="#suites" class="btn btn-gold">Take the lift <span aria-hidden="true">↓</span></a>
+            <a href="#rooftop" class="btn btn-ghost">Call reception</a>
             <a href="#" class="btn btn-ghost" data-cv hidden>Download CV</a>
           </div>
-          <dl class="hero-stats">
-            <div><dt>10+ yrs</dt><dd>Hospitality &amp; OTA</dd></div>
-            <div><dt>380+</dt><dd>Hotel partners managed</dd></div>
-            <div><dt>6</dt><dd>SaaS products built</dd></div>
-          </dl>
         </div>
 
-        <aside class="suite" aria-label="Product suite">
-          <div class="suite-head">
-            <span class="mono">// the IQ suite</span>
-            <span class="dots"><i></i><i></i><i></i></span>
-          </div>
-          <ul class="suite-list" id="suite-list"></ul>
-          <div class="suite-foot mono">select a product to open its brief →</div>
+        <div class="keycard-stage">
+          <button class="keycard" id="keycard" aria-label="Guest key card. Select to flip.">
+            <span class="keycard-inner">
+              <span class="keycard-face front">
+                <span class="glare" aria-hidden="true"></span>
+                <span class="kc-top">
+                  <span class="crest">AP</span>
+                  <span class="mono kc-tag">GUEST KEY · ALL ACCESS</span>
+                </span>
+                <span class="kc-chip" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="kc-name">Alan Philip Babu</span>
+                <span class="kc-role">Product Builder · Hospitality &amp; SaaS</span>
+                <span class="kc-bottom mono">
+                  <span>ROOMS 101–106</span>
+                  <span>CHECK-IN 2016</span>
+                </span>
+              </span>
+              <span class="keycard-face back">
+                <span class="kc-stripe" aria-hidden="true"></span>
+                <span class="kc-stats">
+                  <span><b>10+ yrs</b><small>Hospitality &amp; OTA</small></span>
+                  <span><b>380+</b><small>Hotel partners managed</small></span>
+                  <span><b>6</b><small>SaaS products built</small></span>
+                </span>
+                <span class="kc-back-foot mono">Kerala, India · open to relocation</span>
+              </span>
+            </span>
+          </button>
+          <p class="keycard-hint mono">tap the key card to flip it</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1 · THE SUITES -->
+    <section class="floor" id="suites" data-floor="1" data-floor-name="The Suites">
+      <header class="floor-head">
+        <p class="floor-tag mono"><span>Floor 1</span>The Suites</p>
+        <h2>Six rooms, six products.</h2>
+        <p class="floor-sub">Each product started from a problem I saw first-hand in an industry. Knock on a door to open its brief.</p>
+      </header>
+      <div class="corridor" id="corridor"></div>
+    </section>
+
+    <!-- 2 · THE GALLERY -->
+    <section class="floor" id="gallery" data-floor="2" data-floor-name="The Gallery">
+      <header class="floor-head">
+        <p class="floor-tag mono"><span>Floor 2</span>The Gallery</p>
+        <h2>Websites in production.</h2>
+        <p class="floor-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
+      </header>
+      <div class="gallery" id="gallery-wall"></div>
+    </section>
+
+    <!-- 3 · CONCIERGE -->
+    <section class="floor" id="concierge" data-floor="3" data-floor-name="Concierge">
+      <header class="floor-head">
+        <p class="floor-tag mono"><span>Floor 3</span>Concierge</p>
+        <h2>The key rack.</h2>
+        <p class="floor-sub">Every tool I use, hung on its hook. Pick a key from the build stack and the concierge tells you which rooms it opens.</p>
+      </header>
+      <div class="concierge">
+        <div class="rack" id="rack"></div>
+        <aside class="desk" aria-live="polite">
+          <p class="mono desk-label">Concierge</p>
+          <p class="desk-q" id="desk-q">Which rooms use <b>Supabase</b>?</p>
+          <ul class="desk-rooms" id="desk-rooms"></ul>
         </aside>
       </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section class="section" id="work">
-      <div class="section-head">
-        <p class="kicker mono">01 / Products</p>
-        <h2>SaaS products I've built</h2>
-        <p class="section-sub">Each product started from a problem I saw first-hand in an industry. Open one for a short brief covering the problem, what it does, my role and the stack.</p>
-      </div>
-      <div class="work-grid" id="work-grid"></div>
+    <!-- 4 · GUEST REGISTER -->
+    <section class="floor" id="register" data-floor="4" data-floor-name="Guest Register">
+      <header class="floor-head">
+        <p class="floor-tag mono"><span>Floor 4</span>Guest Register</p>
+        <h2>Where I've stayed.</h2>
+        <p class="floor-sub">My career so far, from hosting guests to building the software.</p>
+      </header>
+      <ol class="ledger" id="ledger"></ol>
     </section>
 
-    <!-- WEBSITES -->
-    <section class="section" id="websites">
-      <div class="section-head">
-        <p class="kicker mono">02 / Client websites</p>
-        <h2>Websites in production</h2>
-        <p class="section-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
-      </div>
-      <div class="site-grid" id="site-grid"></div>
-    </section>
-
-    <!-- TOOLBOX -->
-    <section class="section" id="toolbox">
-      <div class="section-head">
-        <p class="kicker mono">03 / Toolbox</p>
-        <h2>Tools I use every day</h2>
-        <p class="section-sub">Product, hospitality and build tools. Hover or tap a build tool to see which products use it.</p>
-      </div>
-      <div class="toolbox">
-        <div class="tool-groups" id="tool-groups"></div>
-        <aside class="tool-usage" aria-live="polite">
-          <p class="mono tool-usage-label">used in</p>
-          <ul id="tool-usage-list"></ul>
-          <p class="tool-usage-hint" id="tool-usage-hint">Select a tool</p>
-        </aside>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="section" id="experience">
-      <div class="section-head">
-        <p class="kicker mono">04 / Experience</p>
-        <h2>Track record</h2>
-      </div>
-      <ol class="timeline" id="timeline"></ol>
-    </section>
-
-    <!-- COLLAB -->
-    <section class="section" id="collab">
-      <div class="section-head">
-        <p class="kicker mono">05 / Work with me</p>
-        <h2>How we can work together</h2>
-      </div>
-      <div class="collab-grid">
-        <article class="collab-card">
-          <span class="collab-icon mono">01</span>
+    <!-- 5 · BUSINESS CENTRE -->
+    <section class="floor" id="business" data-floor="5" data-floor-name="Business Centre">
+      <header class="floor-head">
+        <p class="floor-tag mono"><span>Floor 5</span>Business Centre</p>
+        <h2>Ways we can work together.</h2>
+      </header>
+      <div class="meeting-rooms">
+        <article class="meeting">
+          <span class="meeting-plate mono">Meeting room A</span>
           <h3>Product roles</h3>
           <p>Product manager or product owner roles in travel, hospitality or vertical SaaS, where knowing the industry and being able to build both matter.</p>
         </article>
-        <article class="collab-card">
-          <span class="collab-icon mono">02</span>
+        <article class="meeting">
+          <span class="meeting-plate mono">Meeting room B</span>
           <h3>Build collaborations</h3>
           <p>Working with a firm to take an industry problem from discovery to a shipped product, either on web and mobile or as an internal tool.</p>
         </article>
-        <article class="collab-card">
-          <span class="collab-icon mono">03</span>
+        <article class="meeting">
+          <span class="meeting-plate mono">Meeting room C</span>
           <h3>Hospitality tech advisory</h3>
           <p>OTA distribution, channel management, pricing and partner workflows, from someone who has worked on both the hotel side and the OTA side.</p>
         </article>
       </div>
-      <div class="process">
-        <p class="mono process-label">how I work</p>
-        <ol class="process-steps">
+      <div class="itinerary">
+        <p class="mono itinerary-label">Itinerary · how I work</p>
+        <ol class="itinerary-steps">
           <li><b>Discover</b><span>Sit with the users and map the workflow</span></li>
           <li><b>Define</b><span>Scope, requirements, priorities</span></li>
           <li><b>Build</b><span>Fast prototypes, weekly demos</span></li>
@@ -147,29 +186,34 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section contact" id="contact">
-      <div class="contact-card">
-        <p class="kicker mono">06 / Contact</p>
-        <h2>Let's build something.</h2>
-        <p class="section-sub">Live demos and product walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
-        <div class="contact-links">
-          <a class="btn btn-accent" data-email href="#">Email me</a>
+    <!-- R · ROOFTOP -->
+    <section class="rooftop" id="rooftop" data-floor="R" data-floor-name="Rooftop">
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="reservation">
+        <p class="floor-tag mono"><span>Rooftop</span>Reservations</p>
+        <h2>Let's book a meeting.</h2>
+        <p class="floor-sub">Live demos and product walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
+        <dl class="res-slip mono">
+          <div><dt>Guest</dt><dd>You</dd></div>
+          <div><dt>Host</dt><dd>Alan Philip Babu</dd></div>
+          <div><dt>Purpose</dt><dd>Role · Collaboration · Advisory</dd></div>
+        </dl>
+        <div class="res-actions">
+          <a class="btn btn-gold" data-email href="#">Email me</a>
           <a class="btn btn-ghost" data-linkedin href="#" target="_blank" rel="noopener" hidden>LinkedIn</a>
           <a class="btn btn-ghost" data-github href="#" target="_blank" rel="noopener">GitHub</a>
           <a class="btn btn-ghost" data-cv href="#" hidden>Download CV</a>
         </div>
-        <p class="contact-email mono" data-email-text></p>
+        <p class="res-email mono" data-email-text></p>
       </div>
+      <footer class="footer">
+        <span>© <span id="year"></span> Alan Philip Babu</span>
+        <span class="mono">Kerala, India</span>
+      </footer>
     </section>
   </main>
 
-  <footer class="footer">
-    <span>© <span id="year"></span> Alan Philip Babu</span>
-    <span class="mono">Kerala, India</span>
-  </footer>
-
-  <!-- PRODUCT BRIEF -->
+  <!-- ROOM BRIEF -->
   <div class="brief" id="brief" role="dialog" aria-modal="true" aria-labelledby="brief-title" hidden>
     <div class="brief-backdrop" data-close></div>
     <article class="brief-panel" tabindex="-1">
