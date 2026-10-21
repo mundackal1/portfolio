@@ -18,6 +18,8 @@ const PRODUCTS = [
   {
     id: 'room-iq',
     name: 'Room IQ',
+    color: '#5b8cff',
+    category: 'Hospitality',
     headline: 'Overbookings across every OTA',
     domain: 'Hospitality · Channel management',
     tagline: 'Hotel distribution and channel management for independent properties.',
@@ -37,6 +39,8 @@ const PRODUCTS = [
   {
     id: 'rates-iq',
     name: 'Rates IQ',
+    color: '#3fe0b0',
+    category: 'Hospitality',
     headline: 'Prices drifting out of parity',
     domain: 'Hospitality · Revenue intelligence',
     tagline: 'Rate intelligence that helps hotels win more direct bookings.',
@@ -56,6 +60,8 @@ const PRODUCTS = [
   {
     id: 'salon-iq',
     name: 'Salon IQ',
+    color: '#ff6bb5',
+    category: 'Operations',
     headline: 'Salon bills on paper and WhatsApp',
     domain: 'Retail & services · Salon operations',
     tagline: 'The everyday operating system for salons and spas.',
@@ -75,6 +81,8 @@ const PRODUCTS = [
   {
     id: 'chit-iq',
     name: 'Chit IQ',
+    color: '#ffb84d',
+    category: 'Finance',
     headline: 'Chit auctions reconciled by hand',
     domain: 'Finance · Chit funds',
     tagline: 'End-to-end management for chit fund companies.',
@@ -94,6 +102,8 @@ const PRODUCTS = [
   {
     id: 'fin-iq',
     name: 'Fin IQ',
+    color: '#a46bff',
+    category: 'Finance',
     headline: 'Loans tracked in spreadsheets',
     domain: 'Finance · Lending operations',
     tagline: 'Lending and finance operations in one system.',
@@ -113,6 +123,8 @@ const PRODUCTS = [
   {
     id: 'build-iq',
     name: 'Build IQ',
+    color: '#ff8a4c',
+    category: 'Operations',
     headline: 'Materials lost between sites',
     domain: 'Construction · Site & materials',
     tagline: 'Material and site tracking for construction contractors.',
@@ -310,23 +322,19 @@ function viz(kind) {
 
 function siteViz() {
   // Wireframe thumbnail drawn in the current text colour.
-  return `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" aria-hidden="true">
-    <g stroke-opacity=".35">
-      <line x1="0" y1="26" x2="320" y2="26"/>
-      <rect x="20" y="10" width="44" height="6" rx="3" fill="currentColor" fill-opacity=".5" stroke="none"/>
-      <rect x="196" y="10" width="26" height="6" rx="3" fill="currentColor" fill-opacity=".2" stroke="none"/>
-      <rect x="230" y="10" width="26" height="6" rx="3" fill="currentColor" fill-opacity=".2" stroke="none"/>
-      <rect x="264" y="8" width="38" height="10" rx="5"/>
-    </g>
-    <rect x="20" y="52" width="160" height="14" rx="2" fill="currentColor" fill-opacity=".75" stroke="none"/>
-    <rect x="20" y="72" width="118" height="14" rx="2" fill="currentColor" fill-opacity=".45" stroke="none"/>
-    <rect x="20" y="98" width="62" height="18" rx="9" fill="currentColor" fill-opacity=".85" stroke="none"/>
-    <rect x="200" y="48" width="100" height="72" rx="2" stroke-opacity=".35"/>
-    <path d="M200 120 L236 88 L260 106 L282 82 L300 98" stroke-opacity=".35"/>
-    <g stroke-opacity=".3">
-      <rect x="20" y="138" width="86" height="48" rx="2"/>
-      <rect x="117" y="138" width="86" height="48" rx="2"/>
-      <rect x="214" y="138" width="86" height="48" rx="2"/>
+  return `<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" aria-hidden="true">
+    <defs><linearGradient id="sv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+    <rect width="320" height="180" fill="url(#sv)" stroke="none"/>
+    <rect x="20" y="14" width="40" height="6" rx="3" fill="currentColor" stroke="none"/>
+    <rect x="200" y="14" width="22" height="6" rx="3" fill="#fff" fill-opacity=".2" stroke="none"/>
+    <rect x="228" y="14" width="22" height="6" rx="3" fill="#fff" fill-opacity=".2" stroke="none"/>
+    <rect x="262" y="12" width="40" height="10" rx="5" fill="currentColor" fill-opacity=".8" stroke="none"/>
+    <rect x="20" y="50" width="150" height="12" rx="3" fill="#fff" fill-opacity=".8" stroke="none"/>
+    <rect x="20" y="68" width="110" height="12" rx="3" fill="#fff" fill-opacity=".45" stroke="none"/>
+    <rect x="20" y="94" width="58" height="16" rx="8" fill="currentColor" stroke="none"/>
+    <rect x="196" y="46" width="104" height="66" rx="8" fill="#fff" fill-opacity=".06" stroke-opacity=".3"/>
+    <g fill="#fff" fill-opacity=".05" stroke-opacity=".15">
+      <rect x="20" y="128" width="86" height="44" rx="6"/><rect x="117" y="128" width="86" height="44" rx="6"/><rect x="214" y="128" width="86" height="44" rx="6"/>
     </g>
   </svg>`;
 }
@@ -338,68 +346,100 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const listJoin = arr => arr.length < 2 ? arr.join('') : `${arr.slice(0, -1).join(', ')} and ${arr[arr.length - 1]}`;
+const finePointer = window.matchMedia('(pointer: fine)').matches;
 
-function renderFeatures() {
-  // Lead story, two halves, then three thirds.
-  const size = i => (i === 0 ? 'lead' : i < 3 ? 'half' : '');
-  $('#feature-list').innerHTML = PRODUCTS.map((p, i) => `
-    <article class="feature ${size(i)} reveal" data-open="${p.id}" tabindex="0" role="button" aria-label="Read about ${p.name}">
-      <div class="feature-art">${viz(p.viz)}</div>
-      <div class="feature-text">
-        <p class="kicker">No. ${i + 1} · ${esc(p.domain)}</p>
+function renderMarquee() {
+  const words = ['Hospitality', 'Product', 'SaaS', 'Distribution', 'Fintech', 'Operations'];
+  $('#marquee').innerHTML = [...words, ...words].map(w => `<span>${w} •</span>`).join('');
+}
+
+function renderProducts() {
+  const cats = ['All', ...new Set(PRODUCTS.map(p => p.category))];
+  $('#filters').innerHTML = cats.map((c, i) =>
+    `<button class="filter${i ? '' : ' on'}" role="tab" aria-selected="${!i}" data-filter="${c}">${c}</button>`).join('');
+
+  $('#product-grid').innerHTML = PRODUCTS.map(p => `
+    <article class="card tilt reveal" style="--c:${p.color}" data-open="${p.id}" data-cat="${p.category}" tabindex="0" role="button" aria-label="Open ${p.name} brief">
+      <span class="glare" aria-hidden="true"></span>
+      <span class="card-art">${viz(p.viz)}</span>
+      <span class="card-body">
+        <span class="card-domain mono">${esc(p.domain)}</span>
         <h3>${p.name}</h3>
-        <p class="feature-dek">${esc(p.tagline)}</p>
-        ${i === 0 ? `<p class="feature-problem">${esc(p.problem)}</p>` : ''}
-        <span class="read">Read the story</span>
-      </div>
+        <p>${esc(p.tagline)}</p>
+        <span class="card-more"><span>
+          <span class="card-solves" style="display:block"><span class="mono">solves</span>${esc(p.headline)}</span>
+          <span class="chips">${p.stack.slice(0, 4).map(t => `<span class="chip">${t}</span>`).join('')}</span>
+        </span></span>
+        <span class="card-foot"><span class="play" aria-hidden="true"></span>Open brief</span>
+      </span>
     </article>`).join('');
+
+  $('#filters').addEventListener('click', e => {
+    const f = e.target.closest('.filter');
+    if (!f) return;
+    $$('.filter').forEach(b => { b.classList.toggle('on', b === f); b.setAttribute('aria-selected', String(b === f)); });
+    $$('#product-grid .card').forEach(c => c.classList.toggle('hidden', f.dataset.filter !== 'All' && c.dataset.cat !== f.dataset.filter));
+  });
 }
 
 function renderSites() {
-  $('#site-list').innerHTML = SITES.map(s => {
+  $('#site-grid').innerHTML = SITES.map(s => {
     const host = s.url.replace(/^https?:\/\//, '');
     return `
     <article class="site reveal">
-      <a class="site-thumb" href="${s.url}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">${siteViz()}</a>
-      <p class="kicker">${esc(s.type)}</p>
-      <h3>${esc(s.name)}</h3>
-      <p>${esc(s.desc)}</p>
-      <a class="site-link" href="${s.url}" target="_blank" rel="noopener">${host} ↗</a>
+      <div class="browser">
+        <div class="browser-bar"><span class="dots3"><i></i><i></i><i></i></span><span class="browser-url">${host}</span></div>
+        <div class="browser-view">${siteViz()}</div>
+      </div>
+      <div class="site-body">
+        <span class="site-type mono">${esc(s.type)}</span>
+        <h3>${esc(s.name)}</h3>
+        <p>${esc(s.desc)}</p>
+        <a class="site-link" href="${s.url}" target="_blank" rel="noopener">Visit ${host} ↗</a>
+      </div>
     </article>`;
   }).join('');
 }
 
-function renderKit() {
-  $('#kit-list').innerHTML = TOOL_GROUPS.map(g => `
-    <div class="kit-group reveal">
+function renderToolbox() {
+  const build = TOOL_GROUPS.find(g => g.linked).tools;
+  $('#tool-track').innerHTML = [...build, ...build].map(t => `<span>${t}</span>`).join('');
+
+  $('#tool-groups').innerHTML = TOOL_GROUPS.map(g => `
+    <div class="tool-group reveal">
       <h3>${g.title}</h3>
       <p>${g.note}</p>
-      <ul>${g.tools.map(t => g.linked
-        ? `<li><button class="tool-btn" data-tool="${esc(t)}">${t}</button></li>`
-        : `<li>${t}</li>`).join('')}</ul>
+      <div class="tools">${g.tools.map(t => g.linked
+        ? `<button class="tool" data-tool="${esc(t)}">${t}</button>`
+        : `<span class="tool">${t}</span>`).join('')}</div>
     </div>`).join('');
 
-  const note = $('#kit-note');
   const show = tool => {
-    $$('.tool-btn.on').forEach(b => b.classList.remove('on'));
-    $(`.tool-btn[data-tool="${CSS.escape(tool)}"]`)?.classList.add('on');
-    const used = PRODUCTS.filter(p => p.stack.includes(tool)).map(p => p.name);
-    note.innerHTML = `<b>${esc(tool)}</b> is used in ${used.length ? listJoin(used) : 'none of the products yet'}.`;
+    $$('.tool.on').forEach(t => t.classList.remove('on'));
+    $(`.tool[data-tool="${CSS.escape(tool)}"]`)?.classList.add('on');
+    const used = PRODUCTS.filter(p => p.stack.includes(tool));
+    $('#usage-tool').textContent = tool;
+    $('#usage-list').innerHTML = used.length
+      ? used.map(p => `<li style="--c:${p.color}"><i></i>${p.name}</li>`).join('')
+      : '<li class="empty">Not used in a product yet</li>';
   };
-  $$('.tool-btn').forEach(b => {
-    b.addEventListener('mouseenter', () => show(b.dataset.tool));
-    b.addEventListener('focus', () => show(b.dataset.tool));
-    b.addEventListener('click', () => show(b.dataset.tool));
+  $$('.tool[data-tool]').forEach(t => {
+    t.addEventListener('mouseenter', () => show(t.dataset.tool));
+    t.addEventListener('focus', () => show(t.dataset.tool));
+    t.addEventListener('click', () => show(t.dataset.tool));
   });
+  show('Supabase');
 }
 
-function renderStory() {
-  $('#story-list').innerHTML = TIMELINE.map(t => `
+function renderTimeline() {
+  $('#timeline').innerHTML = TIMELINE.map(t => `
     <li class="reveal">
-      <span class="when">${t.when}</span>
-      <div><h3>${esc(t.role)}</h3><p class="where">${esc(t.where)}</p></div>
-      ${t.points.length ? `<ul>${t.points.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      <span class="when mono">${t.when}</span>
+      <div>
+        <h3>${esc(t.role)}</h3>
+        <p class="where">${esc(t.where)}</p>
+        ${t.points.length ? `<ul>${t.points.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      </div>
     </li>`).join('');
 }
 
@@ -414,86 +454,138 @@ function renderContact() {
 }
 
 /* =========================================================
-   Cover — problem → product headline swap
+   Featured billboard — rotates through the products
    ========================================================= */
-function initSwap() {
-  if (reduceMotion) return;
-  const problem = $('#swap-problem');
-  const product = $('#swap-product');
-  let i = 0;
-  setInterval(() => {
-    if (document.hidden) return;
-    i = (i + 1) % PRODUCTS.length;
-    problem.classList.add('out');
-    product.classList.add('out');
-    setTimeout(() => {
-      problem.textContent = PRODUCTS[i].headline;
-      product.textContent = `${PRODUCTS[i].name}.`;
-      problem.classList.remove('out');
-      product.classList.remove('out');
-    }, 450);
-  }, 3800);
+function initBillboard() {
+  const bb = $('#billboard');
+  const DURATION = 5000;
+  let i = 0, timer = null;
+  bb.style.setProperty('--dur', `${DURATION}ms`);
+
+  $('#bb-progress').innerHTML = PRODUCTS.map((p, k) =>
+    `<button class="bb-seg" role="tab" aria-label="${p.name}" data-i="${k}"><i></i></button>`).join('');
+  const segs = $$('.bb-seg', bb);
+
+  const paint = k => {
+    const p = PRODUCTS[k];
+    bb.style.setProperty('--c', p.color);
+    $('#bb-art').style.setProperty('--c', p.color);
+    $('#bb-art').innerHTML = viz(p.viz);
+    $('#bb-count').textContent = `${String(k + 1).padStart(2, '0')} / ${String(PRODUCTS.length).padStart(2, '0')}`;
+    $('#bb-domain').textContent = p.domain;
+    $('#bb-domain').style.color = p.color;
+    $('#bb-name').textContent = p.name;
+    $('#bb-problem').textContent = p.headline;
+    $('#bb-stack').textContent = p.stack.slice(0, 3).join(' · ');
+    segs.forEach((s, n) => {
+      s.classList.toggle('done', n < k);
+      s.classList.remove('on');
+      s.setAttribute('aria-selected', String(n === k));
+    });
+    void segs[k].offsetWidth; // restart the progress animation
+    segs[k].classList.add('on');
+  };
+
+  const go = k => {
+    i = (k + PRODUCTS.length) % PRODUCTS.length;
+    if (reduceMotion) { paint(i); return; }
+    bb.classList.add('swap');
+    setTimeout(() => { paint(i); bb.classList.remove('swap'); }, 300);
+  };
+
+  const schedule = () => {
+    clearTimeout(timer);
+    if (reduceMotion) return;
+    timer = setTimeout(() => { go(i + 1); schedule(); }, DURATION);
+  };
+
+  // Pause while the visitor is looking at it or the tab is hidden.
+  let remaining = DURATION, started = Date.now();
+  const pause = () => { remaining -= Date.now() - started; clearTimeout(timer); bb.classList.add('paused'); };
+  const resume = () => {
+    bb.classList.remove('paused'); started = Date.now();
+    clearTimeout(timer);
+    if (reduceMotion) return;
+    timer = setTimeout(() => { go(i + 1); remaining = DURATION; started = Date.now(); schedule(); }, Math.max(remaining, 300));
+  };
+  const restart = () => { remaining = DURATION; started = Date.now(); schedule(); };
+
+  bb.addEventListener('mouseenter', pause);
+  bb.addEventListener('mouseleave', resume);
+  document.addEventListener('visibilitychange', () => (document.hidden ? pause() : resume()));
+  $('#bb-progress').addEventListener('click', e => {
+    const s = e.target.closest('.bb-seg');
+    if (s) { go(+s.dataset.i); restart(); if (bb.matches(':hover')) pause(); }
+  });
+  $('#bb-open').addEventListener('click', () => openBrief(PRODUCTS[i].id));
+
+  paint(0);
+  restart();
 }
 
 /* =========================================================
-   Feature article (drawer) — deep-linkable via #/work/<id>
+   Product brief (drawer) — deep-linkable via #/work/<id>
    ========================================================= */
-const panel = $('#article');
-const panelBody = $('.article-panel', panel);
+const brief = $('#brief');
+const briefPanel = $('.brief-panel', brief);
 let lastFocus = null;
 let pushedEntry = false;
 
-function articleHTML(p) {
+function briefHTML(p) {
   const i = PRODUCTS.indexOf(p);
   const prev = PRODUCTS[(i - 1 + PRODUCTS.length) % PRODUCTS.length];
   const next = PRODUCTS[(i + 1) % PRODUCTS.length];
   return `
-    <p class="kicker">No. ${i + 1} · ${esc(p.domain)}</p>
-    <h2 id="article-title">${p.name}</h2>
-    <p class="article-dek">${esc(p.tagline)}</p>
-    <p class="article-byline">By Alan Philip Babu · ${esc(p.platforms)}</p>
-    <div class="article-art">${viz(p.viz)}</div>
-    <div class="article-body">
-      <p class="dropcap">${esc(p.problem)}</p>
-      <h3>What it does</h3>
-      <ul>${p.does.map(d => `<li>${esc(d)}</li>`).join('')}</ul>
-      <h3>How it fits together</h3>
-      <p class="flow">${p.flow.map(f => esc(f)).join(' <i>→</i> ')}</p>
-    </div>
-    <aside class="factbox">
-      <div class="wide"><span class="label">My role</span><p>${esc(p.role)}</p></div>
-      <div><span class="label">Platforms</span><p>${esc(p.platforms)}</p></div>
-      <div><span class="label">Built with</span><p>${p.stack.join(', ')}</p></div>
-    </aside>
-    <div class="article-cta">
-      <p>Want to see it working? I'm happy to give a live demo on a call.</p>
-      <a class="btn btn-ink" href="#contact" data-close>Request a demo</a>
-    </div>
-    <nav class="article-nav" aria-label="More products">
-      <button data-open="${prev.id}">← ${prev.name}</button>
-      <button data-open="${next.id}">${next.name} →</button>
-    </nav>`;
+    <div class="brief-hero">${viz(p.viz)}</div>
+    <div class="brief-content">
+      <span class="brief-domain mono">${esc(p.domain)}</span>
+      <h2 id="brief-title">${p.name}</h2>
+      <p class="brief-tag">${esc(p.tagline)}</p>
+      <div class="brief-meta-row">
+        <span class="chip">${esc(p.platforms)}</span>
+        ${p.stack.map(t => `<span class="chip">${t}</span>`).join('')}
+      </div>
+
+      <section class="brief-section"><h3>The problem</h3><p>${esc(p.problem)}</p></section>
+      <section class="brief-section"><h3>What it does</h3>
+        <ul class="brief-list">${p.does.map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+      </section>
+      <section class="brief-section"><h3>How it fits together</h3>
+        <div class="flow">${p.flow.map((f, k) => `${k ? '<span class="flow-arrow">→</span>' : ''}<span class="flow-node">${esc(f)}</span>`).join('')}</div>
+      </section>
+      <section class="brief-section"><h3>My role</h3><p class="brief-role">${esc(p.role)}</p></section>
+
+      <div class="brief-note">
+        <p>I'm happy to give a live demo and walk through the product on a call.</p>
+        <a class="btn btn-small btn-primary" href="#contact" data-close>Request a demo</a>
+      </div>
+      <div class="brief-nav">
+        <button data-open="${prev.id}">← ${prev.name}</button>
+        <button data-open="${next.id}">${next.name} →</button>
+      </div>
+    </div>`;
 }
 
-function openArticle(id, push = true) {
+function openBrief(id, push = true) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
-  if (panel.hidden) lastFocus = document.activeElement;
-  $('#article-body').innerHTML = articleHTML(p);
-  panel.hidden = false;
+  if (brief.hidden) lastFocus = document.activeElement;
+  briefPanel.style.setProperty('--c', p.color);
+  $('#brief-body').innerHTML = briefHTML(p);
+  brief.hidden = false;
   document.body.classList.add('locked');
-  panelBody.scrollTop = 0;
-  panelBody.focus();
+  briefPanel.scrollTop = 0;
+  briefPanel.focus();
   if (push && location.hash !== `#/work/${id}`) {
-    // First open adds a history entry so Back closes the article; switching products replaces it.
+    // First open adds a history entry so Back closes the brief; switching products replaces it.
     if (pushedEntry) history.replaceState(null, '', `#/work/${id}`);
     else { history.pushState(null, '', `#/work/${id}`); pushedEntry = true; }
   }
 }
 
-function closeArticle(push = true) {
-  if (panel.hidden) return;
-  panel.hidden = true;
+function closeBrief(push = true) {
+  if (brief.hidden) return;
+  brief.hidden = true;
   document.body.classList.remove('locked');
   if (push && location.hash.startsWith('#/work/')) {
     if (pushedEntry) history.back();
@@ -505,16 +597,16 @@ function closeArticle(push = true) {
 
 function syncRoute() {
   const m = location.hash.match(/^#\/work\/([\w-]+)/);
-  if (m) openArticle(m[1], false); else closeArticle(false);
+  if (m) openBrief(m[1], false); else closeBrief(false);
 }
 
 document.addEventListener('click', e => {
   const opener = e.target.closest('[data-open]');
-  if (opener) { e.preventDefault(); openArticle(opener.dataset.open); return; }
+  if (opener) { e.preventDefault(); openBrief(opener.dataset.open); return; }
   const closer = e.target.closest('[data-close]');
-  if (closer && !panel.hidden) {
+  if (closer && !brief.hidden) {
     const href = closer.getAttribute('href');
-    closeArticle();
+    closeBrief();
     if (href && href.startsWith('#') && href.length > 1) {
       e.preventDefault();
       $(href)?.scrollIntoView();
@@ -522,12 +614,12 @@ document.addEventListener('click', e => {
   }
 });
 document.addEventListener('keydown', e => {
-  const card = e.target.closest?.('.feature[data-open]');
-  if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openArticle(card.dataset.open); return; }
-  if (panel.hidden) return;
-  if (e.key === 'Escape') closeArticle();
+  const card = e.target.closest?.('.card[data-open]');
+  if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openBrief(card.dataset.open); return; }
+  if (brief.hidden) return;
+  if (e.key === 'Escape') closeBrief();
   if (e.key === 'Tab') {
-    const f = $$('a, button', panelBody);
+    const f = $$('a, button', briefPanel);
     if (!f.length) return;
     const first = f[0], last = f[f.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -538,10 +630,60 @@ window.addEventListener('popstate', syncRoute);
 window.addEventListener('hashchange', syncRoute);
 
 /* =========================================================
-   Page effects
+   Motion
    ========================================================= */
+function initIntro() {
+  const el = $('#intro');
+  let seen = false;
+  try { seen = sessionStorage.getItem('intro-seen') === '1'; } catch (_) { /* storage blocked */ }
+  if (reduceMotion || seen || location.hash.startsWith('#/work/')) { el.classList.add('done'); return; }
+  try { sessionStorage.setItem('intro-seen', '1'); } catch (_) { /* storage blocked */ }
+  setTimeout(() => el.classList.add('out'), 1300);
+  setTimeout(() => el.classList.add('done'), 1850);
+}
+
+function initSpotlightAndTilt() {
+  if (reduceMotion || !finePointer) return;
+  const spot = $('#spotlight');
+  window.addEventListener('pointermove', e => {
+    spot.classList.add('on');
+    spot.style.transform = `translate3d(${e.clientX - 350}px, ${e.clientY - 350}px, 0)`;
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => spot.classList.remove('on'));
+
+  // 3D tilt + glare on cards, tiles and the billboard.
+  document.addEventListener('pointermove', e => {
+    const el = e.target.closest?.('.tilt');
+    $$('.tilt.tilting').forEach(t => { if (t !== el) { t.classList.remove('tilting'); t.style.transform = ''; } });
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    const max = el.classList.contains('billboard') ? 6 : 8;
+    el.classList.add('tilting');
+    el.style.transform = `rotateX(${((0.5 - y) * max).toFixed(2)}deg) rotateY(${((x - 0.5) * max).toFixed(2)}deg) ${el.classList.contains('card') ? 'translateY(-4px)' : ''}`;
+    el.style.setProperty('--gx', `${x * 100}%`);
+    el.style.setProperty('--gy', `${y * 100}%`);
+  }, { passive: true });
+}
+
+function initTimeline() {
+  const wrap = $('.timeline-wrap');
+  const fill = $('#timeline-fill');
+  const items = $$('#timeline > li');
+  const update = () => {
+    const r = wrap.getBoundingClientRect();
+    const mark = window.innerHeight * 0.6;
+    const pct = Math.min(1, Math.max(0, (mark - r.top) / r.height));
+    fill.style.height = `${pct * 100}%`;
+    items.forEach(li => li.classList.toggle('lit', li.getBoundingClientRect().top < mark));
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+}
+
 function initReveal() {
-  const els = $$('.reveal, .section-head, .pull, .ways article, .letter');
+  const els = $$('.reveal, .section-head, .tile, .steps, .cta');
   if (reduceMotion || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
   els.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver(entries => {
@@ -551,7 +693,11 @@ function initReveal() {
 }
 
 function initNav() {
-  const links = $$('.mast-nav a');
+  const nav = $('#nav');
+  const links = $$('.nav-links a');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
   if (!('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
@@ -562,12 +708,16 @@ function initNav() {
 }
 
 /* ---------- Boot ---------- */
-renderFeatures();
+renderMarquee();
+renderProducts();
 renderSites();
-renderKit();
-renderStory();
+renderToolbox();
+renderTimeline();
 renderContact();
-initSwap();
+initIntro();
+initBillboard();
+initSpotlightAndTilt();
+initTimeline();
 initReveal();
 initNav();
 syncRoute();
