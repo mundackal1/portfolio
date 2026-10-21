@@ -1,6 +1,6 @@
 # Alan Philip Babu — Portfolio
 
-Personal portfolio with a dark, serif-led design: products (Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ, Build IQ) as case studies, client websites, toolkit and experience.
+Personal portfolio with a paper-toned, magazine-style design: products (Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ, Build IQ) as case studies, client websites, toolkit and experience.
 
 Static site, no build step. All content lives in the data blocks at the top of `js/main.js`.
 

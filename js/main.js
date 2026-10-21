@@ -315,14 +315,14 @@ function siteViz() {
     <defs><linearGradient id="sv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".18"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
     <rect width="320" height="180" fill="url(#sv)" stroke="none"/>
     <rect x="20" y="14" width="40" height="6" rx="3" fill="currentColor" stroke="none"/>
-    <rect x="200" y="14" width="22" height="6" rx="3" fill="#fff" fill-opacity=".2" stroke="none"/>
-    <rect x="228" y="14" width="22" height="6" rx="3" fill="#fff" fill-opacity=".2" stroke="none"/>
+    <rect x="200" y="14" width="22" height="6" rx="3" fill="#1d1a16" fill-opacity=".2" stroke="none"/>
+    <rect x="228" y="14" width="22" height="6" rx="3" fill="#1d1a16" fill-opacity=".2" stroke="none"/>
     <rect x="262" y="12" width="40" height="10" rx="5" fill="currentColor" fill-opacity=".8" stroke="none"/>
-    <rect x="20" y="50" width="150" height="12" rx="3" fill="#fff" fill-opacity=".8" stroke="none"/>
-    <rect x="20" y="68" width="110" height="12" rx="3" fill="#fff" fill-opacity=".45" stroke="none"/>
+    <rect x="20" y="50" width="150" height="12" rx="3" fill="#1d1a16" fill-opacity=".8" stroke="none"/>
+    <rect x="20" y="68" width="110" height="12" rx="3" fill="#1d1a16" fill-opacity=".45" stroke="none"/>
     <rect x="20" y="94" width="58" height="16" rx="8" fill="currentColor" stroke="none"/>
-    <rect x="196" y="46" width="104" height="66" rx="8" fill="#fff" fill-opacity=".05" stroke-opacity=".3"/>
-    <g fill="#fff" fill-opacity=".04" stroke-opacity=".15">
+    <rect x="196" y="46" width="104" height="66" rx="8" fill="#1d1a16" fill-opacity=".05" stroke-opacity=".3"/>
+    <g fill="#1d1a16" fill-opacity=".04" stroke-opacity=".15">
       <rect x="20" y="128" width="86" height="44" rx="6"/><rect x="117" y="128" width="86" height="44" rx="6"/><rect x="214" y="128" width="86" height="44" rx="6"/>
     </g>
   </svg>`;
