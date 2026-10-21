@@ -3,186 +3,161 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alan Philip Babu — Product Builder</title>
+  <title>Alan Philip Babu — Product Builder · Hospitality &amp; SaaS</title>
   <meta name="description" content="Alan Philip Babu spent ten years in hospitality and OTA distribution. Now he builds SaaS products: Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ and Build IQ.">
-  <meta name="theme-color" content="#06070a">
+  <meta name="theme-color" content="#0c0a09">
   <meta property="og:title" content="Alan Philip Babu — Product Builder">
   <meta property="og:description" content="Ten years in hospitality and OTA distribution. Now building the software those businesses run on.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="skip" href="#products">Skip to products</a>
-
-  <!-- INTRO -->
-  <div class="intro" id="intro" aria-hidden="true">
-    <div class="intro-word" id="intro-word">ALAN PHILIP BABU</div>
-  </div>
-
-  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <a class="skip" href="#work">Skip to products</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
-    <a href="#top" class="logo" aria-label="Alan Philip Babu — home">APB<span>.</span></a>
+    <a href="#top" class="brand" aria-label="Alan Philip Babu — home">
+      <span class="mark">AP</span>
+      <span class="brand-name">Alan Philip Babu</span>
+    </a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#work">Products</a>
       <a href="#websites">Websites</a>
-      <a href="#toolbox">Toolbox</a>
-      <a href="#experience">Experience</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#path">Experience</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn btn-small btn-primary">Let's talk</a>
+    <a href="#contact" class="btn btn-small btn-line" data-nav-cta>Let's talk</a>
   </header>
 
   <main id="top">
     <!-- HERO -->
     <section class="hero">
-      <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="pill mono"><span class="dot"></span>Open to roles &amp; collaborations</p>
-          <h1>I build the software<br><span class="grad">businesses run on.</span></h1>
-          <p class="lede">
-            Ten years running hotels and managing OTA partners. Now I design and ship SaaS products for
-            <strong>hospitality</strong>, <strong>finance</strong>, <strong>salons</strong> and <strong>construction</strong>.
-          </p>
-          <div class="hero-cta">
-            <a href="#products" class="btn btn-primary"><span class="play" aria-hidden="true"></span>See my products</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
-            <a href="#" class="btn btn-ghost" data-cv hidden>Download CV</a>
+      <div class="hero-copy">
+        <p class="pill"><span class="dot"></span>Product Builder · Hospitality &amp; SaaS · Open to roles</p>
+        <p class="tagline mono">— Hospitality · Product · Software</p>
+        <h1>Alan<br>Philip <em>Babu.</em></h1>
+        <p class="lede">
+          I turn <em>real operational problems</em> into software, from hotel channel management
+          to chit-fund accounting. Ten years in hospitality and OTA distribution, now designing
+          and shipping products end to end.
+        </p>
+        <div class="hero-cta">
+          <a href="#work" class="btn btn-accent">Explore my work <span aria-hidden="true">→</span></a>
+          <a href="#" class="btn btn-line" data-cv hidden>View CV <span aria-hidden="true">↗</span></a>
+          <a href="#" class="btn btn-line" data-linkedin target="_blank" rel="noopener" hidden>LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="arch" id="arch">
+          <div class="arch-inner" id="arch-inner"></div>
+          <div class="arch-caption">
+            <span class="arch-name" id="arch-name">Room IQ</span>
+            <span class="arch-domain mono" id="arch-domain">Hospitality · Channel management</span>
           </div>
-          <ul class="badges mono">
-            <li><b>10+ yrs</b> hospitality &amp; OTA</li>
-            <li><b>380+</b> hotel partners managed</li>
-            <li><b>6</b> SaaS products</li>
+        </div>
+        <span class="float-chip chip-a"><small class="mono">Cleartrip · Flipkart Travel</small>380+ partners</span>
+        <span class="float-chip chip-b"><small class="mono">Shipped</small>6 SaaS products</span>
+        <figcaption class="mono"><span>Fig. 01</span><span>Six products, one builder</span></figcaption>
+      </figure>
+      <a href="#about" class="scroll-cue mono" aria-label="Scroll to about">Scroll<span></span></a>
+    </section>
+
+    <!-- NUMBERS TICKER -->
+    <div class="ticker" aria-label="Key numbers">
+      <div class="ticker-track" id="ticker"></div>
+    </div>
+
+    <!-- 01 ABOUT -->
+    <section class="section" id="about">
+      <p class="label mono"><span>01</span>About</p>
+      <div class="about">
+        <div>
+          <h2>Built from the <em>front desk</em> up.</h2>
+          <p class="about-lead">I hosted guests at my family's homestay, ran a 34-room hotel for eight years, and managed <em>380+ hotel partners</em> at Cleartrip.</p>
+          <p>That's where I learned how rates, inventory and reservations really break, and how much small businesses lose to tools that don't fit them. Now I build those tools myself: I talk to the people who'll use them, define the workflow, and ship web and mobile products with modern frameworks and AI-assisted development.</p>
+          <p>Today I'm Product &amp; Business Development Manager at Akshaya Group, where I built Room IQ, Chit IQ and Fin IQ.</p>
+        </div>
+        <ol class="principles">
+          <li>
+            <span class="roman">I.</span>
+            <div><h3>Start at the front desk</h3><p>Sit with the people who'll use it. The workflow comes before the screens.</p></div>
+          </li>
+          <li>
+            <span class="roman">II.</span>
+            <div><h3>One source of truth</h3><p>Rates, stock and ledgers must never disagree. I design the data first, then the features.</p></div>
+          </li>
+          <li>
+            <span class="roman">III.</span>
+            <div><h3>Ship, then listen</h3><p>Small releases in real businesses, shaped by feedback from owners and staff.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 02 WORK -->
+    <section class="section" id="work">
+      <p class="label mono"><span>02</span>Selected work</p>
+      <h2 class="section-title">Products, not <em>prototypes.</em></h2>
+      <div class="cases" id="cases"></div>
+    </section>
+
+    <!-- 03 WEBSITES -->
+    <section class="section" id="websites">
+      <p class="label mono"><span>03</span>Websites</p>
+      <h2 class="section-title">Live on the <em>web.</em></h2>
+      <p class="section-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
+      <div class="sites" id="sites"></div>
+    </section>
+
+    <!-- 04 TOOLKIT -->
+    <section class="section" id="toolkit">
+      <p class="label mono"><span>04</span>Toolkit</p>
+      <h2 class="section-title">Tools I reach for, <em>and why.</em></h2>
+      <p class="section-sub">Hover over or focus a highlighted build tool to see where I've used it.</p>
+      <div class="bento" id="bento"></div>
+      <p class="used-in" id="used-in" aria-live="polite">&nbsp;</p>
+    </section>
+
+    <!-- 05 PATH -->
+    <section class="section" id="path">
+      <p class="label mono"><span>05</span>Experience &amp; education</p>
+      <h2 class="section-title">The path <em>so far.</em></h2>
+      <ol class="path" id="path-list"></ol>
+    </section>
+
+    <!-- 06 CONTACT -->
+    <section class="section contact" id="contact">
+      <p class="label mono"><span>06</span>Contact</p>
+      <h2 class="contact-title">Let's build something<br><em>worth booking.</em></h2>
+      <div class="contact-grid">
+        <div>
+          <p class="section-sub">Open to product roles, build collaborations and hospitality-tech advisory. Live demos and walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
+          <ul class="ways mono">
+            <li>Product roles</li>
+            <li>Build collaborations</li>
+            <li>Hospitality tech advisory</li>
           </ul>
         </div>
-
-        <!-- Featured billboard: rotates through the products -->
-        <div class="billboard-wrap">
-          <article class="billboard tilt" id="billboard" aria-roledescription="carousel" aria-label="Featured products">
-            <span class="glare" aria-hidden="true"></span>
-            <div class="bb-top mono">
-              <span class="bb-live"><span class="dot"></span>Featured</span>
-              <span id="bb-count">01 / 06</span>
-            </div>
-            <div class="bb-art" id="bb-art"></div>
-            <div class="bb-body">
-              <p class="bb-domain mono" id="bb-domain"></p>
-              <h2 class="bb-name" id="bb-name"></h2>
-              <p class="bb-solves"><span class="mono">solves</span> <span id="bb-problem"></span></p>
-              <div class="bb-actions">
-                <button class="btn btn-small btn-primary" id="bb-open"><span class="play" aria-hidden="true"></span>Open brief</button>
-                <span class="bb-stack mono" id="bb-stack"></span>
-              </div>
-            </div>
-            <div class="bb-progress" id="bb-progress" role="tablist" aria-label="Choose product"></div>
-          </article>
+        <div class="contact-card">
+          <span class="mono">Email</span>
+          <a class="contact-email" data-email href="#"><span data-email-text></span></a>
+          <div class="contact-links">
+            <a class="btn btn-accent" data-email href="#">Email me <span aria-hidden="true">→</span></a>
+            <a class="btn btn-line" data-linkedin href="#" target="_blank" rel="noopener" hidden>LinkedIn ↗</a>
+            <a class="btn btn-line" data-github href="#" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="btn btn-line" data-cv href="#" hidden>CV ↓</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section class="section" id="products">
-      <div class="section-head">
-        <p class="eyebrow mono">01 — Products</p>
-        <h2>Six products. Six real problems.</h2>
-        <p class="section-sub">Each one started from a problem I saw first-hand in an industry. Hover over a card for a preview, or open it for the full brief.</p>
-      </div>
-      <div class="filters" id="filters" role="tablist" aria-label="Filter products"></div>
-      <div class="grid" id="product-grid"></div>
-    </section>
-
-    <!-- WEBSITES -->
-    <section class="section" id="websites">
-      <div class="section-head">
-        <p class="eyebrow mono">02 — Websites</p>
-        <h2>Live on the web.</h2>
-        <p class="section-sub">Websites I've designed and built for businesses. They're live, so you can visit them.</p>
-      </div>
-      <div class="sites" id="site-grid"></div>
-    </section>
-
-    <!-- TOOLBOX -->
-    <section class="section" id="toolbox">
-      <div class="section-head">
-        <p class="eyebrow mono">03 — Toolbox</p>
-        <h2>The stack behind the products.</h2>
-        <p class="section-sub">Hover over a build tool to light up the products that use it.</p>
-      </div>
-      <div class="tool-marquee" aria-hidden="true"><div class="tool-track" id="tool-track"></div></div>
-      <div class="toolbox">
-        <div class="tool-groups" id="tool-groups"></div>
-        <aside class="usage" aria-live="polite">
-          <p class="mono usage-label">Used in</p>
-          <p class="usage-tool" id="usage-tool">Supabase</p>
-          <ul id="usage-list"></ul>
-        </aside>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="section" id="experience">
-      <div class="section-head">
-        <p class="eyebrow mono">04 — Experience</p>
-        <h2>From hosting guests to shipping software.</h2>
-      </div>
-      <div class="timeline-wrap">
-        <div class="timeline-rail" aria-hidden="true"><span id="timeline-fill"></span></div>
-        <ol class="timeline" id="timeline"></ol>
-      </div>
-    </section>
-
-    <!-- WORK WITH ME -->
-    <section class="section" id="collab">
-      <div class="section-head">
-        <p class="eyebrow mono">05 — Work with me</p>
-        <h2>Ways we can work together.</h2>
-      </div>
-      <div class="collab">
-        <article class="tile tilt">
-          <span class="glare" aria-hidden="true"></span>
-          <span class="tile-no mono">01</span>
-          <h3>Product roles</h3>
-          <p>Product manager or product owner roles in travel, hospitality or vertical SaaS, where knowing the industry and being able to build both matter.</p>
-        </article>
-        <article class="tile tilt">
-          <span class="glare" aria-hidden="true"></span>
-          <span class="tile-no mono">02</span>
-          <h3>Build collaborations</h3>
-          <p>Working with a firm to take an industry problem from discovery to a shipped product, either on web and mobile or as an internal tool.</p>
-        </article>
-        <article class="tile tilt">
-          <span class="glare" aria-hidden="true"></span>
-          <span class="tile-no mono">03</span>
-          <h3>Hospitality tech advisory</h3>
-          <p>OTA distribution, channel management, pricing and partner workflows, from someone who has worked on both the hotel side and the OTA side.</p>
-        </article>
-      </div>
-      <ol class="steps">
-        <li><span class="mono">01</span><b>Discover</b><small>Sit with the users and map the workflow</small></li>
-        <li><span class="mono">02</span><b>Define</b><small>Scope, requirements, priorities</small></li>
-        <li><span class="mono">03</span><b>Build</b><small>Fast prototypes, weekly demos</small></li>
-        <li><span class="mono">04</span><b>Ship</b><small>Launch, feedback, iterate</small></li>
-      </ol>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="cta">
-        <p class="eyebrow mono">06 — Contact</p>
-        <h2>Let's build what's next.</h2>
-        <p class="section-sub">Live demos and product walkthroughs are available on a call. Based in Kerala, open to relocating and to travel.</p>
-        <a class="cta-email" data-email href="#"><span data-email-text></span></a>
-        <div class="cta-links">
-          <a class="btn btn-primary" data-email href="#">Email me</a>
-          <a class="btn btn-ghost" data-linkedin href="#" target="_blank" rel="noopener" hidden>LinkedIn</a>
-          <a class="btn btn-ghost" data-github href="#" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn btn-ghost" data-cv href="#" hidden>Download CV</a>
-        </div>
-      </div>
-    </section>
+    <div class="giant" aria-hidden="true"><span>Let's talk · Let's talk · </span><span>Let's talk · Let's talk · </span></div>
   </main>
 
   <footer class="footer">
@@ -190,7 +165,7 @@
     <span class="mono">Kerala, India</span>
   </footer>
 
-  <!-- PRODUCT BRIEF -->
+  <!-- CASE STUDY DRAWER -->
   <div class="brief" id="brief" role="dialog" aria-modal="true" aria-labelledby="brief-title" hidden>
     <div class="brief-backdrop" data-close></div>
     <article class="brief-panel" tabindex="-1">
