@@ -8,7 +8,7 @@ const CONFIG = {
   emailUser: 'alanbabu94',
   emailDomain: 'gmail.com',
   github: 'https://github.com/mundackal1',
-  linkedin: '', // add your LinkedIn URL to show the button
+  linkedin: 'https://www.linkedin.com/in/alan-mundackal/',
   cv: ''        // e.g. 'assets/Alan-Philip-Babu-CV.pdf' to show "Download CV"
 };
 
@@ -224,10 +224,11 @@ const TIMELINE = [
     ]
   },
   {
-    when: 'Until 2016',
-    role: 'Host, Family Homestay',
+    when: 'Before 2016',
+    role: 'Helped build and run the family homestay',
     where: 'El Paradiso · Thekkady',
     points: [
+      'Helped develop El Paradiso into a homestay, from setting it up to welcoming the first guests.',
       'Set up and managed online listings, pricing and availability calendars.',
       'Learned first-hand what small hosts need: visibility, pricing, reviews and simple tools.'
     ]
