@@ -1,6 +1,6 @@
 # Alan Philip Babu — Portfolio
 
-Personal portfolio themed as a hotel (lobby, suites, gallery, concierge, guest register, rooftop): products (Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ, Build IQ), client websites, toolbox and experience.
+Personal portfolio in an editorial (magazine) style: products (Room IQ, Rates IQ, Salon IQ, Chit IQ, Fin IQ, Build IQ), client websites, toolbox and experience.
 
 Static site, no build step. All content lives in the data blocks at the top of `js/main.js`.
 
